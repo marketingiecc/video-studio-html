@@ -56,6 +56,7 @@
           <button id="btn-select-output-folder" class="btn-header output-folder-button" type="button"><svg class="ui-icon"><use href="#icon-folder"/></svg><span>Thư mục</span></button>
           <span id="output-folder-status">rendered_output</span>
         </div>
+        <button id="btn-check-update" class="btn-header btn-update" type="button" title="Kiểm tra & Cập nhật phiên bản mới"><svg class="ui-icon"><use href="#icon-spark"/></svg><span>Cập nhật</span><span id="update-badge" class="update-badge" style="display:none;">MỚI</span></button>
         <button id="btn-render-trigger" class="btn-render-hero" disabled><svg class="ui-icon"><use href="#icon-spark"/></svg><span>RENDER VIDEO MP4</span></button>
       </div>
     </header>
@@ -611,6 +612,51 @@
           </div>
         </div>
         <div class="modal-footer" id="render-modal-footer"><button id="btn-cancel-render" class="btn-header danger">Hủy render</button></div>
+      </div>
+    </div>
+
+    <!-- Update Modal -->
+    <div id="modal-update" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="update-modal-title">
+      <div class="modal-dialog update-dialog">
+        <div class="modal-header">
+          <span id="update-modal-title" class="modal-title">Cập Nhật MathCA Video Studio Pro</span>
+          <button class="btn-close-modal btn-header icon-button" aria-label="Đóng">×</button>
+        </div>
+        <div class="modal-body update-modal-body">
+          <div class="update-status-card">
+            <div class="update-version-row">
+              <span class="version-label">Commit hiện tại:</span>
+              <span id="update-current-commit" class="version-val">Đang kiểm tra...</span>
+            </div>
+            <div class="update-version-row">
+              <span class="version-label">Bản mới trên GitHub:</span>
+              <span id="update-remote-commit" class="version-val">—</span>
+            </div>
+            <div id="update-status-msg" class="update-status-msg checking">
+              Đang kết nối GitHub để kiểm tra phiên bản mới...
+            </div>
+          </div>
+
+          <div id="update-changelog-section" style="display:none; margin-top: 14px;">
+            <div class="section-title"><span>Nhật ký cập nhật</span></div>
+            <ul id="update-changelog-list" class="update-changelog-list"></ul>
+          </div>
+
+          <div id="update-progress-container" style="display:none; margin-top: 14px;">
+            <div id="update-step-text" class="render-stage-text">Đang tải mã nguồn từ GitHub...</div>
+            <div class="render-progress-track">
+              <div id="update-progress-bar" class="render-progress-bar update-bar-indeterminate"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer update-modal-footer">
+          <button id="btn-recheck-update" class="btn-header" type="button">Kiểm tra lại</button>
+          <button id="btn-apply-update" class="btn-render-hero" type="button" disabled style="padding: 8px 18px; font-size: 13px;">
+            <svg class="ui-icon"><use href="#icon-spark"/></svg>
+            <span>Cập Nhật Ngay</span>
+          </button>
+          <button class="btn-close-modal btn-header" type="button">Đóng</button>
+        </div>
       </div>
     </div>
 

@@ -101,15 +101,29 @@ test('studio page exposes audio, render and selection controls', () => {
   const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html'), 'utf8');
   const appJs = fs.readFileSync(path.join(__dirname, '..', 'public', 'js', 'app.js'), 'utf8');
 
-  for (const id of ['server-status', 'btn-generate-audio', 'audio-status', 'btn-select-output-folder', 'output-folder-status', 'render-output-location', 'btn-render-trigger']) {
+  for (const id of ['server-status', 'btn-generate-audio', 'audio-status', 'btn-select-output-folder', 'output-folder-status', 'render-output-location', 'btn-render-trigger', 'btn-check-update', 'modal-update']) {
     assert.match(indexHtml, new RegExp(`id="${id}"`));
   }
   assert.match(appJs, /compositionRoot\.addEventListener\('mousedown'/);
   assert.match(appJs, /fetch\('\/api\/generate-audio'/);
   assert.match(appJs, /fetch\('\/api\/render'/);
+  assert.match(appJs, /fetch\('\/api\/update\/check'\)/);
   assert.match(appJs, /showDirectoryPicker/);
   assert.match(appJs, /getFileHandle\(outputFile/);
   assert.match(appJs, /setInterval\(\(\) => checkServerHealth\(\), 5000\)/);
   assert.match(appJs, /Dev Server đã dừng/);
+});
+
+test('update check API reports git status and commits', async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/api/update/check`);
+    const data = await response.json();
+    assert.equal(response.status, 200);
+    assert.equal(data.success, true);
+    assert.equal(typeof data.hasUpdate, 'boolean');
+    if (data.isGitRepo) {
+      assert.ok(data.currentCommit);
+    }
+  });
 });
 

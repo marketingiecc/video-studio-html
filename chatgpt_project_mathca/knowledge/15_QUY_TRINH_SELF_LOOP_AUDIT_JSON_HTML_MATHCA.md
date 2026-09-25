@@ -41,30 +41,32 @@ Phải thiết kế lại scene hoặc rút gọn text rồi audit lại từ đ
 Chỉ được xuất file JSON cho người dùng khi TẤT CẢ điều kiện sau cùng đúng:
 
 - JSON hợp lệ, parse được 100%.
-- Đủ 5 khối chuẩn:
-  - metadata
-  - brand
-  - scenes
-  - globalElements
-  - html_template
-- duration từ 25s đến 35s.
-- Scene đầu bắt đầu tại 0.
-- Scene cuối kết thúc đúng metadata.duration.
+- Đủ 6 khối chuẩn:
+  - `metadata`
+  - `brand`
+  - `scenes`
+  - `globalElements`
+  - `audio` (BGM ducking + mảng SFX)
+  - `html_template`
+- duration hợp lý cho video ngắn (20s đến 45s).
+- Scene đầu bắt đầu tại 0.0s.
+- Scene cuối kết thúc đúng `metadata.duration`.
 - Không có scene chồng thời gian sai hoặc khoảng trống ngoài chủ ý.
-- Tất cả scene có voiceText.
-- Tất cả element có animation.
+- Tất cả scene có `voiceText`.
+- **ĐỘ DÀI VOICETEXT KHỚP THỜI LƯỢNG CẢNH:** Số từ / 3.8 + 0.4s <= (endTime - startTime).
+- Tất cả element có `animation` (type, duration, delay, loop).
+- Không có hiệu ứng loop dùng `repeat: -1`.
+- Quy tắc layer order: `scene.elements.at(-1)` là layer trên cùng (z-index cao nhất).
+- Toàn bộ SFX trong `audio.sfx` dùng 5 preset chuẩn: `preset-whoosh`, `preset-pop`, `preset-boing`, `preset-chime`, `preset-click`.
 - Không có chữ đè lên chữ.
 - Không có box đè vào box quan trọng.
-- Không có text bị cắt.
-- Không có text tràn khỏi box.
+- Không có text bị cắt hoặc tràn khỏi box.
 - Không có badge / button / equation tự xuống dòng.
-- Không có câu bị xuống dòng ở vị trí vô nghĩa.
-- Không có một từ đơn lẻ bị rơi xuống dòng cuối.
 - Hook đọc đúng nội dung Title hiển thị.
-- Title Hook rõ, lớn, nhưng không chạm nhau.
+- Title Hook rõ, lớn (88-96px), nhưng không chạm nhau.
 - CTA không bị mascot hoặc cursor che.
 - Mascot không che nội dung toán.
-- Preview đúng khung 1080x1920.
+- Khung hình chuẩn 1080x1920, Stage Card 940x1080.
 - Không có phần tử nào ra ngoài safe area.
 
 CHỈ CẦN 1 MỤC FAIL -> FILE CHƯA ĐƯỢC BÀN GIAO.
@@ -76,71 +78,42 @@ CHỈ CẦN 1 MỤC FAIL -> FILE CHƯA ĐƯỢC BÀN GIAO.
 GPT phải tự kiểm:
 
 ## 3.1 metadata
-
 Bắt buộc:
-
 - metadata.title: không rỗng.
 - metadata.grade: số nguyên.
 - metadata.topic: không rỗng.
-- metadata.duration: 25 <= duration <= 35.
-- metadata.voice: mặc định `vi-VN-HoaiMyNeural`.
+- metadata.duration: số thực (20 <= duration <= 45).
+- metadata.voice: mặc định `vi-VN-HoaiMyNeural` hoặc `vi-VN-NamMinhNeural`.
 
 ## 3.2 brand
-
 Bắt buộc đúng:
-
 - Teal Primary: #12ABA0
 - Teal Dark: #006A63
-- Coral: #FF5239
-- Yellow: #FFBD05
+- Coral Red: #FF5239
+- Yellow Vibrant: #FFBD05
 - Font: Inter
 
-Không tự ý dùng Arial / Times New Roman.
-
-## 3.3 scenes
-
+## 3.3 scenes & voiceText matching
 Mỗi scene phải có:
-
-- id
-- name
-- startTime
-- endTime
-- voiceText
-- elements
-
+- id, name, startTime, endTime, voiceText, elements.
 Kiểm tra:
-
 - startTime < endTime.
 - startTime scene sau >= startTime scene trước.
-- Không có scene vượt metadata.duration.
 - Scene cuối endTime = metadata.duration.
-- Hook nên kết thúc khoảng 4.2s.
-- CTA nằm ở phần cuối video.
+- **Tốc độ đọc voiceText:** $T_{\text{đọc}} = \text{Số từ trong } voiceText / 3.8$.
+- Bắt buộc $(endTime - startTime) \ge T_{\text{đọc}} + 0.4\text{s}$. Nếu câu thoại dài hơn, phải tăng thời lượng cảnh hoặc rút ngắn từ!
 
-## 3.4 elements
+## 3.4 elements & layer order
+Mỗi element bắt buộc có:
+- id, name, type, x, y, width, fontSize, text, color, bgColor, animation.
+- animation: type, loop, duration, delay.
+- delay phải tương ứng với từ khóa phát âm trong voiceText.
+- Không dùng `repeat: -1` trong loop.
+- **Layer order:** Khung thẻ nền xếp trước, chữ/số/huy hiệu nổi bật xếp ở cuối mảng `elements` (được gán z-index cao nhất).
 
-Mỗi element bắt buộc có tối thiểu:
-
-- id
-- name
-- type
-- x
-- y
-- width
-- fontSize
-- text
-- color
-- bgColor
-- animation
-
-animation bắt buộc có:
-
-- type
-- loop
-- duration
-- delay
-
-Không được bỏ `width` ở các phần tử text quan trọng vì Studio cần biết giới hạn box để audit wrap.
+## 3.5 audio (BGM & SFX)
+- `audio.bgm`: Có cờ `enabled`, `assetId: "bgm-happy-math-01"`, `volume: 0.25`, ducking hạ -12dB khi có giọng đọc.
+- `audio.sfx`: Danh sách các clip SFX có `startTime = scene.startTime + delay`. Dùng đúng 5 preset của Studio: `preset-whoosh`, `preset-pop`, `preset-boing`, `preset-chime`, `preset-click`.
 
 ---
 

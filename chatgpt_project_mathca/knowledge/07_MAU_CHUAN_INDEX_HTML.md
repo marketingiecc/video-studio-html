@@ -1,6 +1,6 @@
-# 07. MÃ NGUỒN MẪU CHUẨN INDEX.HTML (HYPERFRAMES + GSAP)
+# 07. MÃ NGUỒN MẪU CHUẨN HTML_TEMPLATE (HYPERFRAMES + GSAP CHO STUDIO PRO)
 
-Đây là bản mẫu HTML5/CSS/GSAP hoàn chỉnh, đã được kiểm thử render thực tế 100% không lỗi. ChatGPT sẽ dùng cấu trúc này và thay đổi nội dung, bài toán và thời gian cho phù hợp với kịch bản mới.
+Đây là bản mẫu HTML5/CSS/GSAP hoàn chỉnh, tương thích 100% với `composition-generator.js` của MathCA Video Studio Pro. ChatGPT sẽ nhúng đoạn mã này vào trường `html_template` trong JSON khi xuất bản kịch bản cho người dùng.
 
 ```html
 <!doctype html>
@@ -8,14 +8,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
-    <title>MathCA - Video Giáo Dục Toán Hoạt Hình</title>
-    <!-- GSAP CDN hoặc file assets/gsap.min.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>MathCA Video - Mẹo Toán Học Siêu Tốc</title>
+    <!-- GSAP nhúng cục bộ cho Studio Pro offline -->
+    <script src="assets/gsap.min.js"></script>
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+      @font-face {
+        font-family: 'Inter';
+        src: url('assets/fonts/Inter-Regular.otf') format('opentype');
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: 'Inter';
+        src: url('assets/fonts/Inter-Bold.otf') format('opentype');
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: 'Inter';
+        src: url('assets/fonts/Inter-Black.otf') format('opentype');
+        font-weight: 900;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
       :root {
         --teal-primary: #12aba0;
         --teal-dark: #006a63;
@@ -29,281 +42,352 @@
         --surface-white: #ffffff;
         --bg-soft: #fbfbf9;
       }
+
       html, body {
-        margin: 0; width: 1080px; height: 1920px; overflow: hidden;
-        background-color: var(--bg-soft);
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg-soft);
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         -webkit-font-smoothing: antialiased;
       }
-      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--bg-soft); }
+
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg-soft);
+      }
+
+      /* Họa tiết chấm bi hoạt hình MathCA */
       .bg-container {
-        position: absolute; inset: 0; width: 100%; height: 100%;
+        position: absolute;
+        inset: 0;
+        width: 1080px;
+        height: 1920px;
         background-color: #fbfbf9;
         background-image: 
           radial-gradient(#12aba0 2px, transparent 2px),
           radial-gradient(#ffbd05 1.5px, transparent 1.5px);
         background-size: 40px 40px, 80px 80px;
-        background-position: 0 0, 20px 20px;
-        opacity: 0.85; z-index: 1;
+        opacity: 0.85;
+        z-index: 1;
       }
-      .math-symbol-watermark {
-        position: absolute; font-weight: 900; color: rgba(18, 171, 160, 0.08); user-select: none; pointer-events: none; z-index: 2;
-      }
+
+      /* Header Logo & Top Tag */
       .header-wrapper {
-        position: absolute; top: 75px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; z-index: 10;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 1080px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
       }
-      .logo-brand { height: 110px; margin-bottom: 20px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06)); }
+      .logo-brand {
+        height: 110px;
+        margin-bottom: 20px;
+        filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));
+      }
       .header-top-tag {
-        background: var(--coral-red); color: #ffffff; font-size: 30px; font-weight: 800; padding: 10px 40px; border-radius: 9999px; letter-spacing: 0.04em; box-shadow: 0 10px 24px rgba(255, 82, 57, 0.35); text-transform: uppercase;
+        background: var(--coral-red);
+        color: #ffffff;
+        font-size: 30px;
+        font-weight: 800;
+        padding: 10px 40px;
+        border-radius: 9999px;
+        letter-spacing: 0.04em;
+        box-shadow: 0 10px 24px rgba(255, 82, 57, 0.35);
+        text-transform: uppercase;
       }
+
+      /* Stage Card trung tâm (940x1080px) */
       .stage-card {
-        position: absolute; top: 380px; left: 70px; width: 940px; height: 1080px; background: var(--surface-white); border-radius: 40px; box-shadow: 0 20px 50px rgba(18, 171, 160, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04); border: 2.5px solid rgba(18, 171, 160, 0.18); z-index: 10; overflow: hidden;
+        position: absolute;
+        top: 380px;
+        left: 70px;
+        width: 940px;
+        height: 1080px;
+        background: var(--surface-white);
+        border-radius: 40px;
+        box-shadow: 0 20px 50px rgba(18, 171, 160, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
+        border: 2.5px solid rgba(18, 171, 160, 0.18);
+        overflow: hidden;
+        z-index: 10;
       }
+
+      /* Phân cảnh bài toán */
       .stage-scene {
-        position: absolute; inset: 0; padding: 40px 36px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        position: absolute;
+        inset: 0;
+        padding: 40px 36px;
+        opacity: 0;
+        visibility: hidden;
       }
-      .step-badge {
-        font-size: 32px; font-weight: 800; padding: 12px 40px; border-radius: 9999px; margin-bottom: 28px; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      }
-      .step-badge.yellow { background: var(--yellow-vibrant); color: var(--navy-dark); }
-      .step-badge.teal { background: var(--teal-primary); color: #ffffff; }
-      .step-badge.coral { background: var(--coral-red); color: #ffffff; }
-
-      /* Hook elements */
-      .hook-container { display: flex; flex-direction: column; align-items: center; width: 100%; gap: 18px; }
-      .hook-kicker-badge {
-        background: linear-gradient(135deg, #ffbd05, #f59e0b); color: var(--navy-dark); font-size: 28px; font-weight: 900; padding: 10px 36px; border-radius: 9999px; text-transform: uppercase; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35); display: inline-flex; align-items: center; gap: 12px;
-      }
-      .hook-title-box { text-align: center; display: flex; flex-direction: column; align-items: center; margin-top: 6px; }
-      .title-line-main { font-size: 96px; font-weight: 900; color: var(--teal-dark); line-height: 1.05; letter-spacing: -0.02em; text-shadow: 0 6px 20px rgba(0, 106, 99, 0.2); }
-      .title-line-highlight { font-size: 90px; font-weight: 900; color: var(--coral-red); line-height: 1.1; margin-top: 10px; letter-spacing: -0.01em; text-shadow: 0 8px 26px rgba(255, 82, 57, 0.35); }
-      .hook-vs-card {
-        width: 840px; background: #f8fcfb; border: 2.5px solid #c9eee9; border-radius: 28px; padding: 20px 28px; box-shadow: 0 10px 24px rgba(18, 171, 160, 0.1); display: flex; align-items: center; justify-content: space-between; margin-top: 8px;
-      }
-      .vs-box { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
-      .vs-box.target { background: #e6f7f6; border: 2.5px solid var(--teal-primary); border-radius: 20px; padding: 10px 14px; box-shadow: 0 6px 16px rgba(18, 171, 160, 0.18); }
-      .vs-tag { font-size: 20px; font-weight: 900; padding: 4px 16px; border-radius: 9999px; }
-      .vs-tag.red { background: #ffebe8; color: var(--coral-red); }
-      .vs-tag.teal { background: var(--teal-primary); color: #ffffff; }
-      .vs-time { font-size: 38px; font-weight: 900; }
-      .vs-time.red { color: var(--coral-red); }
-      .vs-time.teal { color: var(--teal-dark); }
-      .vs-desc { font-size: 21px; font-weight: 700; color: var(--navy-muted); }
-      .vs-sep-circle { font-size: 24px; font-weight: 900; color: var(--navy-muted); background: #e8efee; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 10px; }
-      .hook-bottom-card {
-        margin-top: 8px; width: 840px; background: linear-gradient(135deg, #fffcf5, #fff8e8); border: 2.5px dashed var(--yellow-vibrant); border-radius: 24px; padding: 16px 24px; display: flex; align-items: center; justify-content: center; gap: 14px;
-      }
-      .hook-bottom-text { font-size: 28px; font-weight: 800; color: #946200; text-align: center; }
-
-      /* Math tiles */
-      .equation-display { display: flex; align-items: center; justify-content: center; gap: 22px; margin-top: 20px; }
-      .num-tile {
-        font-size: 104px; font-weight: 900; color: var(--navy-dark); background: #f4fdfc; border: 4px solid #bcece8; border-radius: 30px; width: 165px; height: 185px; display: flex; align-items: center; justify-content: center; box-shadow: 0 14px 28px rgba(18, 171, 160, 0.16);
-      }
-      .num-tile.coral { background: #fff4f2; border-color: #ffd0c9; color: var(--coral-red); }
-      .num-tile.yellow { background: #fffdf0; border-color: #ffe699; color: #b78103; }
-      .op-sign { font-size: 72px; font-weight: 800; color: var(--navy-muted); }
-      .warning-card { margin-top: 40px; background: #fff5f3; border: 2px solid #ffd4cc; border-radius: 24px; padding: 18px 40px; display: flex; align-items: center; gap: 16px; }
-      .warning-text { font-size: 32px; font-weight: 800; color: var(--coral-red); }
-
-      /* Step slots */
-      .split-stage { display: flex; align-items: center; justify-content: center; gap: 30px; margin-top: 30px; width: 100%; }
-      .slot-box {
-        width: 160px; height: 190px; border-radius: 32px; display: flex; align-items: center; justify-content: center; font-size: 116px; font-weight: 900;
-      }
-      .slot-box.num-left, .slot-box.num-right { background: #e6f7f6; color: var(--teal-dark); border: 4px solid var(--teal-primary); box-shadow: 0 14px 28px rgba(18, 171, 160, 0.2); }
-      .slot-box.num-middle { background: #fff8e1; border: 4px dashed var(--yellow-vibrant); color: #b78103; }
-      .calc-pill {
-        background: #fff0ed; border: 3.5px solid #ffb5aa; color: var(--coral-red); font-size: 52px; font-weight: 900; padding: 14px 48px; border-radius: 9999px; display: flex; align-items: center; gap: 18px; box-shadow: 0 12px 28px rgba(255, 82, 57, 0.2);
-      }
-      .big-answer { font-size: 148px; font-weight: 900; color: var(--teal-dark); letter-spacing: 0.04em; text-shadow: 0 8px 24px rgba(18, 171, 160, 0.25); }
-      .speed-badge { background: linear-gradient(135deg, #ffbd05, #f59e0b); color: var(--navy-dark); font-size: 34px; font-weight: 900; padding: 14px 44px; border-radius: 9999px; margin-top: 20px; box-shadow: 0 10px 24px rgba(245, 158, 11, 0.35); }
-
-      /* Quiz */
-      .quiz-card { background: #fffcf0; border: 3px solid #ffdd80; border-radius: 32px; padding: 36px 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; box-shadow: 0 12px 30px rgba(255, 189, 5, 0.18); }
-      .quiz-title { font-size: 32px; font-weight: 700; color: #855700; }
-      .quiz-equation { font-size: 76px; font-weight: 900; color: var(--teal-dark); }
-
-      /* Mascot & Bubble */
-      .mascot-stage-box { position: absolute; bottom: 220px; right: 40px; width: 320px; z-index: 25; }
-      .mascot-stage-box img { width: 100%; height: auto; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.12)); }
-      .speech-bubble {
-        position: absolute; bottom: 520px; right: 260px; background: #ffffff; color: var(--navy-dark); border: 3px solid var(--teal-primary); border-radius: 24px; border-bottom-right-radius: 4px; padding: 16px 28px; font-size: 28px; font-weight: 800; box-shadow: 0 10px 25px rgba(18, 171, 160, 0.2); z-index: 30;
+      .stage-scene.is-active {
+        opacity: 1;
+        visibility: visible;
       }
 
-      /* Footer CTA & Cursor */
-      .footer-wrapper { position: absolute; bottom: 65px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; z-index: 20; }
+      /* Lớp đối tượng đồ họa MathCA Studio */
+      .mathca-element {
+        position: absolute;
+        white-space: pre-wrap;
+      }
+      .mathca-text {
+        font-weight: 900;
+        line-height: 1.1;
+        text-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+      .mathca-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 36px;
+        border-radius: 9999px;
+        background: var(--yellow-vibrant);
+        color: var(--navy-dark);
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        white-space: nowrap;
+      }
+      .mathca-card {
+        padding: 22px 28px;
+        border: 2.5px solid #c9eee9;
+        border-radius: 28px;
+        background: #f8fcfb;
+        color: var(--teal-dark);
+        font-weight: 800;
+        text-align: center;
+        box-shadow: 0 10px 24px rgba(18, 171, 160, 0.12);
+      }
+      .mathca-equation {
+        padding: 18px 28px;
+        border: 3px solid var(--teal-primary);
+        border-radius: 24px;
+        background: var(--teal-soft);
+        color: var(--navy-dark);
+        font-weight: 900;
+        text-align: center;
+      }
+      .mathca-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 40px;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, var(--teal-primary), var(--teal-dark));
+        color: #ffffff;
+        font-weight: 900;
+        box-shadow: 0 10px 24px rgba(0, 106, 99, 0.3);
+      }
+      .mathca-slots {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+      .mathca-slots span {
+        display: flex;
+        width: 180px;
+        height: 180px;
+        align-items: center;
+        justify-content: center;
+        border: 4px solid var(--teal-primary);
+        border-radius: 28px;
+        background: var(--teal-soft);
+        color: var(--teal-dark);
+        font-size: inherit;
+        font-weight: 900;
+        box-shadow: 0 12px 24px rgba(18, 171, 160, 0.18);
+      }
+      .line-break {
+        display: block;
+        height: 0.28em;
+      }
+
+      /* Mascot Cú con */
+      .mascot-stage-box {
+        position: absolute;
+        left: 720px;
+        top: 1380px;
+        width: 320px;
+        z-index: 25;
+      }
+      .mascot-stage-box img {
+        width: 100%;
+        filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.12));
+      }
+
+      /* Nút CTA Follow */
       .cta-button {
-        background: linear-gradient(135deg, #ff5239, #e0321a); color: #ffffff; font-size: 38px; font-weight: 900; padding: 18px 60px; border-radius: 9999px; letter-spacing: 0.04em; box-shadow: 0 12px 30px rgba(255, 82, 57, 0.45); display: inline-flex; align-items: center; gap: 16px;
+        position: absolute;
+        left: 230px;
+        top: 1720px;
+        z-index: 20;
+        padding: 18px 60px;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, #ff5239, #e02e16);
+        color: #ffffff;
+        font-size: 38px;
+        font-weight: 900;
+        box-shadow: 0 12px 30px rgba(255, 82, 57, 0.45);
+        white-space: nowrap;
       }
-      .footer-brand-text { font-size: 22px; font-weight: 700; color: var(--navy-muted); margin-top: 14px; letter-spacing: 0.05em; }
-      .click-cursor { position: absolute; bottom: 95px; left: 680px; width: 64px; height: 64px; z-index: 50; pointer-events: none; }
-      .click-cursor svg { width: 100%; height: 100%; filter: drop-shadow(2px 6px 10px rgba(0,0,0,0.35)); }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="29.5" data-width="1080" data-height="1920">
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="29.5"
+      data-width="1080"
+      data-height="1920"
+    >
       <div class="bg-container"></div>
-      <div class="math-symbol-watermark" style="top: 230px; left: 60px; font-size: 140px;">×</div>
-      <div class="math-symbol-watermark" style="top: 320px; right: 80px; font-size: 120px;">+</div>
+      
+      <!-- Audio Soundtrack clip -->
+      <audio
+        id="soundtrack"
+        class="clip"
+        src="assets/audio.mp3"
+        data-start="0"
+        data-duration="29.5"
+        data-track-index="0"
+        data-volume="1"
+      ></audio>
 
-      <!-- Audio Track -->
-      <audio id="soundtrack" class="clip" src="assets/audio.mp3" data-start="0" data-duration="29.5" data-track-index="0" data-volume="1"></audio>
-
-      <!-- Header -->
-      <div class="header-wrapper">
+      <!-- Global Header -->
+      <div id="elem-header-brand" data-hf-id="elem-header-brand" class="header-wrapper">
         <img class="logo-brand" src="assets/logo.png" alt="MathCA Logo" />
         <div class="header-top-tag">HỆ THỐNG GIÁO DỤC TOÁN MATHCA</div>
       </div>
 
-      <!-- Stage Card -->
+      <!-- Stage Card trung tâm -->
       <div id="stage" class="stage-card">
         <!-- Scene 1: Hook -->
-        <div id="scene-hook" class="stage-scene">
-          <div class="hook-container">
-            <div id="hook-kicker" class="hook-kicker-badge"><span>⚡</span><span>MẸO TOÁN LỚP 3</span><span>⚡</span></div>
-            <div class="hook-title-box">
-              <div id="hook-title-1" class="title-line-main">NHÂN VỚI 11</div>
-              <div id="hook-title-2" class="title-line-highlight">CHỈ MẤT 2 GIÂY! ⚡</div>
-            </div>
-            <div id="hook-vs-box" class="hook-vs-card">
-              <div class="vs-box"><span class="vs-tag red">CÁCH CŨ</span><span class="vs-time red">⏳ 60 GIÂY</span><span class="vs-desc">Đặt tính dọc rối mắt</span></div>
-              <div class="vs-sep-circle">VS</div>
-              <div class="vs-box target"><span class="vs-tag teal">MẸO MATHCA</span><span class="vs-time teal">⚡ 2 GIÂY</span><span class="vs-desc">Nhìn là ra đáp án!</span></div>
-            </div>
-            <div id="hook-bottom" class="hook-bottom-card"><span style="font-size: 32px;">🚀</span><span class="hook-bottom-text">Bí quyết tính nhẩm siêu tốc — Không cần nháp!</span></div>
-          </div>
-        </div>
+        <section id="scene-hook" data-hf-id="scene-hook" class="stage-scene is-active">
+          <div id="hook-kicker" data-hf-id="hook-kicker" class="mathca-element mathca-badge" style="left:260px;top:60px;font-size:28px;background:#ffbd05;color:#1a1c1c;z-index:101;">⚡ MẸO TOÁN LỚP 3 ⚡</div>
+          <div id="hook-title-1" data-hf-id="hook-title-1" class="mathca-element mathca-text" style="left:160px;top:150px;font-size:96px;color:#006a63;z-index:102;">NHÂN VỚI 11</div>
+          <div id="hook-title-2" data-hf-id="hook-title-2" class="mathca-element mathca-text" style="left:90px;top:265px;font-size:90px;color:#ff5239;z-index:103;">CHỈ MẤT 2 GIÂY! ⚡</div>
+          <div id="hook-vs-box" data-hf-id="hook-vs-box" class="mathca-element mathca-card" style="left:50px;top:410px;width:840px;font-size:32px;z-index:104;">CÁCH CŨ: 60 GIÂY vs MẸO MATHCA: 2 GIÂY</div>
+          <div id="hook-bottom" data-hf-id="hook-bottom" class="mathca-element mathca-card" style="left:50px;top:650px;width:840px;font-size:30px;color:#946200;border:2.5px dashed #ffbd05;background:#fffdf5;z-index:105;">🚀 Bí quyết tính nhẩm siêu tốc — Không cần nháp!</div>
+        </section>
 
-        <!-- Scene 2: Vídụ -->
-        <div id="scene-vidu" class="stage-scene" style="opacity: 0;">
-          <div class="step-badge teal">BÀI TOÁN TÍNH NHANH</div>
-          <div class="equation-display">
-            <div id="tile-35" class="num-tile" style="width: 185px;">35</div>
-            <div id="op-mult" class="op-sign">×</div>
-            <div id="tile-11" class="num-tile coral">11</div>
-            <div id="op-eq" class="op-sign">=</div>
-            <div id="tile-q" class="num-tile yellow">?</div>
-          </div>
-          <div class="warning-card"><span style="font-size: 36px;">⚠️</span><span class="warning-text">Đừng vội lấy giấy bút đặt tính nhé!</span></div>
-        </div>
+        <!-- Scene 2: Đặt bài toán -->
+        <section id="scene-vidu" data-hf-id="scene-vidu" class="stage-scene">
+          <div id="badge-vidu" data-hf-id="badge-vidu" class="mathca-element mathca-badge" style="left:260px;top:60px;font-size:32px;background:#12aba0;color:#ffffff;z-index:101;">BÀI TOÁN TÍNH NHANH</div>
+          <div id="equation-display" data-hf-id="equation-display" class="mathca-element mathca-equation" style="left:150px;top:240px;width:640px;font-size:76px;z-index:102;">35 × 11 = ?</div>
+          <div id="warning-card" data-hf-id="warning-card" class="mathca-element mathca-card" style="left:90px;top:520px;width:760px;font-size:32px;color:#ff5239;border-color:#ffd4cc;background:#fff5f3;z-index:103;">⚠️ Đừng vội lấy giấy bút đặt tính nhé!</div>
+        </section>
 
         <!-- Scene 3: Bước 1 -->
-        <div id="scene-buoc1" class="stage-scene" style="opacity: 0;">
-          <div class="step-badge yellow">BƯỚC 1: TÁCH ĐÔI SỐ 35</div>
-          <div style="font-size: 34px; font-weight: 600; color: var(--navy-muted); margin-bottom: 10px;">Viết số 3 sang trái, số 5 sang phải:</div>
-          <div class="split-stage">
-            <div id="slot-left" class="slot-box num-left">3</div>
-            <div id="slot-mid-empty" class="slot-box num-middle">?</div>
-            <div id="slot-right" class="slot-box num-right">5</div>
-          </div>
-        </div>
+        <section id="scene-buoc1" data-hf-id="scene-buoc1" class="stage-scene">
+          <div id="badge-buoc1" data-hf-id="badge-buoc1" class="mathca-element mathca-badge" style="left:220px;top:60px;font-size:32px;background:#ffbd05;color:#1a1c1c;z-index:101;">BƯỚC 1: TÁCH ĐÔI SỐ 35</div>
+          <div id="split-stage" data-hf-id="split-stage" class="mathca-element mathca-slots" style="left:120px;top:300px;font-size:88px;z-index:102;"><span>3</span><span>?</span><span>5</span></div>
+        </section>
 
         <!-- Scene 4: Bước 2 -->
-        <div id="scene-buoc2" class="stage-scene" style="opacity: 0;">
-          <div class="step-badge coral">BƯỚC 2: CỘNG LẠI NHÉT VÀO GIỮA</div>
-          <div class="addition-indicator">
-            <div id="calc-badge" class="calc-pill"><span>3</span><span>+</span><span>5</span><span>=</span><span style="font-size: 64px; font-weight: 900; color: var(--yellow-vibrant);">8</span></div>
-          </div>
-          <div class="split-stage" style="margin-top: 40px;">
-            <div class="slot-box num-left">3</div>
-            <div id="slot-mid-filled" class="slot-box num-middle" style="background: #fff2cc; border-style: solid; color: #b78103;">8</div>
-            <div class="slot-box num-right">5</div>
-          </div>
-        </div>
+        <section id="scene-buoc2" data-hf-id="scene-buoc2" class="stage-scene">
+          <div id="badge-buoc2" data-hf-id="badge-buoc2" class="mathca-element mathca-badge" style="left:160px;top:60px;font-size:32px;background:#ff5239;color:#ffffff;z-index:101;">BƯỚC 2: CỘNG NHÉT GIỮA</div>
+          <div id="calc-pill" data-hf-id="calc-pill" class="mathca-element mathca-pill" style="left:270px;top:230px;font-size:48px;z-index:102;">3 + 5 = 8</div>
+          <div id="split-filled" data-hf-id="split-filled" class="mathca-element mathca-slots" style="left:120px;top:450px;font-size:88px;z-index:103;"><span>3</span><span style="background:#fff8e1;border-color:#ffbd05;color:#b78103;">8</span><span>5</span></div>
+        </section>
 
-        <!-- Scene 5: Kết quả -->
-        <div id="scene-ketqua" class="stage-scene" style="opacity: 0;">
-          <div class="step-badge teal">KẾT QUẢ SIÊU TỐC</div>
-          <div style="font-size: 52px; font-weight: 800; color: var(--navy-muted); margin-top: 10px;">35 × 11 =</div>
-          <div class="result-hero-box"><div id="final-answer" class="big-answer">385</div><div class="speed-badge">⚡ CHỈ MẤT ĐÚNG 2 GIÂY!</div></div>
-        </div>
+        <!-- Scene 5: Kết quả siêu tốc -->
+        <section id="scene-ketqua" data-hf-id="scene-ketqua" class="stage-scene">
+          <div id="badge-ketqua" data-hf-id="badge-ketqua" class="mathca-element mathca-badge" style="left:260px;top:60px;font-size:32px;background:#12aba0;color:#ffffff;z-index:101;">KẾT QUẢ SIÊU TỐC</div>
+          <div id="final-answer" data-hf-id="final-answer" class="mathca-element mathca-text" style="left:290px;top:240px;font-size:148px;color:#006a63;z-index:102;">385</div>
+          <div id="speed-badge" data-hf-id="speed-badge" class="mathca-element mathca-badge" style="left:210px;top:500px;font-size:34px;background:#ffbd05;color:#1a1c1c;z-index:103;">⚡ CHỈ MẤT ĐÚNG 2 GIÂY!</div>
+        </section>
 
-        <!-- Scene 6: Thử thách -->
-        <div id="scene-thuthach" class="stage-scene" style="opacity: 0;">
-          <div class="step-badge yellow">THỬ THÁCH CHO BẠN</div>
-          <div class="quiz-card"><div class="quiz-title">Áp dụng mẹo trên, tính nhanh:</div><div class="quiz-equation">42 × 11 = ?</div></div>
-          <div style="margin-top: 30px; font-size: 34px; color: var(--coral-red); font-weight: 900;">👇 Hãy bình luận ngay đáp án nhé!</div>
-        </div>
+        <!-- Scene 6: Thử thách & CTA -->
+        <section id="scene-thuthach" data-hf-id="scene-thuthach" class="stage-scene">
+          <div id="badge-thuthach" data-hf-id="badge-thuthach" class="mathca-element mathca-badge" style="left:230px;top:60px;font-size:32px;background:#ffbd05;color:#1a1c1c;z-index:101;">THỬ THÁCH CHO BẠN</div>
+          <div id="quiz-card" data-hf-id="quiz-card" class="mathca-element mathca-card" style="left:60px;top:200px;width:820px;font-size:76px;z-index:102;">42 × 11 = ?</div>
+        </section>
       </div>
 
-      <!-- Mascot & Bubble -->
-      <div id="mascot-wrapper" class="mascot-stage-box"><img src="assets/mascot.png" alt="Mascot" /></div>
-      <div id="bubble" class="speech-bubble">Đừng đặt tính vội nhé! 🦉</div>
-
-      <!-- Footer CTA -->
-      <div class="footer-wrapper"><div id="cta-btn" class="cta-button"><span>FOLLOW MATHCA</span><span>✨</span></div><div class="footer-brand-text">HỆ THỐNG GIÁO DỤC TOÁN MATHCA</div></div>
-
-      <!-- Cursor -->
-      <div id="cursor" class="click-cursor">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M3 3L10.07 20.97L12.58 13.58L19.97 11.07L3 3Z" fill="white" stroke="#1a1c1c" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      <!-- Mascot & CTA -->
+      <div id="elem-mascot-wrapper" data-hf-id="elem-mascot-wrapper" class="mascot-stage-box">
+        <img src="assets/mascot.png" alt="Mascot MathCA" />
+      </div>
+      <div id="elem-cta-btn" data-hf-id="elem-cta-btn" class="cta-button">
+        FOLLOW MATHCA ✨
       </div>
     </div>
 
-    <!-- GSAP Animation Master Timeline -->
+    <!-- GSAP Master Timeline điều khiển HyperFrames -->
     <script>
       window.__timelines = window.__timelines || {};
-      gsap.set("#stage", { scale: 0.95, opacity: 0 });
-      gsap.set(".header-wrapper", { y: -50, opacity: 0 });
-      gsap.set("#mascot-wrapper", { x: 100, opacity: 0 });
-      gsap.set("#bubble", { scale: 0, opacity: 0 });
-      gsap.set("#cursor", { opacity: 0 });
-      gsap.set("#scene-hook", { opacity: 1 });
-      gsap.set("#scene-vidu, #scene-buoc1, #scene-buoc2, #scene-ketqua, #scene-thuthach", { opacity: 0, pointerEvents: "none" });
-
       const tl = gsap.timeline({ paused: true });
 
-      // BEAT 1: HOOK (0s - 4.2s)
-      tl.to(".header-wrapper", { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.5)" }, 0.05);
-      tl.to("#stage", { scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 0.1);
-      tl.to("#mascot-wrapper", { x: 0, opacity: 1, duration: 0.5, ease: "back.out(1.6)" }, 0.18);
-      tl.from("#hook-kicker", { scale: 0.3, opacity: 0, duration: 0.3, ease: "back.out(2.2)" }, 0.25);
-      tl.from("#hook-title-1", { scale: 0.25, y: 35, opacity: 0, duration: 0.45, ease: "back.out(2.4)" }, 0.45);
-      tl.from("#hook-title-2", { scale: 0.25, y: 35, opacity: 0, duration: 0.45, ease: "back.out(2.4)" }, 0.75);
-      tl.from("#hook-vs-box", { scale: 0.8, y: 30, opacity: 0, duration: 0.4, ease: "back.out(1.8)" }, 1.05);
-      tl.from("#hook-bottom", { y: 20, opacity: 0, duration: 0.35, ease: "power2.out" }, 1.35);
-      tl.to("#hook-title-2", { scale: 1.06, duration: 0.28, yoyo: true, repeat: 5, ease: "sine.inOut" }, 1.5);
-      tl.to("#mascot-wrapper", { y: -18, duration: 0.45, yoyo: true, repeat: 4, ease: "sine.inOut" }, 0.8);
+      // --- GLOBAL ELEMENTS ENTRY ---
+      tl.fromTo("#elem-header-brand", { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 0.05);
+      tl.fromTo("#elem-mascot-wrapper", { x: 150, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.18);
+      tl.to("#elem-mascot-wrapper", { y: -16, duration: 0.7, yoyo: true, repeat: 20, ease: "sine.inOut" }, 0.7);
+      tl.fromTo("#elem-cta-btn", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2.4)" }, 0.5);
+      tl.to("#elem-cta-btn", { scale: 1.07, duration: 0.28, yoyo: true, repeat: 20, ease: "sine.inOut" }, 1.0);
 
-      // BEAT 2: BÀI TOÁN (4.2s - 9.0s)
-      tl.to("#scene-hook", { opacity: 0, duration: 0.25 }, 4.1);
-      tl.to("#scene-vidu", { opacity: 1, duration: 0.35, ease: "power2.out" }, 4.35);
-      tl.from("#tile-35", { scale: 0.3, opacity: 0, duration: 0.3, ease: "back.out(2)" }, 4.55);
-      tl.from("#op-mult", { scale: 0, opacity: 0, duration: 0.2, ease: "back.out(2)" }, 4.7);
-      tl.from("#tile-11", { scale: 0.3, opacity: 0, duration: 0.3, ease: "back.out(2)" }, 4.85);
-      tl.from("#op-eq", { scale: 0, opacity: 0, duration: 0.2, ease: "back.out(2)" }, 5.0);
-      tl.from("#tile-q", { scale: 0.2, opacity: 0, rotation: -12, duration: 0.35, ease: "back.out(2.5)" }, 5.15);
-      tl.to("#bubble", { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.0)" }, 5.8);
-      tl.to("#bubble", { scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" }, 8.3);
+      // --- SCENE 1: HOOK (0s - 4.2s) ---
+      tl.fromTo("#hook-kicker", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 0.2);
+      tl.fromTo("#hook-title-1", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2.4)" }, 0.45);
+      tl.fromTo("#hook-title-2", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2.4)" }, 0.75);
+      tl.to("#hook-title-2", { scale: 1.07, duration: 0.28, yoyo: true, repeat: 6, ease: "sine.inOut" }, 1.2);
+      tl.fromTo("#hook-vs-box", { y: 150, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 1.05);
+      tl.fromTo("#hook-bottom", { y: 150, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 1.35);
 
-      // BEAT 3: BƯỚC 1 (9.0s - 13.0s)
-      tl.to("#scene-vidu", { opacity: 0, duration: 0.25 }, 8.9);
-      tl.to("#scene-buoc1", { opacity: 1, duration: 0.35, ease: "power2.out" }, 9.15);
-      tl.from("#slot-left", { x: 80, duration: 0.55, ease: "back.out(1.7)" }, 9.35);
-      tl.from("#slot-right", { x: -80, duration: 0.55, ease: "back.out(1.7)" }, 9.55);
-      tl.from("#slot-mid-empty", { scale: 0, duration: 0.45, ease: "back.out(2.2)" }, 9.9);
+      // Chuyển Scene 1 sang Scene 2 (4.2s)
+      tl.to("#scene-hook", { autoAlpha: 0, duration: 0.22 }, 3.98);
+      tl.to("#scene-vidu", { autoAlpha: 1, duration: 0.28 }, 4.2);
 
-      // BEAT 4: BƯỚC 2 (13.0s - 17.4s)
-      tl.to("#scene-buoc1", { opacity: 0, duration: 0.25 }, 12.9);
-      tl.to("#scene-buoc2", { opacity: 1, duration: 0.35, ease: "power2.out" }, 13.15);
-      tl.from("#calc-badge", { scale: 0.6, opacity: 0, y: -20, duration: 0.5, ease: "back.out(2.0)" }, 13.35);
-      tl.from("#slot-mid-filled", { y: -100, scale: 0.2, duration: 0.6, ease: "bounce.out" }, 14.8);
+      // --- SCENE 2: ĐẶT BÀI TOÁN (4.2s - 9.0s) ---
+      tl.fromTo("#badge-vidu", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 4.3);
+      tl.fromTo("#equation-display", { y: -220, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "bounce.out" }, 4.5);
+      tl.fromTo("#warning-card", { y: 150, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, 6.4);
+      tl.to("#warning-card", { rotation: 4, duration: 0.14, yoyo: true, repeat: 8, ease: "sine.inOut" }, 6.8);
 
-      // BEAT 5: KẾT QUẢ (17.4s - 22.4s)
-      tl.to("#scene-buoc2", { opacity: 0, duration: 0.25 }, 17.3);
-      tl.to("#scene-ketqua", { opacity: 1, duration: 0.35, ease: "power2.out" }, 17.55);
-      tl.from("#final-answer", { scale: 0.3, opacity: 0, duration: 0.55, ease: "back.out(2.2)" }, 17.7);
-      tl.from(".speed-badge", { y: 20, opacity: 0, duration: 0.4, ease: "back.out(1.8)" }, 18.5);
-      tl.to("#mascot-wrapper", { y: -50, rotation: -5, duration: 0.3, yoyo: true, repeat: 3, ease: "power2.out" }, 18.2);
+      // Chuyển Scene 2 sang Scene 3 (9.0s)
+      tl.to("#scene-vidu", { autoAlpha: 0, duration: 0.22 }, 8.78);
+      tl.to("#scene-buoc1", { autoAlpha: 1, duration: 0.28 }, 9.0);
 
-      // BEAT 6: THỬ THÁCH (22.4s - 29.5s)
-      tl.to("#scene-ketqua", { opacity: 0, duration: 0.25 }, 22.3);
-      tl.to("#scene-thuthach", { opacity: 1, duration: 0.35, ease: "power2.out" }, 22.55);
-      tl.from(".quiz-card", { scale: 0.8, opacity: 0, duration: 0.5, ease: "back.out(1.6)" }, 22.75);
-      tl.fromTo("#cursor", { opacity: 0, x: 250, y: 120 }, { opacity: 1, x: 0, y: 0, duration: 0.6, ease: "power3.out" }, 25.5);
-      tl.to("#cursor", { scale: 0.8, duration: 0.1, yoyo: true, repeat: 1 }, 26.5);
-      tl.to("#cta-btn", { scale: 0.94, duration: 0.1, yoyo: true, repeat: 1 }, 26.5);
+      // --- SCENE 3: BƯỚC 1 (9.0s - 13.0s) ---
+      tl.fromTo("#badge-buoc1", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 9.1);
+      tl.fromTo("#split-stage", { scale: 0.1, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "elastic.out(1, 0.35)" }, 9.4);
 
+      // Chuyển Scene 3 sang Scene 4 (13.0s)
+      tl.to("#scene-buoc1", { autoAlpha: 0, duration: 0.22 }, 12.78);
+      tl.to("#scene-buoc2", { autoAlpha: 1, duration: 0.28 }, 13.0);
+
+      // --- SCENE 4: BƯỚC 2 (13.0s - 17.4s) ---
+      tl.fromTo("#badge-buoc2", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 13.1);
+      tl.fromTo("#calc-pill", { y: -220, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "bounce.out" }, 13.4);
+      tl.fromTo("#split-filled", { scale: 0.1, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "elastic.out(1, 0.35)" }, 14.8);
+
+      // Chuyển Scene 4 sang Scene 5 (17.4s)
+      tl.to("#scene-buoc2", { autoAlpha: 0, duration: 0.22 }, 17.18);
+      tl.to("#scene-ketqua", { autoAlpha: 1, duration: 0.28 }, 17.4);
+
+      // --- SCENE 5: KẾT QUẢ SIÊU TỐC (17.4s - 22.4s) ---
+      tl.fromTo("#badge-ketqua", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 17.5);
+      tl.fromTo("#final-answer", { scale: 0.05, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(3.2)" }, 17.75);
+      tl.fromTo("#speed-badge", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.4)" }, 18.2);
+      tl.to("#speed-badge", { scale: 1.07, duration: 0.28, yoyo: true, repeat: 7, ease: "sine.inOut" }, 18.6);
+
+      // Chuyển Scene 5 sang Scene 6 (22.4s)
+      tl.to("#scene-ketqua", { autoAlpha: 0, duration: 0.22 }, 22.18);
+      tl.to("#scene-thuthach", { autoAlpha: 1, duration: 0.28 }, 22.4);
+
+      // --- SCENE 6: THỬ THÁCH & CTA (22.4s - 29.5s) ---
+      tl.fromTo("#badge-thuthach", { scale: 0.25, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 22.5);
+      tl.fromTo("#quiz-card", { scale: 0.1, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "elastic.out(1, 0.35)" }, 22.8);
+
+      // Đăng ký Master Timeline vào window.__timelines
       window.__timelines["main"] = tl;
     </script>
   </body>

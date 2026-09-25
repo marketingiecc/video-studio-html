@@ -25,10 +25,14 @@ MathCA Studio là ứng dụng web chạy cục bộ để:
 
 ### Windows
 
-- Máy mới: nhấp đúp `install_studio.bat` một lần. Script kiểm tra/cài Node.js LTS 22+ bằng Winget khi cần, cài đúng các package đã khóa và tải browser render của HyperFrames.
-- Các lần sau: chỉ cần nhấp đúp `start_studio.bat`.
+- **Cách 1 (Khuyên dùng số 1 - File .EXE chuyển giao):**
+  - Máy mới: Nhấp đúp **`Cai_Dat_MathCA_Studio.exe`** để mở trình cài đặt tự động trọn bộ (tự kiểm tra/cài Node.js 22+, cài thư viện, thiết lập bộ render HyperFrames và tạo icon Desktop).
+  - Khởi động hàng ngày: Nhấp đúp **`MathCA_Studio.exe`** (hoặc icon Desktop) để khởi động Studio ngay lập tức.
+- **Cách 2 (Sử dụng script .bat):**
+  - Máy mới: Nhấp đúp `install_studio.bat` một lần.
+  - Các lần sau: Nhấp đúp `start_studio.bat`.
 
-`start_studio.bat` tự chuyển về đúng thư mục, bổ sung package còn thiếu, kiểm tra bộ render, khởi động server tại `http://localhost:3300` và chỉ mở trình duyệt sau khi server thực sự phản hồi.
+`start_studio.bat` và `MathCA_Studio.exe` tự chuyển về đúng thư mục, bổ sung package còn thiếu, kiểm tra bộ render, khởi động server tại `http://localhost:3300` và chỉ mở trình duyệt sau khi server thực sự phản hồi.
 
 ### macOS / Linux
 

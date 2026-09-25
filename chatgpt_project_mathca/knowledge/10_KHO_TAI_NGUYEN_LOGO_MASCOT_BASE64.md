@@ -1,11 +1,11 @@
-# 10. KHO TÀI NGUYÊN LOGO, MASCOT VÀ HÌNH HỌC (SELF-CONTAINED ASSETS)
+# 10. KHO TÀI NGUYÊN LOGO, MASCOT VÀ ĐỒ HỌA (STUDIO ASSETS)
 
-Để gói ZIP tạo ra từ ChatGPT hoàn toàn độc lập và không bao giờ bị lỗi thiếu ảnh ("broken image"), ChatGPT có 2 phương án xử lý tài nguyên đồ họa:
+Trong **MathCA Video Studio Pro**, toàn bộ tài nguyên thương hiệu cốt lõi đã được lưu trữ bền vững tại thư mục `public/assets/`:
+- `assets/logo.png`: Logo nhận diện chính thức của MathCA.
+- `assets/mascot.png`: Mascot Cú con thông thái của MathCA.
+- `assets/fonts/Inter-*.otf`: Trọn bộ font chữ Inter bản quyền hiển thị offline.
 
----
-
-## PHƯƠNG ÁN 1: DÙNG VECTOR SVG TRỰC TIẾP TRONG HTML (KHUYÊN DÙNG SỐ 1)
-Nhúng trực tiếp mã SVG vào `index.html`. Cách này giúp tệp nhẹ, sắc nét tuyệt đối ở độ phân giải 1080x1920 mà không cần nạp bất kỳ file ảnh ngoài nào.
+Khi GPT tạo mã HTML hoặc các phần tử `type: "image"` trong JSON, chỉ cần trỏ đường dẫn tới `assets/logo.png` và `assets/mascot.png`. Ngoài ra, nếu muốn hiển thị vector độc lập tuyệt đối, GPT có thể sử dụng các mã SVG chuẩn dưới đây:
 
 ### 1. Vector Logo MathCA (Chuẩn màu Teal `#12ABA0` + Coral `#FF5239` + Puzzle):
 ```html

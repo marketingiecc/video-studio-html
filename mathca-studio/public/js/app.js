@@ -145,6 +145,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   initAudioControls();
   initTimelineVoicePicker();
   initPremiumStudio();
+  initUpdateManager();
   await checkServerHealth();
   window.setInterval(() => checkServerHealth(), 5000);
 
@@ -2606,6 +2607,155 @@ function showToast(msg, type = 'success') {
     toast.style.transform = 'translateY(10px)';
     _toastTimer = null;
   }, type === 'error' ? 5000 : 2500);
+}
+
+/**
+ * Update Manager: Check and Apply updates from GitHub
+ */
+let updateCheckInFlight = false;
+let updateApplyInFlight = false;
+
+function initUpdateManager() {
+  const btnCheckUpdate = document.getElementById('btn-check-update');
+  const modalUpdate = document.getElementById('modal-update');
+  const btnRecheckUpdate = document.getElementById('btn-recheck-update');
+  const btnApplyUpdate = document.getElementById('btn-apply-update');
+
+  btnCheckUpdate?.addEventListener('click', () => {
+    modalUpdate?.classList.add('active');
+    checkAppUpdate(true);
+  });
+
+  btnRecheckUpdate?.addEventListener('click', () => checkAppUpdate(true));
+  btnApplyUpdate?.addEventListener('click', applyAppUpdate);
+
+  // Background check on startup
+  setTimeout(() => checkAppUpdate(false), 2500);
+}
+
+async function checkAppUpdate(isManual = false) {
+  if (updateCheckInFlight) return;
+  updateCheckInFlight = true;
+
+  const updateBadge = document.getElementById('update-badge');
+  const updateCurrentCommit = document.getElementById('update-current-commit');
+  const updateRemoteCommit = document.getElementById('update-remote-commit');
+  const updateStatusMsg = document.getElementById('update-status-msg');
+  const updateChangelogSection = document.getElementById('update-changelog-section');
+  const updateChangelogList = document.getElementById('update-changelog-list');
+  const btnApplyUpdate = document.getElementById('btn-apply-update');
+  const btnRecheckUpdate = document.getElementById('btn-recheck-update');
+
+  if (isManual) {
+    if (updateStatusMsg) {
+      updateStatusMsg.className = 'update-status-msg checking';
+      updateStatusMsg.textContent = 'Đang kết nối GitHub để kiểm tra phiên bản mới...';
+    }
+    if (btnApplyUpdate) btnApplyUpdate.disabled = true;
+    if (btnRecheckUpdate) btnRecheckUpdate.disabled = true;
+  }
+
+  try {
+    const res = await fetch('/api/update/check');
+    const data = await res.json();
+
+    if (!data.success) {
+      throw new Error(data.error || 'Không thể kiểm tra bản cập nhật.');
+    }
+
+    if (updateCurrentCommit) updateCurrentCommit.textContent = data.currentCommit || '—';
+    if (updateRemoteCommit) updateRemoteCommit.textContent = data.remoteCommit || '—';
+
+    if (data.hasUpdate) {
+      if (updateBadge) updateBadge.style.display = 'inline-block';
+      if (updateStatusMsg) {
+        updateStatusMsg.className = 'update-status-msg has-update';
+        updateStatusMsg.textContent = `🚀 Có ${data.commitsBehind || 1} bản cập nhật mới trên GitHub! Nhấn "Cập Nhật Ngay" để nâng cấp.`;
+      }
+      if (btnApplyUpdate) btnApplyUpdate.disabled = false;
+
+      if (data.changelog && data.changelog.length > 0 && updateChangelogList && updateChangelogSection) {
+        updateChangelogList.innerHTML = '';
+        data.changelog.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          updateChangelogList.appendChild(li);
+        });
+        updateChangelogSection.style.display = 'block';
+      }
+    } else {
+      if (updateBadge) updateBadge.style.display = 'none';
+      if (updateStatusMsg) {
+        updateStatusMsg.className = 'update-status-msg up-to-date';
+        updateStatusMsg.textContent = '✅ Bạn đang sử dụng phiên bản mới nhất từ GitHub!';
+      }
+      if (btnApplyUpdate) btnApplyUpdate.disabled = true;
+      if (updateChangelogSection) updateChangelogSection.style.display = 'none';
+    }
+  } catch (err) {
+    console.warn('[Update Check]', err);
+    if (isManual && updateStatusMsg) {
+      updateStatusMsg.className = 'update-status-msg error';
+      updateStatusMsg.textContent = `Lỗi kiểm tra cập nhật: ${err.message}`;
+    }
+  } finally {
+    updateCheckInFlight = false;
+    if (btnRecheckUpdate) btnRecheckUpdate.disabled = false;
+  }
+}
+
+async function applyAppUpdate() {
+  if (updateApplyInFlight) return;
+  updateApplyInFlight = true;
+
+  const btnApplyUpdate = document.getElementById('btn-apply-update');
+  const btnRecheckUpdate = document.getElementById('btn-recheck-update');
+  const updateStatusMsg = document.getElementById('update-status-msg');
+  const updateProgressContainer = document.getElementById('update-progress-container');
+  const updateStepText = document.getElementById('update-step-text');
+  const updateBadge = document.getElementById('update-badge');
+
+  if (btnApplyUpdate) btnApplyUpdate.disabled = true;
+  if (btnRecheckUpdate) btnRecheckUpdate.disabled = true;
+  if (updateProgressContainer) updateProgressContainer.style.display = 'block';
+  if (updateStepText) updateStepText.textContent = 'Đang kéo mã nguồn mới nhất từ GitHub (git pull)...';
+  if (updateStatusMsg) {
+    updateStatusMsg.className = 'update-status-msg updating';
+    updateStatusMsg.textContent = 'Đang cập nhật phiên bản mới, vui lòng không tắt trình duyệt hoặc server...';
+  }
+
+  try {
+    const res = await fetch('/api/update/apply', { method: 'POST' });
+    const data = await res.json();
+
+    if (!data.success) {
+      throw new Error(data.error || 'Cập nhật thất bại.');
+    }
+
+    if (updateStepText) updateStepText.textContent = 'Hoàn tất cập nhật!';
+    if (updateStatusMsg) {
+      updateStatusMsg.className = 'update-status-msg up-to-date';
+      updateStatusMsg.textContent = '🎉 Cập nhật thành công! Trang sẽ tự động tải lại sau 3 giây...';
+    }
+    if (updateBadge) updateBadge.style.display = 'none';
+    showToast('Cập nhật thành công! Đang tải lại Studio... 🎉');
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
+  } catch (err) {
+    console.error('[Update Apply]', err);
+    if (updateStatusMsg) {
+      updateStatusMsg.className = 'update-status-msg error';
+      updateStatusMsg.textContent = `Cập nhật thất bại: ${err.message}`;
+    }
+    if (updateProgressContainer) updateProgressContainer.style.display = 'none';
+    if (btnApplyUpdate) btnApplyUpdate.disabled = false;
+    if (btnRecheckUpdate) btnRecheckUpdate.disabled = false;
+    showToast(`Lỗi cập nhật: ${err.message}`, 'error');
+  } finally {
+    updateApplyInFlight = false;
+  }
 }
 
 

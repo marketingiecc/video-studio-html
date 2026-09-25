@@ -3,7 +3,9 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { spawn } = require('child_process');
+const { spawn, execFile } = require('child_process');
+const util = require('util');
+const execFileAsync = util.promisify(execFile);
 const bundledFfmpegPath = require('ffmpeg-static');
 const bundledFfprobePath = require('ffprobe-static').path;
 const { AudioAssetStore } = require('./audio-assets');
@@ -13,6 +15,9 @@ const { normalizeAudioPlan } = require('./audio-mixer');
 const { generateCompleteHtmlComposition } = require('./public/js/composition-generator');
 
 const DEFAULT_PORT = Number(process.env.PORT) || 3300;
+const REPO_ROOT = fs.existsSync(path.join(__dirname, '..', '.git'))
+  ? path.resolve(__dirname, '..')
+  : (fs.existsSync(path.join(__dirname, '.git')) ? __dirname : path.resolve(__dirname, '..'));
 const PROJECTS_DIR = path.join(__dirname, 'projects');
 const RENDER_DIR = path.join(__dirname, 'rendered_output');
 const WORKSPACE_DIR = path.join(__dirname, 'render_workspace');
@@ -968,6 +973,126 @@ function createApp(options = {}) {
   });
 
   app.get('/api/render-status', (request, response) => response.json(currentRenderJob));
+
+  app.get('/api/update/check', async (request, response) => {
+    try {
+      if (!fs.existsSync(path.join(REPO_ROOT, '.git'))) {
+        return response.json({
+          success: true,
+          isGitRepo: false,
+          hasUpdate: false,
+          message: 'Ứng dụng không chạy từ kho Git.',
+        });
+      }
+
+      try {
+        await execFileAsync('git', ['fetch', 'origin', 'main'], { cwd: REPO_ROOT, timeout: 25000 });
+      } catch (fetchErr) {
+        console.warn('[Update] git fetch warning:', fetchErr.message);
+      }
+
+      const { stdout: localHead } = await execFileAsync('git', ['rev-parse', '--short', 'HEAD'], { cwd: REPO_ROOT });
+      const currentCommit = localHead.trim();
+
+      let remoteCommit = currentCommit;
+      try {
+        const { stdout: remoteHead } = await execFileAsync('git', ['rev-parse', '--short', 'origin/main'], { cwd: REPO_ROOT });
+        remoteCommit = remoteHead.trim();
+      } catch {
+        // remote may not be tracked yet
+      }
+
+      let commitsBehind = 0;
+      let changelog = [];
+      try {
+        const { stdout: countOut } = await execFileAsync('git', ['rev-list', 'HEAD..origin/main', '--count'], { cwd: REPO_ROOT });
+        commitsBehind = parseInt(countOut.trim(), 10) || 0;
+      } catch {
+        commitsBehind = 0;
+      }
+
+      if (commitsBehind > 0) {
+        try {
+          const { stdout: logOut } = await execFileAsync('git', ['log', 'HEAD..origin/main', '--oneline', '-n', '15'], { cwd: REPO_ROOT });
+          changelog = logOut.split('\n').map((line) => line.trim()).filter(Boolean);
+        } catch {
+          changelog = [];
+        }
+      }
+
+      response.json({
+        success: true,
+        isGitRepo: true,
+        hasUpdate: commitsBehind > 0,
+        currentCommit,
+        remoteCommit,
+        commitsBehind,
+        changelog,
+      });
+    } catch (error) {
+      console.error('[Update Check Error]', error);
+      response.status(500).json({
+        success: false,
+        error: error.message || 'Lỗi kiểm tra cập nhật.',
+      });
+    }
+  });
+
+  app.post('/api/update/apply', async (request, response) => {
+    try {
+      if (currentRenderJob.active) {
+        return response.status(400).json({
+          success: false,
+          error: 'Đang có tác vụ render video đang chạy. Hãy đợi hoàn tất hoặc hủy render trước khi cập nhật.',
+        });
+      }
+
+      if (!fs.existsSync(path.join(REPO_ROOT, '.git'))) {
+        return response.status(400).json({
+          success: false,
+          error: 'Thư mục không phải Git repository, không thể tự động cập nhật.',
+        });
+      }
+
+      console.log('[Update] Bắt đầu kéo mã nguồn mới nhất từ GitHub...');
+      const { stdout: pullOut } = await execFileAsync('git', ['pull', 'origin', 'main'], { cwd: REPO_ROOT, timeout: 60000 });
+      console.log('[Update] Git pull hoàn tất:', pullOut.trim());
+
+      try {
+        console.log('[Update] Kiểm tra và cập nhật dependencies trong mathca-studio...');
+        await execFileAsync(process.platform === 'win32' ? 'npm.cmd' : 'npm', ['install', '--prefer-offline', '--no-audit'], {
+          cwd: __dirname,
+          timeout: 120000,
+        });
+      } catch (npmErr) {
+        console.warn('[Update] npm install warning:', npmErr.message);
+      }
+
+      const setupScript = path.join(__dirname, 'setup-runtime.js');
+      if (fs.existsSync(setupScript)) {
+        try {
+          console.log('[Update] Chạy setup runtime...');
+          await execFileAsync(process.execPath, [setupScript], { cwd: __dirname, timeout: 60000 });
+        } catch (setupErr) {
+          console.warn('[Update] setup-runtime warning:', setupErr.message);
+        }
+      }
+
+      const { stdout: newHead } = await execFileAsync('git', ['rev-parse', '--short', 'HEAD'], { cwd: REPO_ROOT });
+
+      response.json({
+        success: true,
+        newCommit: newHead.trim(),
+        message: 'Cập nhật thành công! Phiên bản mới nhất đã được áp dụng.',
+      });
+    } catch (error) {
+      console.error('[Update Apply Error]', error);
+      response.status(500).json({
+        success: false,
+        error: `Cập nhật thất bại: ${error.message}`,
+      });
+    }
+  });
 
   app.use((error, request, response, next) => {
     console.error('[Server] Unhandled route error:', error);
