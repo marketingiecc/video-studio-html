@@ -1775,6 +1775,30 @@ function initActionButtons() {
 
   btnSelectOutputFolder?.addEventListener('click', chooseOutputDirectory);
   btnRenderTrigger.addEventListener('click', () => { updateRenderAudioSummary(); modalRenderProgress.classList.add('active'); });
+
+  const btnCopyLan = document.getElementById('btn-copy-lan');
+  btnCopyLan?.addEventListener('click', async () => {
+    const label = document.getElementById('lan-btn-label');
+    const rawLan = btnCopyLan.dataset.lanUrl;
+    const url = rawLan || (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? `${window.location.protocol}//192.168.1.24:${window.location.port || 3300}` : window.location.origin);
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = url;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+      }
+      if (label) label.textContent = 'Đã chép link!';
+      showToast(`Đã sao chép link mạng LAN: ${url} 🎉`);
+      setTimeout(() => { if (label) label.textContent = 'Mạng LAN'; }, 3000);
+    } catch {
+      prompt('Link truy cập qua mạng LAN:', url);
+    }
+  });
 }
 
 async function loadPresetProject(filename, options = {}) {
@@ -2315,6 +2339,14 @@ async function checkServerHealth() {
         btnRenderTrigger?.removeAttribute('disabled');
       }
       serverStatus.title = 'Node Server, HyperFrames, FFmpeg, FFprobe và trình duyệt render đã sẵn sàng';
+
+      if (payload.network?.primaryLanUrl) {
+        const btnCopyLan = document.getElementById('btn-copy-lan');
+        if (btnCopyLan) {
+          btnCopyLan.dataset.lanUrl = payload.network.primaryLanUrl;
+          btnCopyLan.title = `Sao chép link mạng LAN: ${payload.network.primaryLanUrl}`;
+        }
+      }
       return true;
     } catch (error) {
       serverOnline = false;

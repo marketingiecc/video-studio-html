@@ -248,6 +248,39 @@ namespace MathCAStudioInstaller
             {
                 AppendLog("Bấm nút 'BẮT ĐẦU CÀI ĐẶT TRỌN BỘ' để phần mềm tự động chuẩn bị tất cả.");
             }
+
+            string lanIp = GetLocalLanIp();
+            if (!string.IsNullOrEmpty(lanIp))
+            {
+                AppendLog("➜ Link truy cập máy này: http://localhost:3300");
+                AppendLog("➜ Link mạng LAN (máy khác): http://" + lanIp + ":3300");
+            }
+        }
+
+        private string GetLocalLanIp()
+        {
+            try
+            {
+                foreach (System.Net.NetworkInformation.NetworkInterface ni in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
+                {
+                    if (ni.OperationalStatus == System.Net.NetworkInformation.OperationalStatus.Up &&
+                        ni.NetworkInterfaceType != System.Net.NetworkInformation.NetworkInterfaceType.Loopback)
+                    {
+                        string name = ni.Name.ToLower();
+                        if (name.Contains("vmware") || name.Contains("virtual") || name.Contains("vethernet") || name.Contains("tailscale")) continue;
+                        foreach (System.Net.NetworkInformation.UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                        {
+                            if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork &&
+                                !ip.Address.ToString().StartsWith("169.254."))
+                            {
+                                return ip.Address.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+            return null;
         }
 
         private bool CheckNodeInstalled(out string version)
@@ -485,6 +518,12 @@ namespace MathCAStudioInstaller
                     psi.UseShellExecute = true;
                     Process.Start(psi);
                     Process.Start("http://localhost:3300");
+                }
+
+                string lanIp = GetLocalLanIp();
+                if (!string.IsNullOrEmpty(lanIp))
+                {
+                    AppendLog("➜ Link chia sẻ mạng LAN cho đồng nghiệp: http://" + lanIp + ":3300");
                 }
             }
             catch (Exception ex)

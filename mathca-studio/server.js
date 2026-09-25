@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 const crypto = require('crypto');
 const { spawn, execFile } = require('child_process');
 const util = require('util');
@@ -18,6 +19,29 @@ const DEFAULT_PORT = Number(process.env.PORT) || 3300;
 const REPO_ROOT = fs.existsSync(path.join(__dirname, '..', '.git'))
   ? path.resolve(__dirname, '..')
   : (fs.existsSync(path.join(__dirname, '.git')) ? __dirname : path.resolve(__dirname, '..'));
+
+function getLanAddresses() {
+  const nets = os.networkInterfaces();
+  const list = [];
+  for (const name of Object.keys(nets)) {
+    for (const net of nets[name] || []) {
+      const family = typeof net.family === 'string' ? net.family : (net.family === 4 ? 'IPv4' : 'IPv6');
+      if (family === 'IPv4' && !net.internal && !net.address.startsWith('169.254.')) {
+        const isVirtual = /vmware|virtual|loopback|vethernet|tailscale/i.test(name);
+        list.push({ name, address: net.address, isVirtual });
+      }
+    }
+  }
+  list.sort((a, b) => (a.isVirtual ? 1 : 0) - (b.isVirtual ? 1 : 0));
+  return list;
+}
+
+function getPrimaryLanUrl(port = DEFAULT_PORT) {
+  const list = getLanAddresses();
+  const primary = list.find((item) => !item.isVirtual) || list[0];
+  return primary ? `http://${primary.address}:${port}` : null;
+}
+
 const PROJECTS_DIR = path.join(__dirname, 'projects');
 const RENDER_DIR = path.join(__dirname, 'rendered_output');
 const WORKSPACE_DIR = path.join(__dirname, 'render_workspace');
@@ -446,6 +470,11 @@ function createApp(options = {}) {
         available: mcpAvailable ? 'vieneu' : 'edge',
         activeProvider: mcpAvailable && ttsProvider !== 'edge' ? 'vieneu' : 'edge',
         vieneuStatus: mcpClient ? (mcpAvailable ? 'ready' : 'unavailable') : 'not_configured',
+      },
+      network: {
+        port: DEFAULT_PORT,
+        primaryLanUrl: getPrimaryLanUrl(DEFAULT_PORT),
+        lanUrls: getLanAddresses().map((item) => `http://${item.address}:${DEFAULT_PORT}`),
       },
       hyperframesVersion: HYPERFRAMES_VERSION,
       timestamp: new Date().toISOString(),
@@ -1118,10 +1147,14 @@ function startServer(port = DEFAULT_PORT) {
   }
   const app = createApp({ mcpClient: mcpClientInstance });
   const server = app.listen(port, () => {
+    const lanUrl = getPrimaryLanUrl(port);
     console.log('=======================================================');
     console.log('  MATHCA VIDEO STUDIO PRO');
     console.log('  Phần mềm trực quan biên tập và xuất video MathCA');
-    console.log(`  Đang chạy tại: http://localhost:${port}`);
+    console.log(`  ➜  Máy này (Local):  http://localhost:${port}`);
+    if (lanUrl) {
+      console.log(`  ➜  Mạng LAN:         ${lanUrl} (Cho máy khác cùng Wi-Fi / mạng)`);
+    }
     console.log('=======================================================');
 
     // Eager VieNeu init — fire-and-forget so the engine is warm when user needs it
@@ -1151,6 +1184,8 @@ module.exports = {
   inferAudioProgress,
   getMasterAudioHash,
   normalizeRenderOptions,
+  getLanAddresses,
+  getPrimaryLanUrl,
   startServer,
 };
 

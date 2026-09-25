@@ -29,6 +29,9 @@ test('health and preset APIs are available', async () => {
     assert.equal(health.success, true);
     assert.equal(health.service, 'MathCA Video Studio Pro');
     assert.equal(typeof health.systemReady, 'boolean');
+    assert.ok(health.network);
+    assert.equal(typeof health.network.port, 'number');
+    assert.ok(Array.isArray(health.network.lanUrls));
 
     const preset = await fetch(`${baseUrl}/api/projects/meo_nhan_11_lop_3.json`).then((response) => response.json());
     assert.equal(preset.success, true);
@@ -101,7 +104,7 @@ test('studio page exposes audio, render and selection controls', () => {
   const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'public', 'index.html'), 'utf8');
   const appJs = fs.readFileSync(path.join(__dirname, '..', 'public', 'js', 'app.js'), 'utf8');
 
-  for (const id of ['server-status', 'btn-generate-audio', 'audio-status', 'btn-select-output-folder', 'output-folder-status', 'render-output-location', 'btn-render-trigger', 'btn-check-update', 'modal-update']) {
+  for (const id of ['server-status', 'btn-generate-audio', 'audio-status', 'btn-select-output-folder', 'output-folder-status', 'render-output-location', 'btn-render-trigger', 'btn-check-update', 'modal-update', 'btn-copy-lan']) {
     assert.match(indexHtml, new RegExp(`id="${id}"`));
   }
   assert.match(appJs, /compositionRoot\.addEventListener\('mousedown'/);

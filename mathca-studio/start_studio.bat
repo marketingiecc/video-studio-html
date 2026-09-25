@@ -46,6 +46,7 @@ if not exist "node_modules\hyperframes\bin\hyperframes.mjs" (
 echo [INFO] Dang kiem tra bo render cuc bo va khoi dong Studio...
 echo [INFO] Lan chay dau co the mat vai phut de tai trinh duyet render.
 echo.
+powershell -NoProfile -Command "$ip = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.IPAddress -ne '127.0.0.1' -and $_.InterfaceAlias -notmatch 'vEthernet|Loopback|VMnet|Tailscale' } | Select-Object -ExpandProperty IPAddress -First 1); if($ip){ Write-Host '  ➜ LINK MANG LAN (Cho may khac truy cap): http://'$ip':3300' -ForegroundColor Green; Write-Host '' }"
 
 start "" powershell -NoProfile -WindowStyle Hidden -Command "$url='http://localhost:3300'; for($i=0; $i -lt 180; $i++){ try { Invoke-WebRequest -UseBasicParsing -Uri ($url + '/api/health') -TimeoutSec 1 | Out-Null; Start-Process $url; break } catch { Start-Sleep -Seconds 1 } }"
 call npm start

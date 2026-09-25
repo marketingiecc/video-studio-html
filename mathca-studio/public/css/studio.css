@@ -1453,6 +1453,21 @@ body.timeline-resizing { cursor: ns-resize; user-select: none; }
   overflow-y: auto !important;
 }
 
+/* LAN share button */
+.btn-lan-link {
+  font-size: 11px;
+  padding: 6px 12px;
+  gap: 6px;
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(14, 116, 144, 0.12);
+  color: #7dd3fc;
+}
+.btn-lan-link:hover {
+  background: rgba(14, 116, 144, 0.28);
+  border-color: #38bdf8;
+  color: #e0f2fe;
+}
+
 /* Update button & badge */
 .btn-update {
   position: relative;
