@@ -1,0 +1,233 @@
+{
+  "metadata": {
+    "title": "Toán Tổng - Hiệu qua Sơ đồ đoạn thẳng - Lớp 4",
+    "grade": 4,
+    "topic": "Tìm hai số khi biết Tổng và Hiệu",
+    "duration": 28.0,
+    "voice": "vi-VN-HoaiMyNeural"
+  },
+  "brand": {
+    "colors": {
+      "tealPrimary": "#12aba0",
+      "tealDark": "#006a63",
+      "tealSoft": "#e6f7f6",
+      "coralRed": "#ff5239",
+      "yellowVibrant": "#ffbd05"
+    },
+    "fontFamily": "Inter"
+  },
+  "scenes": [
+    {
+      "id": "scene-hook",
+      "name": "Hook: Bài toán Tổng - Hiệu",
+      "startTime": 0.0,
+      "endTime": 4.5,
+      "voiceText": "Đừng học vẹt công thức Tổng Hiệu nữa! Hãy vẽ sơ đồ trong 3 giây!",
+      "elements": [
+        {
+          "id": "hook-kicker",
+          "name": "Thẻ Kicker",
+          "type": "badge",
+          "x": 260,
+          "y": 60,
+          "fontSize": 28,
+          "text": "⚡ BÍ QUYẾT TOÁN LỚP 4 ⚡",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.2 }
+        },
+        {
+          "id": "hook-title-1",
+          "name": "Tiêu đề chính",
+          "type": "text",
+          "x": 140,
+          "y": 150,
+          "fontSize": 92,
+          "text": "BÀI TOÁN TỔNG - HIỆU",
+          "color": "#006a63",
+          "animation": { "type": "pop-punch", "duration": 0.45, "delay": 0.45 }
+        },
+        {
+          "id": "hook-title-2",
+          "name": "Tiêu đề phụ",
+          "type": "text",
+          "x": 100,
+          "y": 265,
+          "fontSize": 84,
+          "text": "VẼ LÀ RA ĐÁP ÁN! 📊",
+          "color": "#ff5239",
+          "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.45, "delay": 0.75 }
+        },
+        {
+          "id": "hook-vs-box",
+          "name": "Thẻ cam kết",
+          "type": "card",
+          "x": 50,
+          "y": 420,
+          "width": 840,
+          "text": "Khắc sâu bản chất — Không sợ quên công thức!",
+          "animation": { "type": "slide-up", "duration": 0.4, "delay": 1.05 }
+        }
+      ]
+    },
+    {
+      "id": "scene-vidu",
+      "name": "Đề bài: Tổng 50, Hiệu 10",
+      "startTime": 4.5,
+      "endTime": 10.0,
+      "voiceText": "Ví dụ: Tổng hai số là 50, Hiệu là 10. Tìm hai số đó!",
+      "elements": [
+        {
+          "id": "badge-vidu",
+          "name": "Thẻ đề bài",
+          "type": "badge",
+          "x": 280,
+          "y": 60,
+          "fontSize": 32,
+          "text": "BÀI TOÁN KINH ĐIỂN",
+          "color": "#ffffff",
+          "bgColor": "#12aba0",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "quiz-desc",
+          "name": "Nội dung bài toán",
+          "type": "card",
+          "x": 70,
+          "y": 200,
+          "width": 800,
+          "fontSize": 42,
+          "text": "Tổng = 50  |  Hiệu = 10\nTìm Số Lớn và Số Bé?",
+          "animation": { "type": "elastic-pop", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "scene-buoc1",
+      "name": "Vẽ 2 đoạn thẳng",
+      "startTime": 10.0,
+      "endTime": 16.0,
+      "voiceText": "Bước một: Vẽ Số Lớn dài hơn Số Bé một đoạn là 10.",
+      "elements": [
+        {
+          "id": "badge-buoc1",
+          "name": "Thẻ Bước 1",
+          "type": "badge",
+          "x": 260,
+          "y": 60,
+          "fontSize": 32,
+          "text": "BƯỚC 1: VẼ ĐOẠN THẲNG",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "diagram-box",
+          "name": "Sơ đồ đoạn thẳng",
+          "type": "card",
+          "x": 60,
+          "y": 220,
+          "width": 820,
+          "fontSize": 36,
+          "text": "Số Lớn: ───[ 10 ]───\nSố Bé : ──────\nTổng cả 2 số: 50",
+          "animation": { "type": "slide-up", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "scene-ketqua",
+      "name": "Kết quả siêu nhanh",
+      "startTime": 16.0,
+      "endTime": 22.0,
+      "voiceText": "Lấy 50 trừ 10 chia đôi được Số Bé là 20. Số Lớn là 30!",
+      "elements": [
+        {
+          "id": "badge-ketqua",
+          "name": "Thẻ kết quả",
+          "type": "badge",
+          "x": 280,
+          "y": 60,
+          "fontSize": 32,
+          "text": "KẾT QUẢ DỄ DÀNG",
+          "color": "#ffffff",
+          "bgColor": "#12aba0",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "final-answer",
+          "name": "Đáp án 2 số",
+          "type": "text",
+          "x": 160,
+          "y": 220,
+          "fontSize": 76,
+          "text": "Số Bé = 20\nSố Lớn = 30",
+          "color": "#006a63",
+          "animation": { "type": "zoom-hero", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "scene-thuthach",
+      "name": "Thử thách & CTA",
+      "startTime": 22.0,
+      "endTime": 28.0,
+      "voiceText": "Đố bạn: Tổng bằng 60, Hiệu bằng 20. Hai số là bao nhiêu? Hãy bình luận nhé!",
+      "elements": [
+        {
+          "id": "badge-thuthach",
+          "name": "Thẻ thử thách",
+          "type": "badge",
+          "x": 250,
+          "y": 60,
+          "fontSize": 32,
+          "text": "THỬ THÁCH CHO BẠN",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "quiz-card",
+          "name": "Câu đố",
+          "type": "card",
+          "x": 60,
+          "y": 200,
+          "width": 820,
+          "fontSize": 48,
+          "text": "Tổng = 60 | Hiệu = 20\nSố lớn và số bé là mấy?",
+          "animation": { "type": "elastic-pop", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    }
+  ],
+  "globalElements": [
+    {
+      "id": "elem-header-brand",
+      "name": "Header Logo & Tiêu Đề",
+      "x": 0,
+      "y": 75,
+      "type": "global",
+      "animation": { "type": "slide-up", "duration": 0.4, "delay": 0.05 }
+    },
+    {
+      "id": "elem-mascot-wrapper",
+      "name": "Mascot Cú con",
+      "x": 720,
+      "y": 1380,
+      "width": 320,
+      "type": "global",
+      "animation": { "type": "slide-left", "loop": "float", "duration": 0.5, "delay": 0.18 }
+    },
+    {
+      "id": "elem-cta-btn",
+      "name": "Nút Follow MathCA",
+      "x": 230,
+      "y": 1720,
+      "fontSize": 38,
+      "text": "FOLLOW MATHCA ✨",
+      "color": "#ffffff",
+      "bgColor": "#ff5239",
+      "type": "global",
+      "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.45, "delay": 0.5 }
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "date": "2026-09-25",
+  "sourceJson": "C:\\Users\\lexua\\Downloads\\MathCA_Lop3_5PhepTinhNangCao.json",
+  "passed": 45,
+  "total": 45,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Baseline prototype loads",
+      "pass": true,
+      "details": "{\"scenes\":6,\"sfx\":5,\"bgmOff\":true}"
+    },
+    {
+      "name": "Legacy JSON import completes",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Metadata and 8 scenes mapped",
+      "pass": true,
+      "details": "{\"title\":\"5 phút luyện tập toán lớp 3 với 5 phép tính nâng cao\",\"cards\":8,\"first\":\"Hồi 1 - Hook bùng nổ\",\"firstTime\":\"00:00.0 – 00:04.2\",\"bgmOff\":true,\"sfx\":0,\"nan\":false,\"sceneCount\":\"(8 cảnh)\"}"
+    },
+    {
+      "name": "Missing audio hydrates safely",
+      "pass": true,
+      "details": "bgmOff=true, sfx=0"
+    },
+    {
+      "name": "Timeline has finite layout",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Scene selection syncs Inspector",
+      "pass": true,
+      "details": "{\"name\":\"Câu 1\",\"start\":\"4.2\",\"end\":\"7.0\",\"voice\":\"Câu một: 48 nhân 2 bằng bao nhiêu? Nhẩm nhanh!\"}"
+    },
+    {
+      "name": "Property edit updates scene card",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Undo restores property",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Redo reapplies property",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Effects inspector opens and edits",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Timeline zoom expands content",
+      "pass": true,
+      "details": "1134 -> 1588"
+    },
+    {
+      "name": "Timeline click seeks playhead",
+      "pass": true,
+      "details": "00:14.2 / 00:29.5"
+    },
+    {
+      "name": "Split scene at playhead",
+      "pass": true,
+      "details": "8 -> 9"
+    },
+    {
+      "name": "Undo split",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Duplicate scene",
+      "pass": true,
+      "details": "8 -> 9"
+    },
+    {
+      "name": "Add scene",
+      "pass": true,
+      "details": "8 -> 9"
+    },
+    {
+      "name": "Delete scene with confirmation",
+      "pass": true,
+      "details": "8 -> 7"
+    },
+    {
+      "name": "Audio inspector opens with legacy defaults",
+      "pass": true,
+      "details": "{\"visible\":true,\"bgmOff\":true,\"sfx\":0}"
+    },
+    {
+      "name": "Audio library empty state",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Choose BGM from library",
+      "pass": true,
+      "details": "{\"modalClosed\":true,\"enabled\":true,\"name\":\"Happy Kids 01\",\"bgmClip\":true}"
+    },
+    {
+      "name": "BGM volume updates",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Undo BGM volume",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Redo BGM volume",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "BGM fade inputs update",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Loop and ducking toggles",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "BGM trim handle changes start time",
+      "pass": true,
+      "details": "0 -> 3.1"
+    },
+    {
+      "name": "Insert preset SFX at playhead",
+      "pass": true,
+      "details": "count=1"
+    },
+    {
+      "name": "Nudge selected SFX",
+      "pass": true,
+      "details": "47.4576% -> 47.7966%"
+    },
+    {
+      "name": "Per-clip volume and pan update",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Drag SFX clip on timeline",
+      "pass": true,
+      "details": "47.7966% -> 56.615%"
+    },
+    {
+      "name": "Duplicate selected SFX",
+      "pass": true,
+      "details": "1 -> 2"
+    },
+    {
+      "name": "Delete selected SFX",
+      "pass": true,
+      "details": "2 -> 1"
+    },
+    {
+      "name": "Upload BGM WAV",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Upload custom SFX WAV",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Space toggles timeline playback",
+      "pass": true,
+      "details": "00:14.4 / 00:29.5"
+    },
+    {
+      "name": "Render preset/settings update",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Render progress starts",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Render cancel state",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Render reaches success",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "Save project downloads JSON",
+      "pass": true,
+      "details": "C:\\Users\\lexua\\AppData\\Local\\Temp\\mathca-full-e2e-1790298830814\\downloads\\mathca_project_with_audio.json"
+    },
+    {
+      "name": "Saved JSON preserves original scene schema",
+      "pass": true,
+      "details": "id, name, startTime, endTime, voiceText, elements"
+    },
+    {
+      "name": "Saved JSON contains audio extension",
+      "pass": true,
+      "details": "sfx=3"
+    },
+    {
+      "name": "Export HTML downloads file",
+      "pass": true,
+      "details": "96857"
+    },
+    {
+      "name": "No runtime exceptions",
+      "pass": true,
+      "details": ""
+    },
+    {
+      "name": "No console errors",
+      "pass": true,
+      "details": ""
+    }
+  ],
+  "exceptions": [],
+  "consoleErrors": [],
+  "evidencePath": "E:\\10. Hyperframe\\mathca-studio\\MathCA_Studio_UIUX_Redesign\\reference\\e2e_json_loaded.png",
+  "downloads": "C:\\Users\\lexua\\AppData\\Local\\Temp\\mathca-full-e2e-1790298830814\\downloads"
+}

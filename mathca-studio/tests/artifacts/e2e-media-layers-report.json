@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "checkedAt": "2026-09-25T03:00:24.616Z",
+  "fixturePath": "C:\\Users\\lexua\\Downloads\\MathCA_Lop3_5PhepTinhNangCao.json",
+  "initial": {
+    "elementCount": 5,
+    "layerRows": 5,
+    "layerLabels": 5,
+    "surfaceWidth": 290,
+    "surfaceHeight": 515,
+    "stageClientHeight": 543
+  },
+  "zoom": {
+    "output": "59%",
+    "surfaceWidth": 637,
+    "surfaceHeight": 1133,
+    "scrollTop": 295,
+    "scrollHeight": 1181,
+    "clientHeight": 543
+  },
+  "addedText": {
+    "id": "text-1790305223857",
+    "name": "Dòng chữ mới",
+    "type": "text",
+    "x": 100,
+    "y": 450,
+    "fontSize": 54,
+    "text": "Văn bản MathCA mới ✨",
+    "color": "#006a63",
+    "animation": {
+      "type": "pop-punch",
+      "duration": 0.45,
+      "delay": 0.2
+    }
+  },
+  "reorder": {
+    "sourceId": "hook-kicker",
+    "targetId": "text-1790305223857"
+  },
+  "imageAssets": [
+    "Logo MathCA",
+    "Mascot Cu Con"
+  ],
+  "videoPreview": true,
+  "inspectorScroll": {
+    "scrollTop": 494,
+    "scrollHeight": 788,
+    "clientHeight": 294,
+    "parentHeight": 378,
+    "workspaceHeight": 378,
+    "viewportHeight": 650,
+    "computedHeight": "294px",
+    "computedMaxHeight": "none",
+    "display": "block"
+  },
+  "final": {
+    "elementCount": 8,
+    "layerRows": 8,
+    "topLayerId": "video-1790305224209",
+    "bgmAssetId": "bgm-happy-math-01",
+    "sfxAssetIds": [
+      "preset-pop"
+    ],
+    "hasImage": true,
+    "hasVideo": true,
+    "hasBlob": false
+  },
+  "consoleErrors": [],
+  "pageErrors": []
+}

@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>MathCA - Tính nhanh cấp số nhân</title>
+    <script src="assets/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@600;700;800&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background-color: #f8fafc;
+        font-family: "Montserrat", "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #f8fafc;
+      }
+
+      /* Background Canvas */
+      .bg-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("assets/bg_template.png");
+        background-size: cover;
+        background-position: top center;
+        z-index: 1;
+      }
+
+      /* Stage Layer */
+      .stage-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      /* Math Equations Area */
+      .math-board {
+        position: absolute;
+        top: 800px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .math-expr {
+        font-size: 46px;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+
+      .highlight-red {
+        color: #e11d48;
+        font-weight: 900;
+      }
+
+      .dashed-box {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 10px;
+        border: 4px dashed #e11d48;
+        border-radius: 12px;
+        background-color: rgba(225, 29, 72, 0.05);
+        color: #0f172a;
+      }
+
+      /* Cat Thumbs Up Sticker */
+      .cat-thumb-box {
+        position: absolute;
+        top: 1060px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 440px;
+        height: 480px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+      }
+
+      .cat-thumb-box img {
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.22));
+      }
+
+      /* Rule Box */
+      .rule-container {
+        position: absolute;
+        top: 1030px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 900px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 90px;
+        opacity: 0;
+      }
+
+      .rule-badge {
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: #ffffff;
+        font-size: 38px;
+        font-weight: 800;
+        padding: 10px 42px;
+        border-radius: 9999px;
+        box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+        letter-spacing: 0.02em;
+        margin-bottom: 14px;
+        display: inline-block;
+      }
+
+      .rule-desc-pill {
+        background: #10b981;
+        color: #ffffff;
+        font-size: 34px;
+        font-weight: 700;
+        padding: 12px 34px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25);
+        display: inline-block;
+      }
+
+      .cat-surprised-box {
+        position: absolute;
+        top: 920px;
+        right: 120px;
+        width: 270px;
+        opacity: 0;
+      }
+
+      .cat-surprised-box img {
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.2));
+      }
+
+      /* Final Calculation */
+      .result-board {
+        position: absolute;
+        top: 1390px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+      }
+
+      .result-text {
+        font-size: 64px;
+        font-weight: 900;
+        color: #1e3a8a;
+        letter-spacing: 0.02em;
+      }
+
+      /* Owl Video Scene */
+      .owl-video-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+        opacity: 0;
+      }
+
+      .owl-video-layer video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Outro Scene */
+      .outro-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 30;
+        opacity: 0;
+      }
+
+      .outro-layer img.outro-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Outro Animated Cursor */
+      .cursor-pointer {
+        position: absolute;
+        top: 1195px;
+        left: 630px;
+        width: 60px;
+        height: 60px;
+        z-index: 35;
+        opacity: 0;
+      }
+
+      .cursor-pointer svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.4));
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="32.9"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- Background Template Layer -->
+      <div class="bg-canvas"></div>
+
+      <!-- Audio Track: Voiceover & Sound Effects -->
+      <audio
+        id="bg-audio"
+        class="clip"
+        src="assets/audio.mp3"
+        data-start="0"
+        data-duration="32.9"
+        data-track-index="0"
+        data-volume="1"
+      ></audio>
+
+      <!-- Dynamic Stage Elements -->
+      <div class="stage-layer">
+        <!-- Math Expression 1 (Original Problem) -->
+        <div id="step-1" class="math-board">
+          <div class="math-expr">
+            <span>1 + 2 + 4 + 8 + ... + 1024</span>
+            <span style="margin-left: 20px;">=</span>
+          </div>
+        </div>
+
+        <!-- Math Expression 2 (Trick: +1 in front, -1 at end) -->
+        <div id="step-2" class="math-board" style="opacity: 0;">
+          <div class="math-expr">
+            <span class="highlight-red">1 + </span>
+            <span>1 + 2 + 4 + 8 + ... + 1024</span>
+            <span class="highlight-red"> - 1</span>
+            <span style="margin-left: 14px;">=</span>
+          </div>
+        </div>
+
+        <!-- Math Expression 3 (Group [2 + 2]) -->
+        <div id="step-3" class="math-board" style="opacity: 0;">
+          <div class="math-expr">
+            <span class="dashed-box">2 + 2</span>
+            <span>+ 4 + 8 + ... + 1024</span>
+            <span class="highlight-red"> - 1</span>
+            <span style="margin-left: 14px;">=</span>
+          </div>
+        </div>
+
+        <!-- Math Expression 4 (Cascading [4 + 4]) -->
+        <div id="step-4" class="math-board" style="opacity: 0;">
+          <div class="math-expr">
+            <span class="dashed-box">4 + 4</span>
+            <span>+ 8 + ... + 1024</span>
+            <span class="highlight-red"> - 1</span>
+            <span style="margin-left: 14px;">=</span>
+          </div>
+        </div>
+
+        <!-- Math Expression 5 (Collapsed to 16 + ... + 1024 - 1 =) -->
+        <div id="step-5" class="math-board" style="opacity: 0;">
+          <div class="math-expr" style="font-size: 52px;">
+            <span>16 + ... + 1024</span>
+            <span class="highlight-red"> - 1</span>
+            <span style="margin-left: 16px;">=</span>
+          </div>
+        </div>
+
+        <!-- Sticker: Cat Thumbs Up (0s - 4.5s) -->
+        <div id="cat-thumb" class="cat-thumb-box">
+          <img src="assets/cat_thumbs_clean.png" alt="Meme Cat Thumbs Up" />
+        </div>
+
+        <!-- Rule Card Section (15.0s+) -->
+        <div id="rule-box" class="rule-container">
+          <div class="rule-badge">QUY LUẬT</div>
+          <div class="rule-desc-pill">Số sau gấp đôi số trước</div>
+        </div>
+
+        <!-- Sticker: Cat Surprised with 3D hands (15.0s+) -->
+        <div id="cat-surprised" class="cat-surprised-box">
+          <img src="assets/cat_surprised_clean.png" alt="Meme Cat Surprised" />
+        </div>
+
+        <!-- Result Text (17.5s - 26.8s) -->
+        <div id="result-box" class="result-board">
+          <div class="result-text">
+            <span id="result-2048">2048</span>
+            <span id="result-minus" class="highlight-red" style="opacity: 0;"> - 1</span>
+            <span id="result-final" style="opacity: 0;"> = 2047</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scene 5: Mascot Video Transition (26.8s - 29.5s) -->
+      <div id="mascot-scene" class="owl-video-layer">
+        <video
+          id="mascot-clip"
+          class="clip"
+          src="assets/mascot.mp4"
+          data-start="26.8"
+          data-duration="2.7"
+          data-track-index="1"
+          playsinline
+          muted
+        ></video>
+      </div>
+
+      <!-- Scene 6: Outro Follow CTA (29.5s - 32.9s) -->
+      <div id="outro-scene" class="outro-layer">
+        <img class="outro-bg" src="assets/outro.png" alt="MathCA Outro" />
+        <div id="outro-cursor" class="cursor-pointer">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3 3L10.07 20.97L12.58 13.58L19.97 11.07L3 3Z"
+              fill="white"
+              stroke="#111827"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- GSAP Master Animation Timeline -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // ==========================================
+      // SCENE 1: HOOK & INTRO (0.0s - 4.5s)
+      // ==========================================
+      tl.set("#step-1", { opacity: 1, scale: 1 }, 0);
+      tl.set("#step-2, #step-3, #step-4, #step-5", { opacity: 0 }, 0);
+      tl.set("#rule-box, #cat-surprised, #result-box", { opacity: 0 }, 0);
+      tl.set("#mascot-scene, #outro-scene", { opacity: 0 }, 0);
+
+      // Cat thumbs up enters with a joyful bounce pop
+      tl.fromTo(
+        "#cat-thumb",
+        { opacity: 0, scale: 0.3, rotation: -8, y: 80 },
+        { opacity: 1, scale: 1, rotation: 0, y: 0, duration: 0.6, ease: "back.out(1.8)" },
+        0.3
+      );
+
+      // Subtle breathing / idle wobble for cat sticker
+      tl.to("#cat-thumb", { rotation: 3, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 2 }, 0.9);
+
+      // Cat thumbs up exits before trick reveal
+      tl.to(
+        "#cat-thumb",
+        { opacity: 0, scale: 0.5, y: -40, duration: 0.35, ease: "power2.in" },
+        4.1
+      );
+
+      // ==========================================
+      // SCENE 2: THE TRANSFORMATION TRICK (4.5s - 9.0s)
+      // ==========================================
+      // Hide step-1 and show step-2 (+1 and -1 added)
+      tl.to("#step-1", { opacity: 0, duration: 0.15 }, 4.45);
+      tl.fromTo(
+        "#step-2",
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" },
+        4.5
+      );
+
+      // Highlight the added numbers with a gentle pulse
+      tl.to(
+        "#step-2 .highlight-red",
+        { scale: 1.15, duration: 0.25, yoyo: true, repeat: 1, ease: "power1.inOut" },
+        5.2
+      );
+
+      // ==========================================
+      // SCENE 3: CASCADING COMBINATIONS (9.0s - 15.0s)
+      // ==========================================
+      // 9.0s: Step 3 ([2 + 2])
+      tl.to("#step-2", { opacity: 0, duration: 0.15 }, 8.95);
+      tl.fromTo(
+        "#step-3",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" },
+        9.0
+      );
+
+      // 11.2s: Step 4 ([4 + 4])
+      tl.to("#step-3", { opacity: 0, duration: 0.15 }, 11.15);
+      tl.fromTo(
+        "#step-4",
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" },
+        11.2
+      );
+
+      // 13.0s: Step 5 (16 + ... + 1024 - 1 =)
+      tl.to("#step-4", { opacity: 0, duration: 0.15 }, 12.95);
+      tl.fromTo(
+        "#step-5",
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.5)" },
+        13.0
+      );
+
+      // ==========================================
+      // SCENE 4: THE RULE & FINAL RESULT (15.0s - 26.8s)
+      // ==========================================
+      // "QUY LUẬT" card springs in
+      tl.fromTo(
+        "#rule-box",
+        { opacity: 0, x: -60, scale: 0.85 },
+        { opacity: 1, x: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" },
+        14.8
+      );
+
+      // Surprised cat meme with pointing hands pops in
+      tl.fromTo(
+        "#cat-surprised",
+        { opacity: 0, scale: 0.2, rotation: 12, y: 60 },
+        { opacity: 1, scale: 1, rotation: 0, y: 0, duration: 0.55, ease: "back.out(2.0)" },
+        15.3
+      );
+
+      // Cat hands bounce pointing down
+      tl.to(
+        "#cat-surprised",
+        { y: -15, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 7 },
+        16.0
+      );
+
+      // 17.5s: "2048" appears with heavy punch
+      tl.set("#result-box", { opacity: 1 }, 17.5);
+      tl.fromTo(
+        "#result-2048",
+        { opacity: 0, scale: 0.4 },
+        { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2.2)" },
+        17.5
+      );
+
+      // 19.5s: "- 1" appears in bright red
+      tl.fromTo(
+        "#result-minus",
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" },
+        19.5
+      );
+
+      // 21.0s: "= 2047" final answer revealed!
+      tl.fromTo(
+        "#result-final",
+        { opacity: 0, scale: 1.4 },
+        { opacity: 1, scale: 1, duration: 0.45, ease: "bounce.out" },
+        21.0
+      );
+
+      // Pulse the whole result
+      tl.to(
+        "#result-box",
+        { scale: 1.08, duration: 0.3, yoyo: true, repeat: 1, ease: "power2.inOut" },
+        22.5
+      );
+
+      // Fade out stage content before mascot transition
+      tl.to(".stage-layer", { opacity: 0, duration: 0.3 }, 26.5);
+
+      // ==========================================
+      // SCENE 5: MASCOT TRANSITION (26.8s - 29.5s)
+      // ==========================================
+      tl.set("#mascot-scene", { opacity: 1 }, 26.8);
+      tl.set("#mascot-scene", { opacity: 0 }, 29.5);
+
+      // ==========================================
+      // SCENE 6: OUTRO FOLLOW CTA (29.5s - 32.9s)
+      // ==========================================
+      tl.set("#outro-scene", { opacity: 1 }, 29.5);
+
+      // Mouse cursor flies in toward the Follow button
+      tl.fromTo(
+        "#outro-cursor",
+        { opacity: 0, x: 200, y: 150 },
+        { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "power3.out" },
+        29.9
+      );
+
+      // Cursor clicks down on the Follow button
+      tl.to(
+        "#outro-cursor",
+        { scale: 0.75, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" },
+        30.6
+      );
+
+      // Subtle float after click
+      tl.to("#outro-cursor", { x: 10, y: -8, duration: 1.0, ease: "sine.inOut" }, 30.9);
+
+      // Register master timeline on window.__timelines
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

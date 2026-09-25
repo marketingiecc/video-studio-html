@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-25T00:00:00.000Z",
+  "assets": [
+    {
+      "assetId": "image-mathca-logo",
+      "kind": "image",
+      "name": "Logo MathCA",
+      "src": "assets/logo.png",
+      "filename": "logo.png",
+      "mimeType": "image/png",
+      "extension": ".png",
+      "source": "bundled"
+    },
+    {
+      "assetId": "image-mathca-mascot",
+      "kind": "image",
+      "name": "Mascot Cu Con",
+      "src": "assets/mascot.png",
+      "filename": "mascot.png",
+      "mimeType": "image/png",
+      "extension": ".png",
+      "source": "bundled"
+    },
+    {
+      "assetId": "video-mathca-logo-loop",
+      "kind": "video",
+      "name": "MathCA Logo Loop",
+      "src": "assets/media-library/video/mathca-logo-loop.mp4",
+      "filename": "mathca-logo-loop.mp4",
+      "mimeType": "video/mp4",
+      "extension": ".mp4",
+      "duration": 3,
+      "source": "bundled"
+    }
+  ]
+}

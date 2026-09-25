@@ -1,0 +1,29 @@
+node_modules/
+.mathca-runtime.json
+render_workspace/
+rendered_output/
+npm-debug.log*
+*.log
+
+# Generated runtime audio files & cache
+public/assets/audio-*.mp3
+public/assets/voice-*.mp3
+public/assets/*.wav
+public/assets/*.m4a
+public/assets/test_*.mp3
+public/assets/voice_test_*.mp3
+public/assets/voice-segments/
+public/assets/sentences/
+public/assets/audio-manifest.json
+
+# Python venv and cache
+.venv/
+*/.venv/
+__pycache__/
+*/__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+

@@ -1,0 +1,305 @@
+{
+  "metadata": {
+    "title": "Mẹo nhân 11 trong 2 giây - Lớp 3",
+    "grade": 3,
+    "topic": "Nhân số có 2 chữ số với 11",
+    "duration": 29.5,
+    "voice": "vi-VN-HoaiMyNeural"
+  },
+  "brand": {
+    "colors": {
+      "tealPrimary": "#12aba0",
+      "tealDark": "#006a63",
+      "tealSoft": "#e6f7f6",
+      "coralRed": "#ff5239",
+      "yellowVibrant": "#ffbd05"
+    },
+    "fontFamily": "Inter"
+  },
+  "scenes": [
+    {
+      "id": "scene-hook",
+      "name": "Hook 3s đầu bùng nổ",
+      "startTime": 0.0,
+      "endTime": 4.2,
+      "voiceText": "Mẹo nhân nhẩm với 11 trong 2 giây cho học sinh lớp 3!",
+      "elements": [
+        {
+          "id": "hook-kicker",
+          "name": "Thẻ Kicker",
+          "type": "badge",
+          "x": 280,
+          "y": 60,
+          "fontSize": 28,
+          "text": "⚡ MẸO TOÁN LỚP 3 ⚡",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.2 }
+        },
+        {
+          "id": "hook-title-1",
+          "name": "Tiêu đề chính dòng 1",
+          "type": "text",
+          "x": 160,
+          "y": 150,
+          "fontSize": 96,
+          "text": "NHÂN VỚI 11",
+          "color": "#006a63",
+          "animation": { "type": "pop-punch", "duration": 0.45, "delay": 0.45 }
+        },
+        {
+          "id": "hook-title-2",
+          "name": "Tiêu đề phụ dòng 2",
+          "type": "text",
+          "x": 90,
+          "y": 265,
+          "fontSize": 90,
+          "text": "CHỈ MẤT 2 GIÂY! ⚡",
+          "color": "#ff5239",
+          "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.45, "delay": 0.75 }
+        },
+        {
+          "id": "hook-vs-box",
+          "name": "Bảng so sánh 2 cột",
+          "type": "card",
+          "x": 50,
+          "y": 410,
+          "width": 840,
+          "text": "CÁCH CŨ: 60 GIÂY vs MẸO MATHCA: 2 GIÂY",
+          "animation": { "type": "slide-up", "duration": 0.4, "delay": 1.05 }
+        },
+        {
+          "id": "hook-bottom",
+          "name": "Banner cam kết",
+          "type": "card",
+          "x": 50,
+          "y": 650,
+          "width": 840,
+          "text": "🚀 Bí quyết tính nhẩm siêu tốc — Không cần nháp!",
+          "animation": { "type": "slide-up", "duration": 0.35, "delay": 1.35 }
+        }
+      ]
+    },
+    {
+      "id": "scene-vidu",
+      "name": "Đặt bài toán 35 x 11",
+      "startTime": 4.2,
+      "endTime": 9.0,
+      "voiceText": "Ví dụ: 35 nhân 11. Đừng đặt tính vội nhé!",
+      "elements": [
+        {
+          "id": "badge-vidu",
+          "name": "Thẻ tiêu đề",
+          "type": "badge",
+          "x": 280,
+          "y": 60,
+          "fontSize": 32,
+          "text": "BÀI TOÁN TÍNH NHANH",
+          "color": "#ffffff",
+          "bgColor": "#12aba0",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "equation-display",
+          "name": "Phép tính 35 x 11 = ?",
+          "type": "equation",
+          "x": 120,
+          "y": 240,
+          "fontSize": 76,
+          "text": "35 × 11 = ?",
+          "animation": { "type": "drop-bounce", "duration": 0.45, "delay": 0.3 }
+        },
+        {
+          "id": "warning-card",
+          "name": "Cảnh báo đặt tính",
+          "type": "card",
+          "x": 90,
+          "y": 520,
+          "width": 760,
+          "fontSize": 32,
+          "text": "⚠️ Đừng vội lấy giấy bút đặt tính nhé!",
+          "animation": { "type": "slide-up", "loop": "wiggle", "duration": 0.4, "delay": 0.6 }
+        }
+      ]
+    },
+    {
+      "id": "scene-buoc1",
+      "name": "Bước 1: Tách đôi số 35",
+      "startTime": 9.0,
+      "endTime": 13.0,
+      "voiceText": "Bước một: Tách đôi số 3 sang trái, số 5 sang phải.",
+      "elements": [
+        {
+          "id": "badge-buoc1",
+          "name": "Thẻ Bước 1",
+          "type": "badge",
+          "x": 230,
+          "y": 60,
+          "fontSize": 32,
+          "text": "BƯỚC 1: TÁCH ĐÔI SỐ 35",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "split-stage",
+          "name": "Ô số tách đôi [ 3 ] [ ? ] [ 5 ]",
+          "type": "slots",
+          "x": 120,
+          "y": 300,
+          "fontSize": 88,
+          "text": "3 ? 5",
+          "animation": { "type": "elastic-pop", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "scene-buoc2",
+      "name": "Bước 2: Cộng nhét giữa",
+      "startTime": 13.0,
+      "endTime": 17.4,
+      "voiceText": "Bước hai: Lấy 3 cộng 5 bằng 8, rồi nhét số 8 vào giữa!",
+      "elements": [
+        {
+          "id": "badge-buoc2",
+          "name": "Thẻ Bước 2",
+          "type": "badge",
+          "x": 190,
+          "y": 60,
+          "fontSize": 32,
+          "text": "BƯỚC 2: CỘNG LẠI NHÉT VÀO GIỮA",
+          "color": "#ffffff",
+          "bgColor": "#ff5239",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "calc-pill",
+          "name": "Viên thuốc phép tính 3 + 5 = 8",
+          "type": "pill",
+          "x": 270,
+          "y": 230,
+          "fontSize": 48,
+          "text": "3 + 5 = 8",
+          "animation": { "type": "drop-bounce", "duration": 0.45, "delay": 0.3 }
+        },
+        {
+          "id": "split-filled",
+          "name": "Ô số hoàn thành [ 3 ] [ 8 ] [ 5 ]",
+          "type": "slots",
+          "x": 120,
+          "y": 450,
+          "fontSize": 88,
+          "text": "3 8 5",
+          "animation": { "type": "elastic-pop", "duration": 0.5, "delay": 0.6 }
+        }
+      ]
+    },
+    {
+      "id": "scene-ketqua",
+      "name": "Kết quả siêu tốc 385",
+      "startTime": 17.4,
+      "endTime": 22.4,
+      "voiceText": "Ta được ngay kết quả: 385! Chỉ mất đúng 2 giây!",
+      "elements": [
+        {
+          "id": "badge-ketqua",
+          "name": "Thẻ kết quả",
+          "type": "badge",
+          "x": 280,
+          "y": 60,
+          "fontSize": 32,
+          "text": "KẾT QUẢ SIÊU TỐC",
+          "color": "#ffffff",
+          "bgColor": "#12aba0",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "final-answer",
+          "name": "Số đáp án 385",
+          "type": "text",
+          "x": 290,
+          "y": 240,
+          "fontSize": 148,
+          "text": "385",
+          "color": "#006a63",
+          "animation": { "type": "zoom-hero", "duration": 0.5, "delay": 0.35 }
+        },
+        {
+          "id": "speed-badge",
+          "name": "Huy hiệu 2 giây",
+          "type": "badge",
+          "x": 230,
+          "y": 500,
+          "fontSize": 34,
+          "text": "⚡ CHỈ MẤT ĐÚNG 2 GIÂY!",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.4, "delay": 0.7 }
+        }
+      ]
+    },
+    {
+      "id": "scene-thuthach",
+      "name": "Thử thách 42 x 11 & Follow",
+      "startTime": 22.4,
+      "endTime": 29.5,
+      "voiceText": "Đố các bạn: 42 nhân 11 bằng bao nhiêu? Hãy bình luận đáp án và bấm Follow MathCA nhé!",
+      "elements": [
+        {
+          "id": "badge-thuthach",
+          "name": "Thẻ thử thách",
+          "type": "badge",
+          "x": 250,
+          "y": 60,
+          "fontSize": 32,
+          "text": "THỬ THÁCH CHO BẠN",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "quiz-card",
+          "name": "Khung câu đố 42 x 11 = ?",
+          "type": "card",
+          "x": 60,
+          "y": 200,
+          "width": 820,
+          "fontSize": 76,
+          "text": "42 × 11 = ?",
+          "animation": { "type": "elastic-pop", "duration": 0.5, "delay": 0.35 }
+        }
+      ]
+    }
+  ],
+  "globalElements": [
+    {
+      "id": "elem-header-brand",
+      "name": "Header Logo & Tiêu Đề",
+      "x": 0,
+      "y": 75,
+      "type": "global",
+      "animation": { "type": "slide-up", "duration": 0.4, "delay": 0.05 }
+    },
+    {
+      "id": "elem-mascot-wrapper",
+      "name": "Mascot Cú con",
+      "x": 720,
+      "y": 1380,
+      "width": 320,
+      "type": "global",
+      "animation": { "type": "slide-left", "loop": "float", "duration": 0.5, "delay": 0.18 }
+    },
+    {
+      "id": "elem-cta-btn",
+      "name": "Nút Follow MathCA",
+      "x": 230,
+      "y": 1720,
+      "fontSize": 38,
+      "text": "FOLLOW MATHCA ✨",
+      "color": "#ffffff",
+      "bgColor": "#ff5239",
+      "type": "global",
+      "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.45, "delay": 0.5 }
+    }
+  ]
+}

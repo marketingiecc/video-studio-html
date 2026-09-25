@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checkedAt": "2026-09-25T01:38:14.744Z",
+  "jobId": "job-1790300248596",
+  "audioFile": "audio-7631463d00ad.mp3",
+  "outputFile": "5_phut_luyen_tap_toan_lop_3_voi_5_phep_tinh_nang_cao_1790300248596.mp4",
+  "outputPath": "E:\\10. Hyperframe\\mathca-studio\\rendered_output\\5_phut_luyen_tap_toan_lop_3_voi_5_phep_tinh_nang_cao_1790300248596.mp4",
+  "sizeBytes": 5533745,
+  "duration": 29.5,
+  "logTail": [
+    "██████████████████████░░░  90%  Assembling final video",
+    "[INFO] [Render:trace] {\"renderJobId\":\"2915a774-badc-4d0b-ac5c-a089f3d02053\",\"phase\":\"assemble\",\"status\":\"end\",\"elapsedMs\":43585,\"durationMs\":1022,\"stagePhase\":\"capturing\",\"hasAudio\":true,\"workerCount\":3,\"forceScreenshot\":false,\"totalFrames\":885,\"framesCompleted\":885,\"captureMode\":\"drawelement\",\"captureOperation\":\"encode\"}",
+    "[INFO] [Render:trace] {\"renderJobId\":\"2915a774-badc-4d0b-ac5c-a089f3d02053\",\"phase\":\"pipeline\",\"status\":\"checkpoint\",\"elapsedMs\":43627,\"message\":\"artifact validated\",\"totalElapsedMs\":43626}",
+    "█████████████████████████  100%  Render complete",
+    "◇  E:\\10. Hyperframe\\mathca-studio\\rendered_output\\5_phut_luyen_tap_toan_lop_3_voi_5_phep_tinh_nang_cao_1790300248596.mp4",
+    "5.3 MB · 29.5s video · rendered in 43.6s",
+    "screenshot capture · hardware gpu · compile 0.2s · extract 0.0s · audio 0.8s · probe 0.0s · setup 0.3s · capture 41.3s · encode (during capture) 41.3s · assemble 1.0s",
+    "Thành công: 5_phut_luyen_tap_toan_lop_3_voi_5_phep_tinh_nang_cao_1790300248596.mp4"
+  ]
+}

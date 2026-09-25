@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "checkedAt": "2026-09-25T02:49:35.214Z",
+  "fixture": "MathCA_Lop3_5PhepTinhNangCao.json",
+  "fallbackBeforeImport": {
+    "templateMode": false,
+    "sceneElements": 5,
+    "renderEnabled": true
+  },
+  "result": {
+    "sceneCount": 8,
+    "activeSceneText": "\n      \n        Cảnh 6\n        00:15.4 - 00:18.2\n      \n      Câu 5\n      🎙️ \"Câu năm: 36 nhân 4. Câu cuối rồi!\"\n    ",
+    "previewStatus": "HTML gốc • sẵn sàng chỉnh sửa",
+    "audioStatus": "Voiceover sẵn sàng: 8 cảnh",
+    "audioSrc": "http://localhost:3300/assets/voice-7631463d00adbecc.mp3",
+    "renderEnabled": true,
+    "generateAudioEnabled": true,
+    "rawTopKeys": [
+      "metadata",
+      "brand",
+      "scenes",
+      "globalElements",
+      "html_template"
+    ],
+    "rawFirstSceneKeys": [
+      "id",
+      "name",
+      "startTime",
+      "endTime",
+      "voiceText",
+      "elements"
+    ],
+    "rawHasAudioFile": false,
+    "rawTemplateMatches": true,
+    "frameTitle": "MathCA - 5 phép tính nâng cao lớp 3",
+    "frameHasComposition": true,
+    "frameHasSceneQ5": true,
+    "frameGsapSrc": "assets/gsap.min.js",
+    "frameTimelineReady": true,
+    "frameAudioMuted": true,
+    "boundElements": 32,
+    "timelineTime": 15.6
+  },
+  "editResult": {
+    "inspectorSelected": "Gợi ý",
+    "previewTextAfterEdit": "🎯 30 × 4 rồi cộng 6 × 4 [E2E]",
+    "jsonTextAfterEdit": "🎯 30 × 4 rồi cộng 6 × 4 [E2E]",
+    "templateStillPresent": true
+  },
+  "duplicateResult": {
+    "cloneId": "card-1790304574888",
+    "cloneVisible": true,
+    "selectedName": "Gợi ý (Bản sao)"
+  },
+  "consoleErrors": [],
+  "pageErrors": []
+}

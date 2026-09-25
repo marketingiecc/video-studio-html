@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "title": "Đố vui 5 giây: Tìm số còn thiếu - Lớp 3",
+    "grade": 3,
+    "topic": "Dãy số quy luật",
+    "duration": 25.0,
+    "voice": "vi-VN-HoaiMyNeural"
+  },
+  "brand": {
+    "colors": {
+      "tealPrimary": "#12aba0",
+      "tealDark": "#006a63",
+      "tealSoft": "#e6f7f6",
+      "coralRed": "#ff5239",
+      "yellowVibrant": "#ffbd05"
+    },
+    "fontFamily": "Inter"
+  },
+  "scenes": [
+    {
+      "id": "scene-hook",
+      "name": "Hook: Thử thách 5s",
+      "startTime": 0.0,
+      "endTime": 4.0,
+      "voiceText": "Thử thách 5 giây! 90% học sinh nhìn không ra số còn thiếu!",
+      "elements": [
+        {
+          "id": "hook-kicker",
+          "name": "Thẻ Kicker",
+          "type": "badge",
+          "x": 270,
+          "y": 60,
+          "fontSize": 28,
+          "text": "⏱️ ĐỐ VUI 5 GIÂY ⏱️",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.2 }
+        },
+        {
+          "id": "hook-title-1",
+          "name": "Tiêu đề chính",
+          "type": "text",
+          "x": 120,
+          "y": 150,
+          "fontSize": 88,
+          "text": "TÌM SỐ CÒN THIẾU",
+          "color": "#006a63",
+          "animation": { "type": "pop-punch", "duration": 0.45, "delay": 0.45 }
+        },
+        {
+          "id": "hook-title-2",
+          "name": "Tiêu đề phụ",
+          "type": "text",
+          "x": 140,
+          "y": 265,
+          "fontSize": 84,
+          "text": "TRONG 5 GIÂY! ⚡",
+          "color": "#ff5239",
+          "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.45, "delay": 0.75 }
+        }
+      ]
+    },
+    {
+      "id": "scene-vidu",
+      "name": "Dãy số: 2, 4, 8, 16, ?",
+      "startTime": 4.0,
+      "endTime": 12.0,
+      "voiceText": "Dãy số: 2, 4, 8, 16, chấm hỏi. 5 giây bắt đầu!",
+      "elements": [
+        {
+          "id": "badge-vidu",
+          "name": "Thẻ đếm ngược",
+          "type": "badge",
+          "x": 280,
+          "y": 60,
+          "fontSize": 32,
+          "text": "QUY LUẬT LÀ GÌ?",
+          "color": "#ffffff",
+          "bgColor": "#12aba0",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "sequence-display",
+          "name": "Dãy số",
+          "type": "card",
+          "x": 60,
+          "y": 180,
+          "width": 820,
+          "fontSize": 56,
+          "text": "2 , 4 , 8 , 16 , [ ? ]",
+          "animation": { "type": "drop-bounce", "duration": 0.5, "delay": 0.3 }
+        },
+        {
+          "id": "timer-badge",
+          "name": "Đồng hồ đếm",
+          "type": "badge",
+          "x": 320,
+          "y": 420,
+          "fontSize": 48,
+          "text": "⏳ 5s ... 4s ... 3s",
+          "color": "#ffffff",
+          "bgColor": "#ff5239",
+          "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.4, "delay": 0.8 }
+        }
+      ]
+    },
+    {
+      "id": "scene-ketqua",
+      "name": "Đáp án: 32",
+      "startTime": 12.0,
+      "endTime": 18.0,
+      "voiceText": "Hết giờ! Mỗi số đều nhân 2, vậy số tiếp theo là 32!",
+      "elements": [
+        {
+          "id": "badge-ketqua",
+          "name": "Thẻ đáp án",
+          "type": "badge",
+          "x": 280,
+          "y": 60,
+          "fontSize": 32,
+          "text": "ĐÁP ÁN CHÍNH XÁC",
+          "color": "#ffffff",
+          "bgColor": "#12aba0",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "final-answer",
+          "name": "Số 32",
+          "type": "text",
+          "x": 340,
+          "y": 200,
+          "fontSize": 150,
+          "text": "32",
+          "color": "#006a63",
+          "animation": { "type": "zoom-hero", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "scene-thuthach",
+      "name": "Đố tiếp & CTA",
+      "startTime": 18.0,
+      "endTime": 25.0,
+      "voiceText": "Vậy nếu dãy là 3, 9, 27 thì số tiếp theo là mấy? Bình luận ngay nhé!",
+      "elements": [
+        {
+          "id": "badge-thuthach",
+          "name": "Thẻ đố thêm",
+          "type": "badge",
+          "x": 250,
+          "y": 60,
+          "fontSize": 32,
+          "text": "CÂU ĐỐ CHO BẠN",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "quiz-card",
+          "name": "Khung đố 3, 9, 27",
+          "type": "card",
+          "x": 60,
+          "y": 200,
+          "width": 820,
+          "fontSize": 52,
+          "text": "3 , 9 , 27 , [ ? ] = ?",
+          "animation": { "type": "elastic-pop", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    }
+  ],
+  "globalElements": [
+    {
+      "id": "elem-header-brand",
+      "name": "Header Logo & Tiêu Đề",
+      "x": 0,
+      "y": 75,
+      "type": "global",
+      "animation": { "type": "slide-up", "duration": 0.4, "delay": 0.05 }
+    },
+    {
+      "id": "elem-mascot-wrapper",
+      "name": "Mascot Cú con",
+      "x": 720,
+      "y": 1380,
+      "width": 320,
+      "type": "global",
+      "animation": { "type": "slide-left", "loop": "float", "duration": 0.5, "delay": 0.18 }
+    },
+    {
+      "id": "elem-cta-btn",
+      "name": "Nút Follow MathCA",
+      "x": 230,
+      "y": 1720,
+      "fontSize": 38,
+      "text": "FOLLOW MATHCA ✨",
+      "color": "#ffffff",
+      "bgColor": "#ff5239",
+      "type": "global",
+      "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.45, "delay": 0.5 }
+    }
+  ]
+}

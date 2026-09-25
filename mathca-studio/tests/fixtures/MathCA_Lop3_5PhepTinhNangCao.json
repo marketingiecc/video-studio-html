@@ -1,0 +1,675 @@
+{
+  "metadata": {
+    "title": "5 phút luyện tập toán lớp 3 với 5 phép tính nâng cao",
+    "grade": 3,
+    "topic": "5 phút luyện tập toán lớp 3 với 5 phép tính nâng cao sau",
+    "duration": 29.5,
+    "voice": "vi-VN-HoaiMyNeural"
+  },
+  "brand": {
+    "colors": {
+      "tealPrimary": "#12ABA0",
+      "tealDark": "#006A63",
+      "tealSoft": "#E6F7F6",
+      "coralRed": "#FF5239",
+      "yellowVibrant": "#FFBD05",
+      "navyDark": "#1A1C1C",
+      "navyMuted": "#3C4947",
+      "backgroundSoft": "#FBFBF9"
+    },
+    "fontFamily": "Inter"
+  },
+  "scenes": [
+    {
+      "id": "scene-hook",
+      "name": "Hồi 1 - Hook bùng nổ",
+      "startTime": 0.0,
+      "endTime": 4.2,
+      "voiceText": "5 phút luyện toán lớp 3. 5 phép tính nâng cao!",
+      "elements": [
+        {
+          "id": "hook-kicker",
+          "name": "Kicker lớp 3",
+          "type": "badge",
+          "x": 220,
+          "y": 70,
+          "width": 500,
+          "fontSize": 28,
+          "text": "⚡ THỬ THÁCH TOÁN LỚP 3 ⚡",
+          "color": "#1A1C1C",
+          "bgColor": "#FFBD05",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.15
+          }
+        },
+        {
+          "id": "hook-title-1",
+          "name": "Title chính",
+          "type": "text",
+          "x": 80,
+          "y": 175,
+          "width": 780,
+          "fontSize": 96,
+          "text": "5 PHÚT LUYỆN TOÁN LỚP 3",
+          "color": "#006A63",
+          "bgColor": "#FFFFFF",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.45,
+            "delay": 0.35
+          }
+        },
+        {
+          "id": "hook-title-2",
+          "name": "Title nhấn",
+          "type": "text",
+          "x": 90,
+          "y": 315,
+          "width": 760,
+          "fontSize": 90,
+          "text": "5 PHÉP TÍNH NÂNG CAO!",
+          "color": "#FF5239",
+          "bgColor": "#FFFFFF",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "pulse",
+            "duration": 0.45,
+            "delay": 0.65
+          }
+        },
+        {
+          "id": "hook-vs",
+          "name": "Bảng đối đầu",
+          "type": "card",
+          "x": 50,
+          "y": 500,
+          "width": 840,
+          "fontSize": 34,
+          "text": "CÁCH CŨ ⏳ 60 GIÂY   VS   MATHCA ⚡ 2 GIÂY",
+          "color": "#1A1C1C",
+          "bgColor": "#E6F7F6",
+          "animation": {
+            "type": "slide-up",
+            "loop": "none",
+            "duration": 0.45,
+            "delay": 0.95
+          }
+        },
+        {
+          "id": "hook-promise",
+          "name": "Cam kết",
+          "type": "card",
+          "x": 80,
+          "y": 690,
+          "width": 780,
+          "fontSize": 30,
+          "text": "🚀 Không cần nháp — Nhẩm nhanh, phản xạ chuẩn!",
+          "color": "#946200",
+          "bgColor": "#FFF8E1",
+          "animation": {
+            "type": "slide-up",
+            "loop": "none",
+            "duration": 0.4,
+            "delay": 1.25
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-q1",
+      "name": "Câu 1",
+      "startTime": 4.2,
+      "endTime": 7.0,
+      "voiceText": "Câu một: 48 nhân 2 bằng bao nhiêu? Nhẩm nhanh!",
+      "elements": [
+        {
+          "id": "q1-badge",
+          "name": "Nhãn câu 1",
+          "type": "badge",
+          "x": 340,
+          "y": 90,
+          "width": 260,
+          "fontSize": 32,
+          "text": "CÂU 1 / 5",
+          "color": "#FFFFFF",
+          "bgColor": "#12ABA0",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.05
+          }
+        },
+        {
+          "id": "q1-eq",
+          "name": "Phép tính 1",
+          "type": "equation",
+          "x": 140,
+          "y": 300,
+          "width": 660,
+          "fontSize": 116,
+          "text": "48 × 2 = ?",
+          "color": "#006A63",
+          "bgColor": "#E6F7F6",
+          "animation": {
+            "type": "elastic-pop",
+            "loop": "none",
+            "duration": 0.5,
+            "delay": 0.2
+          }
+        },
+        {
+          "id": "q1-tip",
+          "name": "Nhắc nhẩm",
+          "type": "card",
+          "x": 170,
+          "y": 570,
+          "width": 600,
+          "fontSize": 32,
+          "text": "💡 Gấp đôi 48",
+          "color": "#FF5239",
+          "bgColor": "#FFF4F2",
+          "animation": {
+            "type": "slide-up",
+            "loop": "pulse",
+            "duration": 0.4,
+            "delay": 0.55
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-q2",
+      "name": "Câu 2",
+      "startTime": 7.0,
+      "endTime": 9.8,
+      "voiceText": "Câu hai: 96 chia 3 bằng bao nhiêu?",
+      "elements": [
+        {
+          "id": "q2-badge",
+          "name": "Nhãn câu 2",
+          "type": "badge",
+          "x": 340,
+          "y": 90,
+          "width": 260,
+          "fontSize": 32,
+          "text": "CÂU 2 / 5",
+          "color": "#FFFFFF",
+          "bgColor": "#12ABA0",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.05
+          }
+        },
+        {
+          "id": "q2-eq",
+          "name": "Phép tính 2",
+          "type": "equation",
+          "x": 140,
+          "y": 300,
+          "width": 660,
+          "fontSize": 116,
+          "text": "96 ÷ 3 = ?",
+          "color": "#006A63",
+          "bgColor": "#E6F7F6",
+          "animation": {
+            "type": "elastic-pop",
+            "loop": "none",
+            "duration": 0.5,
+            "delay": 0.2
+          }
+        },
+        {
+          "id": "q2-tip",
+          "name": "Gợi ý",
+          "type": "card",
+          "x": 140,
+          "y": 570,
+          "width": 660,
+          "fontSize": 32,
+          "text": "🧠 Tách 96 = 90 + 6",
+          "color": "#FF5239",
+          "bgColor": "#FFF4F2",
+          "animation": {
+            "type": "slide-up",
+            "loop": "none",
+            "duration": 0.4,
+            "delay": 0.55
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-q3",
+      "name": "Câu 3",
+      "startTime": 9.8,
+      "endTime": 12.6,
+      "voiceText": "Câu ba: 125 cộng 278 bằng bao nhiêu?",
+      "elements": [
+        {
+          "id": "q3-badge",
+          "name": "Nhãn câu 3",
+          "type": "badge",
+          "x": 340,
+          "y": 90,
+          "width": 260,
+          "fontSize": 32,
+          "text": "CÂU 3 / 5",
+          "color": "#FFFFFF",
+          "bgColor": "#12ABA0",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.05
+          }
+        },
+        {
+          "id": "q3-eq",
+          "name": "Phép tính 3",
+          "type": "equation",
+          "x": 105,
+          "y": 300,
+          "width": 730,
+          "fontSize": 104,
+          "text": "125 + 278 = ?",
+          "color": "#006A63",
+          "bgColor": "#E6F7F6",
+          "animation": {
+            "type": "elastic-pop",
+            "loop": "none",
+            "duration": 0.5,
+            "delay": 0.2
+          }
+        },
+        {
+          "id": "q3-tip",
+          "name": "Gợi ý làm tròn",
+          "type": "card",
+          "x": 135,
+          "y": 570,
+          "width": 670,
+          "fontSize": 31,
+          "text": "⚡ 278 + 100 + 25",
+          "color": "#FF5239",
+          "bgColor": "#FFF4F2",
+          "animation": {
+            "type": "slide-up",
+            "loop": "none",
+            "duration": 0.4,
+            "delay": 0.55
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-q4",
+      "name": "Câu 4",
+      "startTime": 12.6,
+      "endTime": 15.4,
+      "voiceText": "Câu bốn: 604 trừ 287. Đừng đặt tính vội!",
+      "elements": [
+        {
+          "id": "q4-badge",
+          "name": "Nhãn câu 4",
+          "type": "badge",
+          "x": 340,
+          "y": 90,
+          "width": 260,
+          "fontSize": 32,
+          "text": "CÂU 4 / 5",
+          "color": "#FFFFFF",
+          "bgColor": "#12ABA0",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.05
+          }
+        },
+        {
+          "id": "q4-eq",
+          "name": "Phép tính 4",
+          "type": "equation",
+          "x": 105,
+          "y": 300,
+          "width": 730,
+          "fontSize": 104,
+          "text": "604 − 287 = ?",
+          "color": "#006A63",
+          "bgColor": "#E6F7F6",
+          "animation": {
+            "type": "elastic-pop",
+            "loop": "none",
+            "duration": 0.5,
+            "delay": 0.2
+          }
+        },
+        {
+          "id": "q4-warn",
+          "name": "Cảnh báo vui",
+          "type": "card",
+          "x": 110,
+          "y": 570,
+          "width": 720,
+          "fontSize": 31,
+          "text": "⚠️ Đừng đặt tính dọc — bù trừ thử xem!",
+          "color": "#FF5239",
+          "bgColor": "#FFF4F2",
+          "animation": {
+            "type": "slide-up",
+            "loop": "wiggle",
+            "duration": 0.4,
+            "delay": 0.55
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-q5",
+      "name": "Câu 5",
+      "startTime": 15.4,
+      "endTime": 18.2,
+      "voiceText": "Câu năm: 36 nhân 4. Câu cuối rồi!",
+      "elements": [
+        {
+          "id": "q5-badge",
+          "name": "Nhãn câu 5",
+          "type": "badge",
+          "x": 340,
+          "y": 90,
+          "width": 260,
+          "fontSize": 32,
+          "text": "CÂU 5 / 5",
+          "color": "#FFFFFF",
+          "bgColor": "#12ABA0",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.05
+          }
+        },
+        {
+          "id": "q5-eq",
+          "name": "Phép tính 5",
+          "type": "equation",
+          "x": 140,
+          "y": 300,
+          "width": 660,
+          "fontSize": 116,
+          "text": "36 × 4 = ?",
+          "color": "#006A63",
+          "bgColor": "#E6F7F6",
+          "animation": {
+            "type": "elastic-pop",
+            "loop": "none",
+            "duration": 0.5,
+            "delay": 0.2
+          }
+        },
+        {
+          "id": "q5-tip",
+          "name": "Gợi ý",
+          "type": "card",
+          "x": 135,
+          "y": 570,
+          "width": 670,
+          "fontSize": 31,
+          "text": "🎯 30 × 4 rồi cộng 6 × 4",
+          "color": "#FF5239",
+          "bgColor": "#FFF4F2",
+          "animation": {
+            "type": "slide-up",
+            "loop": "pulse",
+            "duration": 0.4,
+            "delay": 0.55
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-reveal",
+      "name": "Bật mí 5 đáp án",
+      "startTime": 18.2,
+      "endTime": 22.4,
+      "voiceText": "Bật mí nhé: 96, 32, 403, 317 và 144. Bạn đúng mấy câu?",
+      "elements": [
+        {
+          "id": "reveal-badge",
+          "name": "Nhãn bật mí",
+          "type": "badge",
+          "x": 310,
+          "y": 70,
+          "width": 320,
+          "fontSize": 32,
+          "text": "BẬT MÍ ĐÁP ÁN",
+          "color": "#FFFFFF",
+          "bgColor": "#12ABA0",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.05
+          }
+        },
+        {
+          "id": "ans1",
+          "name": "Đáp án 1",
+          "type": "text",
+          "x": 150,
+          "y": 210,
+          "width": 640,
+          "fontSize": 54,
+          "text": "1️⃣ 48 × 2 = 96",
+          "color": "#006A63",
+          "bgColor": "#FFFFFF",
+          "animation": {
+            "type": "slide-left",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.15
+          }
+        },
+        {
+          "id": "ans2",
+          "name": "Đáp án 2",
+          "type": "text",
+          "x": 150,
+          "y": 330,
+          "width": 640,
+          "fontSize": 54,
+          "text": "2️⃣ 96 ÷ 3 = 32",
+          "color": "#006A63",
+          "bgColor": "#FFFFFF",
+          "animation": {
+            "type": "slide-right",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.35
+          }
+        },
+        {
+          "id": "ans3",
+          "name": "Đáp án 3",
+          "type": "text",
+          "x": 150,
+          "y": 450,
+          "width": 640,
+          "fontSize": 54,
+          "text": "3️⃣ 125 + 278 = 403",
+          "color": "#006A63",
+          "bgColor": "#FFFFFF",
+          "animation": {
+            "type": "slide-left",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.55
+          }
+        },
+        {
+          "id": "ans4",
+          "name": "Đáp án 4",
+          "type": "text",
+          "x": 150,
+          "y": 570,
+          "width": 640,
+          "fontSize": 54,
+          "text": "4️⃣ 604 − 287 = 317",
+          "color": "#006A63",
+          "bgColor": "#FFFFFF",
+          "animation": {
+            "type": "slide-right",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.75
+          }
+        },
+        {
+          "id": "ans5",
+          "name": "Đáp án 5",
+          "type": "text",
+          "x": 150,
+          "y": 690,
+          "width": 640,
+          "fontSize": 54,
+          "text": "5️⃣ 36 × 4 = 144",
+          "color": "#006A63",
+          "bgColor": "#FFFFFF",
+          "animation": {
+            "type": "zoom-hero",
+            "loop": "glow",
+            "duration": 0.5,
+            "delay": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "id": "scene-cta",
+      "name": "Hồi 3 - Thử thách và CTA",
+      "startTime": 22.4,
+      "endTime": 29.5,
+      "voiceText": "Thử thách thêm: 72 chia 4 bằng bao nhiêu? Bình luận đáp án và bấm Follow MathCA nhé!",
+      "elements": [
+        {
+          "id": "cta-badge",
+          "name": "Nhãn thử thách",
+          "type": "badge",
+          "x": 280,
+          "y": 90,
+          "width": 380,
+          "fontSize": 32,
+          "text": "THỬ THÁCH BONUS",
+          "color": "#1A1C1C",
+          "bgColor": "#FFBD05",
+          "animation": {
+            "type": "pop-punch",
+            "loop": "none",
+            "duration": 0.35,
+            "delay": 0.05
+          }
+        },
+        {
+          "id": "bonus-eq",
+          "name": "Bài bonus",
+          "type": "equation",
+          "x": 140,
+          "y": 280,
+          "width": 660,
+          "fontSize": 104,
+          "text": "72 ÷ 4 = ?",
+          "color": "#006A63",
+          "bgColor": "#FFF8E1",
+          "animation": {
+            "type": "elastic-pop",
+            "loop": "none",
+            "duration": 0.55,
+            "delay": 0.25
+          }
+        },
+        {
+          "id": "comment-line",
+          "name": "Kêu gọi bình luận",
+          "type": "text",
+          "x": 120,
+          "y": 540,
+          "width": 700,
+          "fontSize": 34,
+          "text": "👇 Bình luận đáp án để đua top phản xạ!",
+          "color": "#FF5239",
+          "bgColor": "#FFFFFF",
+          "animation": {
+            "type": "slide-up",
+            "loop": "pulse",
+            "duration": 0.45,
+            "delay": 0.75
+          }
+        }
+      ]
+    }
+  ],
+  "globalElements": [
+    {
+      "id": "elem-header-brand",
+      "name": "Header MathCA",
+      "type": "global",
+      "x": 0,
+      "y": 75,
+      "width": 1080,
+      "fontSize": 30,
+      "text": "HỆ THỐNG GIÁO DỤC TOÁN MATHCA",
+      "color": "#FFFFFF",
+      "bgColor": "#FF5239",
+      "animation": {
+        "type": "fade-in",
+        "loop": "none",
+        "duration": 0.4,
+        "delay": 0.05
+      }
+    },
+    {
+      "id": "elem-mascot-wrapper",
+      "name": "Mascot Cú con MathCA",
+      "type": "global",
+      "x": 720,
+      "y": 1380,
+      "width": 300,
+      "fontSize": 0,
+      "text": "MASCOT_MATHCA_SVG",
+      "color": "#12ABA0",
+      "bgColor": "#FFFFFF",
+      "animation": {
+        "type": "slide-right",
+        "loop": "float",
+        "duration": 0.5,
+        "delay": 0.18
+      }
+    },
+    {
+      "id": "elem-cta-btn",
+      "name": "Nút Follow MathCA",
+      "type": "global",
+      "x": 250,
+      "y": 1720,
+      "width": 580,
+      "fontSize": 38,
+      "text": "FOLLOW MATHCA ✨",
+      "color": "#FFFFFF",
+      "bgColor": "#FF5239",
+      "animation": {
+        "type": "pop-punch",
+        "loop": "pulse",
+        "duration": 0.4,
+        "delay": 22.8
+      }
+    }
+  ],
+  "html_template": "<!doctype html>\n<html lang=\"vi\">\n<head>\n<meta charset=\"UTF-8\"/>\n<meta name=\"viewport\" content=\"width=1080, height=1920\"/>\n<title>MathCA - 5 phép tính nâng cao lớp 3</title>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js\"></script>\n<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap\" rel=\"stylesheet\">\n<style>\n*{box-sizing:border-box;margin:0;padding:0}\n:root{--teal:#12ABA0;--teal-dark:#006A63;--teal-soft:#E6F7F6;--coral:#FF5239;--yellow:#FFBD05;--navy:#1A1C1C;--muted:#3C4947;--bg:#FBFBF9}\nhtml,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:Inter,sans-serif}\n#root{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}\n.bg-container{position:absolute;inset:0;background-color:var(--bg);background-image:radial-gradient(#12ABA0 2px,transparent 2px),radial-gradient(#FFBD05 1.5px,transparent 1.5px);background-size:40px 40px,80px 80px;background-position:0 0,20px 20px;opacity:.85}\n.header-wrapper{position:absolute;top:75px;left:0;width:100%;display:flex;flex-direction:column;align-items:center;z-index:10}\n.logo-brand-svg{height:110px;display:flex;align-items:center;justify-content:center;gap:14px}\n.header-tag{margin-top:10px;background:var(--coral);color:#fff;font-size:30px;font-weight:900;padding:10px 38px;border-radius:999px}\n.stage-card{position:absolute;top:380px;left:70px;width:940px;height:1080px;background:#fff;border-radius:40px;box-shadow:0 20px 50px rgba(18,171,160,.12);border:2.5px solid rgba(18,171,160,.18);overflow:hidden;z-index:10}\n.stage-scene{position:absolute;inset:0;padding:40px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center}\n.badge{font-size:32px;font-weight:900;padding:12px 36px;border-radius:999px}\n.hook-title1{font-size:96px;line-height:1.02;font-weight:900;color:var(--teal-dark);text-align:center}\n.hook-title2{font-size:90px;line-height:1.04;font-weight:900;color:var(--coral);text-align:center;margin-top:18px}\n.vs-card{margin-top:30px;width:840px;padding:22px 28px;border-radius:28px;background:var(--teal-soft);font-size:34px;font-weight:900;text-align:center}\n.promise{margin-top:22px;width:780px;padding:18px 26px;border-radius:24px;background:#FFF8E1;border:3px dashed var(--yellow);font-size:30px;font-weight:800;color:#946200;text-align:center}\n.eq{font-size:116px;font-weight:900;color:var(--teal-dark);padding:28px 48px;border-radius:34px;background:var(--teal-soft);border:4px solid #BCECE8}\n.tip{margin-top:42px;font-size:32px;font-weight:800;color:var(--coral);padding:18px 32px;border-radius:24px;background:#FFF4F2}\n.answer-list{display:flex;flex-direction:column;gap:18px;margin-top:24px}\n.answer{font-size:54px;font-weight:900;color:var(--teal-dark)}\n.footer-wrapper{position:absolute;bottom:65px;left:0;width:100%;display:flex;flex-direction:column;align-items:center;z-index:20}\n.cta-button{background:linear-gradient(135deg,#FF5239,#E0321A);color:#fff;font-size:38px;font-weight:900;padding:18px 60px;border-radius:999px;box-shadow:0 12px 30px rgba(255,82,57,.45)}\n.footer-text{font-size:22px;font-weight:700;color:var(--muted);margin-top:14px}\n.mascot-stage-box{position:absolute;bottom:220px;right:40px;width:300px;z-index:25}\n.speech{position:absolute;bottom:525px;right:260px;background:#fff;border:3px solid var(--teal);border-radius:24px;padding:16px 26px;font-size:28px;font-weight:800;z-index:30}\n.click-cursor{position:absolute;bottom:95px;left:690px;width:64px;height:64px;z-index:50}\n</style>\n</head>\n<body>\n<div id=\"root\" data-composition-id=\"main\" data-start=\"0\" data-duration=\"29.5\" data-width=\"1080\" data-height=\"1920\">\n<div class=\"bg-container\"></div>\n<audio id=\"soundtrack\" class=\"clip\" src=\"assets/audio.mp3\" data-start=\"0\" data-duration=\"29.5\" data-track-index=\"0\" data-volume=\"1\"></audio>\n\n<div class=\"header-wrapper\">\n  <div class=\"logo-brand-svg\">\n    <svg width=\"90\" height=\"90\" viewBox=\"0 0 100 100\" fill=\"none\"><path d=\"M15 85V25C15 19.4772 19.4772 15 25 15H38C43.5228 15 48 19.4772 48 25V42L52 38C55 35 60 35 63 38L75 50V25C75 19.4772 79.4772 15 85 15C90.5228 15 95 19.4772 95 25V85H80V60L65 75L50 60V85H15Z\" fill=\"#12ABA0\"/><circle cx=\"35\" cy=\"45\" r=\"10\" fill=\"#FF5239\"/><circle cx=\"65\" cy=\"45\" r=\"10\" fill=\"#FFBD05\"/></svg>\n    <span style=\"font-size:72px;font-weight:900;color:#12ABA0\">math<span style=\"color:#FF5239\">CA</span></span>\n  </div>\n  <div class=\"header-tag\">HỆ THỐNG GIÁO DỤC TOÁN MATHCA</div>\n</div>\n\n<div id=\"stage\" class=\"stage-card\">\n  <div id=\"scene-hook\" class=\"stage-scene\">\n    <div id=\"hook-kicker\" class=\"badge\" style=\"background:#FFBD05;color:#1A1C1C\">⚡ THỬ THÁCH TOÁN LỚP 3 ⚡</div>\n    <div id=\"hook-title-1\" class=\"hook-title1\" style=\"margin-top:20px\">5 PHÚT LUYỆN TOÁN LỚP 3</div>\n    <div id=\"hook-title-2\" class=\"hook-title2\">5 PHÉP TÍNH NÂNG CAO!</div>\n    <div id=\"hook-vs\" class=\"vs-card\">CÁCH CŨ ⏳ 60 GIÂY &nbsp; VS &nbsp; MATHCA ⚡ 2 GIÂY</div>\n    <div id=\"hook-promise\" class=\"promise\">🚀 Không cần nháp — Nhẩm nhanh, phản xạ chuẩn!</div>\n  </div>\n\n  <div id=\"scene-q1\" class=\"stage-scene\"><div class=\"badge\" style=\"background:#12ABA0;color:#fff\">CÂU 1 / 5</div><div id=\"q1-eq\" class=\"eq\" style=\"margin-top:50px\">48 × 2 = ?</div><div class=\"tip\">💡 Gấp đôi 48</div></div>\n  <div id=\"scene-q2\" class=\"stage-scene\"><div class=\"badge\" style=\"background:#12ABA0;color:#fff\">CÂU 2 / 5</div><div id=\"q2-eq\" class=\"eq\" style=\"margin-top:50px\">96 ÷ 3 = ?</div><div class=\"tip\">🧠 Tách 96 = 90 + 6</div></div>\n  <div id=\"scene-q3\" class=\"stage-scene\"><div class=\"badge\" style=\"background:#12ABA0;color:#fff\">CÂU 3 / 5</div><div id=\"q3-eq\" class=\"eq\" style=\"font-size:104px;margin-top:50px\">125 + 278 = ?</div><div class=\"tip\">⚡ 278 + 100 + 25</div></div>\n  <div id=\"scene-q4\" class=\"stage-scene\"><div class=\"badge\" style=\"background:#12ABA0;color:#fff\">CÂU 4 / 5</div><div id=\"q4-eq\" class=\"eq\" style=\"font-size:104px;margin-top:50px\">604 − 287 = ?</div><div id=\"q4-warn\" class=\"tip\">⚠️ Đừng đặt tính dọc — bù trừ thử xem!</div></div>\n  <div id=\"scene-q5\" class=\"stage-scene\"><div class=\"badge\" style=\"background:#12ABA0;color:#fff\">CÂU 5 / 5</div><div id=\"q5-eq\" class=\"eq\" style=\"margin-top:50px\">36 × 4 = ?</div><div class=\"tip\">🎯 30 × 4 rồi cộng 6 × 4</div></div>\n\n  <div id=\"scene-reveal\" class=\"stage-scene\">\n    <div class=\"badge\" style=\"background:#12ABA0;color:#fff\">BẬT MÍ ĐÁP ÁN</div>\n    <div class=\"answer-list\">\n      <div id=\"ans1\" class=\"answer\">1️⃣ 48 × 2 = 96</div>\n      <div id=\"ans2\" class=\"answer\">2️⃣ 96 ÷ 3 = 32</div>\n      <div id=\"ans3\" class=\"answer\">3️⃣ 125 + 278 = 403</div>\n      <div id=\"ans4\" class=\"answer\">4️⃣ 604 − 287 = 317</div>\n      <div id=\"ans5\" class=\"answer\">5️⃣ 36 × 4 = 144</div>\n    </div>\n  </div>\n\n  <div id=\"scene-cta\" class=\"stage-scene\">\n    <div class=\"badge\" style=\"background:#FFBD05;color:#1A1C1C\">THỬ THÁCH BONUS</div>\n    <div id=\"bonus-eq\" class=\"eq\" style=\"margin-top:55px\">72 ÷ 4 = ?</div>\n    <div id=\"comment-line\" class=\"tip\">👇 Bình luận đáp án để đua top phản xạ!</div>\n  </div>\n</div>\n\n<div id=\"mascot-wrapper\" class=\"mascot-stage-box\">\n<svg viewBox=\"0 0 300 320\" fill=\"none\" style=\"width:100%;filter:drop-shadow(0 14px 28px rgba(0,0,0,.15))\">\n<polygon points=\"150,20 260,65 150,110 40,65\" fill=\"#1C1838\"/><rect x=\"110\" y=\"85\" width=\"80\" height=\"35\" rx=\"8\" fill=\"#14112B\"/><ellipse cx=\"150\" cy=\"190\" rx=\"95\" ry=\"105\" fill=\"#12ABA0\"/><ellipse cx=\"150\" cy=\"215\" rx=\"65\" ry=\"70\" fill=\"#FFBD05\"/><circle cx=\"105\" cy=\"160\" r=\"42\" fill=\"#1A1C1C\"/><circle cx=\"195\" cy=\"160\" r=\"42\" fill=\"#1A1C1C\"/><circle cx=\"105\" cy=\"160\" r=\"35\" fill=\"#fff\"/><circle cx=\"195\" cy=\"160\" r=\"35\" fill=\"#fff\"/><circle cx=\"112\" cy=\"160\" r=\"20\" fill=\"#1A1C1C\"/><circle cx=\"188\" cy=\"160\" r=\"20\" fill=\"#1A1C1C\"/><polygon points=\"150,185 138,205 162,205\" fill=\"#FF5239\"/><ellipse cx=\"115\" cy=\"295\" rx=\"20\" ry=\"10\" fill=\"#FFBD05\"/><ellipse cx=\"185\" cy=\"295\" rx=\"20\" ry=\"10\" fill=\"#FFBD05\"/>\n</svg>\n</div>\n<div id=\"bubble\" class=\"speech\">Không cần nháp nhé! 🦉</div>\n<div class=\"footer-wrapper\"><div id=\"cta-btn\" class=\"cta-button\">FOLLOW MATHCA ✨</div><div class=\"footer-text\">HỆ THỐNG GIÁO DỤC TOÁN MATHCA</div></div>\n<div id=\"cursor\" class=\"click-cursor\"><svg viewBox=\"0 0 24 24\"><path d=\"M3 3L10.07 20.97L12.58 13.58L19.97 11.07L3 3Z\" fill=\"white\" stroke=\"#1A1C1C\" stroke-width=\"2.5\"/></svg></div>\n\n<script>\nwindow.__timelines=window.__timelines||{};\nconst scenes=[\"#scene-hook\",\"#scene-q1\",\"#scene-q2\",\"#scene-q3\",\"#scene-q4\",\"#scene-q5\",\"#scene-reveal\",\"#scene-cta\"];\ngsap.set(\"#stage\",{scale:.95,opacity:0});\ngsap.set(\".header-wrapper\",{y:-50,opacity:0});\ngsap.set(\"#mascot-wrapper\",{x:100,opacity:0});\ngsap.set(\"#bubble\",{scale:0,opacity:0});\ngsap.set(\"#cursor\",{opacity:0});\ngsap.set(scenes.slice(1).join(\",\"),{opacity:0,pointerEvents:\"none\"});\ngsap.set(\"#scene-hook\",{opacity:1});\nconst tl=gsap.timeline({paused:true});\ntl.to(\".header-wrapper\",{y:0,opacity:1,duration:.4,ease:\"back.out(1.5)\"},.05)\n  .to(\"#stage\",{scale:1,opacity:1,duration:.45,ease:\"power3.out\"},.1)\n  .to(\"#mascot-wrapper\",{x:0,opacity:1,duration:.5,ease:\"back.out(1.6)\"},.18)\n  .from(\"#hook-kicker\",{scale:.3,opacity:0,duration:.3,ease:\"back.out(2.2)\"},.25)\n  .from(\"#hook-title-1\",{scale:.25,y:35,opacity:0,duration:.45,ease:\"back.out(2.4)\"},.45)\n  .from(\"#hook-title-2\",{scale:.25,y:35,opacity:0,duration:.45,ease:\"back.out(2.4)\"},.75)\n  .from(\"#hook-vs\",{y:80,opacity:0,duration:.4,ease:\"power3.out\"},1.05)\n  .from(\"#hook-promise\",{y:80,opacity:0,duration:.4,ease:\"power3.out\"},1.35)\n  .to(\"#hook-title-2\",{scale:1.06,duration:.28,yoyo:true,repeat:5,ease:\"sine.inOut\"},1.5)\n  .to(\"#mascot-wrapper\",{y:-16,duration:.7,yoyo:true,repeat:-1,ease:\"sine.inOut\"},.8);\n\nfunction swap(outSel,inSel,t){\n  tl.to(outSel,{opacity:0,duration:.2},t-.1);\n  tl.to(inSel,{opacity:1,duration:.3,ease:\"power2.out\"},t);\n}\nswap(\"#scene-hook\",\"#scene-q1\",4.2);\nswap(\"#scene-q1\",\"#scene-q2\",7.0);\nswap(\"#scene-q2\",\"#scene-q3\",9.8);\nswap(\"#scene-q3\",\"#scene-q4\",12.6);\nswap(\"#scene-q4\",\"#scene-q5\",15.4);\nswap(\"#scene-q5\",\"#scene-reveal\",18.2);\nswap(\"#scene-reveal\",\"#scene-cta\",22.4);\n\ntl.from(\"#q1-eq\",{scale:.1,opacity:0,duration:.5,ease:\"elastic.out(1,.35)\"},4.4)\n  .from(\"#q2-eq\",{scale:.1,opacity:0,duration:.5,ease:\"elastic.out(1,.35)\"},7.2)\n  .from(\"#q3-eq\",{scale:.1,opacity:0,duration:.5,ease:\"elastic.out(1,.35)\"},10.0)\n  .from(\"#q4-eq\",{scale:.1,opacity:0,duration:.5,ease:\"elastic.out(1,.35)\"},12.8)\n  .to(\"#q4-warn\",{rotation:4,duration:.14,yoyo:true,repeat:7,ease:\"sine.inOut\"},13.4)\n  .from(\"#q5-eq\",{scale:.1,opacity:0,duration:.5,ease:\"elastic.out(1,.35)\"},15.6)\n  .from(\"#ans1\",{x:-220,opacity:0,duration:.35,ease:\"power3.out\"},18.35)\n  .from(\"#ans2\",{x:220,opacity:0,duration:.35,ease:\"power3.out\"},18.65)\n  .from(\"#ans3\",{x:-220,opacity:0,duration:.35,ease:\"power3.out\"},18.95)\n  .from(\"#ans4\",{x:220,opacity:0,duration:.35,ease:\"power3.out\"},19.25)\n  .from(\"#ans5\",{scale:.05,opacity:0,duration:.5,ease:\"back.out(3.2)\"},19.55)\n  .from(\"#bonus-eq\",{scale:.1,opacity:0,duration:.55,ease:\"elastic.out(1,.35)\"},22.7)\n  .fromTo(\"#cursor\",{opacity:0,x:250,y:120},{opacity:1,x:0,y:0,duration:.6,ease:\"power3.out\"},25.5)\n  .to(\"#cursor\",{scale:.8,duration:.1,yoyo:true,repeat:1},26.5)\n  .to(\"#cta-btn\",{scale:.94,duration:.1,yoyo:true,repeat:1},26.5);\nwindow.__timelines[\"main\"]=tl;\n</script>\n</div>\n</body>\n</html>"
+}

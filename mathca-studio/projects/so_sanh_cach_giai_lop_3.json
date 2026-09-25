@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "title": "So sánh: Cách cũ vs Mẹo MathCA - Lớp 3",
+    "grade": 3,
+    "topic": "Tính nhanh phép nhân 25 x 4",
+    "duration": 26.0,
+    "voice": "vi-VN-HoaiMyNeural"
+  },
+  "brand": {
+    "colors": {
+      "tealPrimary": "#12aba0",
+      "tealDark": "#006a63",
+      "tealSoft": "#e6f7f6",
+      "coralRed": "#ff5239",
+      "yellowVibrant": "#ffbd05"
+    },
+    "fontFamily": "Inter"
+  },
+  "scenes": [
+    {
+      "id": "scene-hook",
+      "name": "Hook: Đối đầu 2 cách làm",
+      "startTime": 0.0,
+      "endTime": 4.5,
+      "voiceText": "Cùng một bài toán nhưng có 2 cách giải: 60 giây hay chỉ 2 giây?",
+      "elements": [
+        {
+          "id": "hook-kicker",
+          "name": "Thẻ Kicker",
+          "type": "badge",
+          "x": 260,
+          "y": 60,
+          "fontSize": 28,
+          "text": "⚖️ ĐỐI ĐẦU PHƯƠNG PHÁP ⚖️",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.2 }
+        },
+        {
+          "id": "hook-title-1",
+          "name": "Tiêu đề chính",
+          "type": "text",
+          "x": 160,
+          "y": 150,
+          "fontSize": 90,
+          "text": "CÁCH CŨ vs MATHCA",
+          "color": "#006a63",
+          "animation": { "type": "pop-punch", "duration": 0.45, "delay": 0.45 }
+        },
+        {
+          "id": "hook-title-2",
+          "name": "Tiêu đề phụ",
+          "type": "text",
+          "x": 100,
+          "y": 265,
+          "fontSize": 84,
+          "text": "BẠN CHỌN CÁCH NÀO? ⚡",
+          "color": "#ff5239",
+          "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.45, "delay": 0.75 }
+        }
+      ]
+    },
+    {
+      "id": "scene-vidu",
+      "name": "So sánh 2 cột",
+      "startTime": 4.5,
+      "endTime": 18.0,
+      "voiceText": "Bài toán 25 nhân 4. Cách cũ đặt tính dọc mất cả phút. MathCA nhẩm ngay 100!",
+      "elements": [
+        {
+          "id": "badge-vidu",
+          "name": "Thẻ tiêu đề",
+          "type": "badge",
+          "x": 280,
+          "y": 60,
+          "fontSize": 32,
+          "text": "SO SÁNH 2 CÁCH GIẢI",
+          "color": "#ffffff",
+          "bgColor": "#12aba0",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "split-compare-box",
+          "name": "Bảng so sánh 2 cột",
+          "type": "card",
+          "x": 50,
+          "y": 180,
+          "width": 840,
+          "fontSize": 36,
+          "text": "🔴 CÁCH CŨ: 25 × 4\nĐặt tính dọc, nhớ 2, mất 60 giây!\n\n🟢 MẸO MATHCA: 25 × 4\n4 lần 25 là 100 — Nhìn là ra đáp án!",
+          "animation": { "type": "slide-up", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    },
+    {
+      "id": "scene-thuthach",
+      "name": "Thử thách & CTA",
+      "startTime": 18.0,
+      "endTime": 26.0,
+      "voiceText": "Thử nhẩm xem: 25 nhân 8 bằng bao nhiêu? Bình luận và Follow MathCA nhé!",
+      "elements": [
+        {
+          "id": "badge-thuthach",
+          "name": "Thẻ thử thách",
+          "type": "badge",
+          "x": 250,
+          "y": 60,
+          "fontSize": 32,
+          "text": "THỬ THÁCH CHO BẠN",
+          "color": "#1a1c1c",
+          "bgColor": "#ffbd05",
+          "animation": { "type": "pop-punch", "duration": 0.35, "delay": 0.1 }
+        },
+        {
+          "id": "quiz-card",
+          "name": "Câu đố 25 x 8",
+          "type": "card",
+          "x": 60,
+          "y": 200,
+          "width": 820,
+          "fontSize": 54,
+          "text": "25 × 8 = ?\nNhẩm trong 2 giây xem!",
+          "animation": { "type": "elastic-pop", "duration": 0.5, "delay": 0.3 }
+        }
+      ]
+    }
+  ],
+  "globalElements": [
+    {
+      "id": "elem-header-brand",
+      "name": "Header Logo & Tiêu Đề",
+      "x": 0,
+      "y": 75,
+      "type": "global",
+      "animation": { "type": "slide-up", "duration": 0.4, "delay": 0.05 }
+    },
+    {
+      "id": "elem-mascot-wrapper",
+      "name": "Mascot Cú con",
+      "x": 720,
+      "y": 1380,
+      "width": 320,
+      "type": "global",
+      "animation": { "type": "slide-left", "loop": "float", "duration": 0.5, "delay": 0.18 }
+    },
+    {
+      "id": "elem-cta-btn",
+      "name": "Nút Follow MathCA",
+      "x": 230,
+      "y": 1720,
+      "fontSize": 38,
+      "text": "FOLLOW MATHCA ✨",
+      "color": "#ffffff",
+      "bgColor": "#ff5239",
+      "type": "global",
+      "animation": { "type": "pop-punch", "loop": "pulse", "duration": 0.45, "delay": 0.5 }
+    }
+  ]
+}

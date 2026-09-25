@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-25T01:58:19.901Z",
+  "assets": [
+    {
+      "assetId": "preset-whoosh",
+      "kind": "sfx",
+      "name": "Whoosh",
+      "preset": "whoosh",
+      "src": "assets/audio-library/presets/whoosh.wav",
+      "filename": "whoosh.wav",
+      "mimeType": "audio/wav",
+      "extension": ".wav",
+      "bytes": 211244,
+      "duration": 1.1,
+      "contentHash": "aa2dc6eb58a7c6eb4e57b69638c4e49c8e6bdedadaf6ded82023c91db9754d80",
+      "source": "bundled"
+    },
+    {
+      "assetId": "preset-pop",
+      "kind": "sfx",
+      "name": "Pop",
+      "preset": "pop",
+      "src": "assets/audio-library/presets/pop.wav",
+      "filename": "pop.wav",
+      "mimeType": "audio/wav",
+      "extension": ".wav",
+      "bytes": 67244,
+      "duration": 0.35,
+      "contentHash": "8dc4ba9350981163e828ed0dfb46f58e1e695ef84790c8961396b7514fec230d",
+      "source": "bundled"
+    },
+    {
+      "assetId": "preset-boing",
+      "kind": "sfx",
+      "name": "Boing",
+      "preset": "boing",
+      "src": "assets/audio-library/presets/boing.wav",
+      "filename": "boing.wav",
+      "mimeType": "audio/wav",
+      "extension": ".wav",
+      "bytes": 230444,
+      "duration": 1.2,
+      "contentHash": "ed00fb108ae0a0594c2d95a72155e9d1ef8ceffc67d36b533cd5c6f41e05ff33",
+      "source": "bundled"
+    },
+    {
+      "assetId": "preset-chime",
+      "kind": "sfx",
+      "name": "Chime",
+      "preset": "chime",
+      "src": "assets/audio-library/presets/chime.wav",
+      "filename": "chime.wav",
+      "mimeType": "audio/wav",
+      "extension": ".wav",
+      "bytes": 326444,
+      "duration": 1.7,
+      "contentHash": "6225a3dba5662cbe4fa9fd0353d85e3fc77bd6a9d33e3b6e3c1435382050daad",
+      "source": "bundled"
+    },
+    {
+      "assetId": "preset-click",
+      "kind": "sfx",
+      "name": "Click",
+      "preset": "click",
+      "src": "assets/audio-library/presets/click.wav",
+      "filename": "click.wav",
+      "mimeType": "audio/wav",
+      "extension": ".wav",
+      "bytes": 34604,
+      "duration": 0.18,
+      "contentHash": "a2ef410b7a6c2a6c3f5c25b2be5c4e8fec6af299da369a28ecc66da92cfc6b12",
+      "source": "bundled"
+    },
+    {
+      "assetId": "bgm-happy-math-01",
+      "kind": "bgm",
+      "name": "Happy Math",
+      "preset": null,
+      "src": "assets/audio-library/bgm/happy-math.wav",
+      "filename": "happy-math.wav",
+      "mimeType": "audio/wav",
+      "extension": ".wav",
+      "bytes": 768044,
+      "duration": 4,
+      "contentHash": "8860ce81e8150e8ff88c9b6f7cdd323d4aab39ef72fc01100d3364d6d746fbfb",
+      "source": "bundled"
+    }
+  ]
+}

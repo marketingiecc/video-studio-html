@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MathCA Video Studio Pro - Phần mềm Biên tập & Xuất Video MathCA</title>
+    <!-- Font Inter & Studio Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/studio.css" />
+    <!-- GSAP Animation Engine -->
+    <script src="assets/gsap.min.js"></script>
+  </head>
+  <body>
+    <svg class="icon-sprite" aria-hidden="true">
+      <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 6h7l2 2h9v11H3z"/></symbol>
+      <symbol id="icon-file" viewBox="0 0 24 24"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5M9 12h6M9 16h6"/></symbol>
+      <symbol id="icon-save" viewBox="0 0 24 24"><path d="M4 3h14l2 2v16H4z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></symbol>
+      <symbol id="icon-export" viewBox="0 0 24 24"><path d="M14 3h7v7M10 14 21 3"/><path d="M18 13v8H3V6h8"/></symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+      <symbol id="icon-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></symbol>
+      <symbol id="icon-wave" viewBox="0 0 24 24"><path d="M3 12h2l2-7 3 14 3-11 3 8 2-4h3"/></symbol>
+      <symbol id="icon-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+      <symbol id="icon-script" viewBox="0 0 24 24"><path d="M5 3h14v18H5z"/><path d="M8 7h8M8 11h8M8 15h5"/></symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/></symbol>
+      <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="icon-undo" viewBox="0 0 24 24"><path d="m9 7-5 5 5 5"/><path d="M20 17a8 8 0 0 0-11-8l-5 3"/></symbol>
+      <symbol id="icon-redo" viewBox="0 0 24 24"><path d="m15 7 5 5-5 5"/><path d="M4 17a8 8 0 0 1 11-8l5 3"/></symbol>
+      <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 3h6l1 4H8ZM7 7l1 14h8l1-14"/></symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></symbol>
+      <symbol id="icon-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></symbol>
+      <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 3 1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5Z"/></symbol>
+    </svg>
+    <header class="studio-header premium-topbar">
+      <div class="brand-section">
+        <img class="brand-mark" src="assets/logo.png" alt="MathCA" />
+        <div><div class="brand-title">MathCA <strong>Video Studio Pro</strong></div><div class="brand-subtitle">HYPERFRAMES PRODUCTION DESK</div></div>
+      </div>
+      <nav class="header-center-controls" aria-label="Thao tác dự án">
+        <button id="btn-open-file" class="btn-header"><svg class="ui-icon"><use href="#icon-folder"/></svg><span>Mở JSON</span></button>
+        <button id="btn-paste-json" class="btn-header"><svg class="ui-icon"><use href="#icon-file"/></svg><span>Dán JSON</span></button>
+        <button id="btn-save-project" class="btn-header"><svg class="ui-icon"><use href="#icon-save"/></svg><span>Lưu</span></button>
+        <button id="btn-export-html" class="btn-header secondary-action"><svg class="ui-icon"><use href="#icon-export"/></svg><span>Xuất HTML</span></button>
+        <button id="btn-undo" class="btn-header icon-button" title="Hoàn tác (Ctrl+Z)" aria-label="Hoàn tác"><svg class="ui-icon"><use href="#icon-undo"/></svg></button>
+        <button id="btn-redo" class="btn-header icon-button" title="Làm lại (Ctrl+Y)" aria-label="Làm lại"><svg class="ui-icon"><use href="#icon-redo"/></svg></button>
+      </nav>
+      <div class="header-actions">
+        <span id="server-status" class="status-pill" data-state="checking">Đang kiểm tra server</span>
+        <span id="save-state" class="save-state">Đã lưu</span>
+        <div class="output-folder-control">
+          <button id="btn-select-output-folder" class="btn-header output-folder-button" type="button"><svg class="ui-icon"><use href="#icon-folder"/></svg><span>Thư mục</span></button>
+          <span id="output-folder-status">rendered_output</span>
+        </div>
+        <button id="btn-render-trigger" class="btn-render-hero" disabled><svg class="ui-icon"><use href="#icon-spark"/></svg><span>RENDER VIDEO MP4</span></button>
+      </div>
+    </header>
+
+    <!-- Main Studio Workspace -->
+    <div class="studio-workspace">
+      <nav class="tool-rail" aria-label="Điều hướng Studio">
+        <button class="tab-btn active" data-tab="tab-storyboard" title="Kịch bản"><svg class="ui-icon"><use href="#icon-script"/></svg><span>Kịch bản</span></button>
+        <button class="tab-btn" data-tab="tab-json" title="JSON"><span class="rail-code">{ }</span><span>JSON</span></button>
+        <button class="tab-btn" data-tab="tab-settings" title="Cài đặt"><svg class="ui-icon"><use href="#icon-settings"/></svg><span>Cài đặt</span></button>
+        <button id="rail-audio" class="rail-action" title="Âm thanh"><svg class="ui-icon"><use href="#icon-music"/></svg><span>Âm thanh</span></button>
+        <button id="rail-media" class="rail-action" title="Thư viện media"><svg class="ui-icon"><use href="#icon-layers"/></svg><span>Media</span></button>
+      </nav>
+      <aside class="studio-sidebar">
+        <div class="panel-heading"><span>Danh sách phân cảnh</span><button id="btn-add-scene" class="compact-add" type="button"><svg class="ui-icon"><use href="#icon-plus"/></svg>Thêm cảnh</button></div>
+
+        <div class="sidebar-content">
+          <!-- Tab 1: Storyboard Scenes -->
+          <div id="tab-storyboard" class="tab-pane active">
+            <div class="panel-kicker">Kịch bản video · chọn cảnh để chỉnh sửa</div>
+            <div id="scene-list-container" class="scene-list">
+              <!-- Dynamically populated scene cards -->
+            </div>
+          </div>
+
+          <!-- Tab 2: Raw JSON Editor -->
+          <div id="tab-json" class="tab-pane" style="display: none; height: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 11px; font-weight: 800; color: var(--text-dim); text-transform: uppercase;">
+                JSON Cấu Trúc Dự Án
+              </span>
+              <button id="btn-apply-json" class="btn-header" style="padding: 4px 10px; font-size: 11px;">
+                Áp Dụng Vào Canvas
+              </button>
+            </div>
+            <textarea
+              id="raw-json-editor"
+              class="prop-textarea"
+              style="height: calc(100% - 40px); font-family: monospace; font-size: 12px; line-height: 1.4; color: #a5f3fc;"
+            ></textarea>
+          </div>
+
+          <!-- Tab 3: Brand & Settings -->
+          <div id="tab-settings" class="tab-pane" style="display: none;">
+            <div class="prop-group">
+              <label class="prop-label">Tên Video / Tiêu đề</label>
+              <input id="setting-title" type="text" class="prop-input-wrap prop-input" />
+            </div>
+            <div class="prop-group" style="margin-top: 14px;">
+              <label class="prop-label">Lớp học</label>
+              <select id="setting-grade" class="prop-input-wrap prop-input">
+                <option value="1">Lớp 1</option>
+                <option value="2">Lớp 2</option>
+                <option value="3" selected>Lớp 3</option>
+                <option value="4">Lớp 4</option>
+                <option value="5">Lớp 5</option>
+              </select>
+            </div>
+            <div class="prop-group" style="margin-top: 14px;">
+              <label class="prop-label">Giọng đọc AI (TTS) <button id="btn-refresh-voices" class="compact-add" type="button" title="Cập nhật danh sách giọng đọc">🔄 Làm mới</button></label>
+              <select id="setting-voice" class="prop-input-wrap prop-input">
+                <optgroup label="Edge TTS (Microsoft)" data-provider="edge">
+                  <option value="vi-VN-HoaiMyNeural" selected>Hoài My (Nữ tươi vui, hoạt bát - Chuẩn MathCA)</option>
+                  <option value="vi-VN-NamMinhNeural">Nam Minh (Nam năng động, dứt khoát)</option>
+                </optgroup>
+                <optgroup label="VieNeu TTS (Bản địa)" data-provider="vieneu" id="voice-optgroup-vieneu">
+                </optgroup>
+              </select>
+              <div id="voice-provider-status" class="prop-help" style="margin-top:4px;font-size:10px;color:#6f8a9d;"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Center Stage: Scaled 9:16 Interactive Canvas -->
+      <main class="studio-center-stage">
+        <!-- Floating Canvas Toolbar -->
+        <div class="canvas-action-bar">
+          <button id="btn-add-text" class="btn-canvas-action" title="Thêm chữ mới vào cảnh">
+            <span>➕</span> <span>Thêm Chữ</span>
+          </button>
+          <button id="btn-add-logo" class="btn-canvas-action" title="Thêm Logo MathCA hoặc tải từ máy">
+            <span>🏷️</span> <span>Chọn Logo</span>
+          </button>
+          <button id="btn-upload-image" class="btn-canvas-action" title="Tải ảnh minh họa từ máy tính">
+            <span>🖼️</span> <span>Tải Ảnh</span>
+          </button>
+          <button id="btn-duplicate-elem" class="btn-canvas-action" title="Nhân bản đối tượng đang chọn (Ctrl+D)">
+            <span>📋</span> <span>Nhân Bản</span>
+          </button>
+          <button id="btn-delete-elem" class="btn-canvas-action danger" title="Xóa đối tượng đang chọn (Delete)">
+            <span>🗑️</span> <span>Xóa</span>
+          </button>
+          <div style="width: 1px; height: 18px; background: var(--border-subtle); margin: 0 4px;"></div>
+          <button id="btn-preset-templates" class="btn-canvas-action highlight" title="Chọn mẫu kịch bản chuẩn MathCA (4 hướng)">
+            <span>📚</span> <span>Mẫu Kịch Bản</span>
+          </button>
+          <div class="preview-zoom-controls" aria-label="Thu phóng preview">
+            <button id="btn-preview-zoom-out" class="btn-canvas-action zoom-button" type="button" title="Thu nhỏ preview">−</button>
+            <input id="preview-zoom" type="range" min="50" max="220" value="100" step="10" aria-label="Mức zoom preview" />
+            <button id="btn-preview-zoom-in" class="btn-canvas-action zoom-button" type="button" title="Phóng to preview">+</button>
+            <button id="btn-preview-fit" class="btn-canvas-action" type="button" title="Vừa khung preview"><span id="preview-zoom-output">Fit</span></button>
+          </div>
+          <button id="btn-open-media-library" class="btn-canvas-action highlight" type="button" title="Mở thư viện ảnh, audio và video"><svg class="ui-icon"><use href="#icon-layers"/></svg><span>Media</span></button>
+          <span id="preview-status" class="status-pill preview-status" data-state="ready">Preview canvas</span>
+        </div>
+
+        <div class="stage-viewport-container">
+          <div id="canvas-pan-surface" class="canvas-pan-surface">
+            <div id="canvas-scaler" class="canvas-frame-wrapper">
+            <!-- Simulated Video Composition (1080x1920) -->
+            <div id="composition-root" style="position: absolute; inset: 0; width: 1080px; height: 1920px; overflow: hidden; background: #fbfbf9;">
+              <iframe id="composition-preview-frame" title="Video preview từ HTML gốc" tabindex="-1"></iframe>
+              <!-- Background Dots Pattern -->
+              <div class="bg-container" style="position: absolute; inset: 0; background-color: #fbfbf9; background-image: radial-gradient(#12aba0 2px, transparent 2px), radial-gradient(#ffbd05 1.5px, transparent 1.5px); background-size: 40px 40px, 80px 80px; opacity: 0.85;"></div>
+
+              <!-- Header Section -->
+              <div id="elem-header-brand" style="position: absolute; top: 75px; left: 0; width: 100%; display: flex; flex-direction: column; align-items: center; z-index: 10;">
+                <img src="assets/logo.png" style="height: 110px; margin-bottom: 20px; filter: drop-shadow(0 8px 16px rgba(0,0,0,0.06));" alt="Logo" />
+                <div style="background: #ff5239; color: #fff; font-size: 30px; font-weight: 800; padding: 10px 40px; border-radius: 9999px; letter-spacing: 0.04em;">
+                  HỆ THỐNG GIÁO DỤC TOÁN MATHCA
+                </div>
+              </div>
+
+              <!-- Stage Card -->
+              <div id="elem-stage-card" style="position: absolute; top: 380px; left: 70px; width: 940px; height: 1080px; background: #ffffff; border-radius: 40px; box-shadow: 0 20px 50px rgba(18, 171, 160, 0.12); border: 2.5px solid rgba(18, 171, 160, 0.18); overflow: hidden; z-index: 10;">
+                <!-- Content will be rendered dynamically based on active scene -->
+                <div id="scene-render-area" style="position: absolute; inset: 0; padding: 40px 36px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                </div>
+              </div>
+
+              <!-- Mascot Owl -->
+              <div id="elem-mascot-wrapper" style="position: absolute; bottom: 220px; right: 40px; width: 320px; z-index: 25;">
+                <img src="assets/mascot.png" style="width: 100%; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.12));" alt="Mascot" />
+              </div>
+
+              <!-- Speech Bubble -->
+              <div id="elem-speech-bubble" style="position: absolute; bottom: 520px; right: 260px; background: #fff; border: 3px solid #12aba0; border-radius: 24px; padding: 16px 28px; font-size: 28px; font-weight: 800; color: #1a1c1c; display: none; z-index: 30;">
+                Đừng đặt tính vội nhé! 🦉
+              </div>
+
+              <!-- Footer CTA -->
+              <div id="elem-cta-btn" style="position: absolute; left: 230px; top: 1720px; z-index: 20; background: linear-gradient(135deg, #ff5239, #e0321a); color: #fff; font-size: 38px; font-weight: 900; padding: 18px 60px; border-radius: 9999px; box-shadow: 0 12px 30px rgba(255, 82, 57, 0.45); cursor: pointer; white-space: nowrap;">
+                FOLLOW MATHCA ✨
+              </div>
+              <div style="position: absolute; bottom: 42px; left: 0; width: 100%; text-align: center; z-index: 19; font-size: 22px; font-weight: 700; color: #3c4947;">
+                HỆ THỐNG GIÁO DỤC TOÁN MATHCA
+              </div>
+
+              <!-- Cursor -->
+              <div id="elem-click-cursor" style="position: absolute; bottom: 95px; left: 680px; width: 64px; height: 64px; z-index: 50; display: none;">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M3 3L10.07 20.97L12.58 13.58L19.97 11.07L3 3Z" fill="white" stroke="#1a1c1c" stroke-width="2.5" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+
+            <!-- Single Universal Selection Bounding Box Layer -->
+            <div id="interactive-overlay" class="interactive-overlay editing">
+              <div id="active-selection-box" class="active-selection-box">
+                <div class="selection-handle tl"></div>
+                <div class="selection-handle tr"></div>
+                <div class="selection-handle bl"></div>
+                <div class="selection-handle br"></div>
+                <div class="selection-handle tc"></div>
+                <div class="selection-handle bc"></div>
+                <div class="selection-handle ml"></div>
+                <div class="selection-handle mr"></div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Inspector Panel -->
+      <aside class="studio-inspector">
+        <div class="inspector-tabs" role="tablist" aria-label="Inspector">
+          <button class="inspector-tab active" data-inspector-tab="properties" role="tab" aria-selected="true">Thuộc tính</button>
+          <button class="inspector-tab" data-inspector-tab="effects" role="tab" aria-selected="false">Hiệu ứng</button>
+          <button class="inspector-tab" data-inspector-tab="audio" role="tab" aria-selected="false">Âm thanh</button>
+        </div>
+        <div class="inspector-header">
+          <span id="inspector-heading">Đối tượng đang chọn</span>
+          <span id="selected-type-badge">CHƯA CHỌN</span>
+        </div>
+
+        <div id="inspector-content" class="inspector-body inspector-panel active" data-inspector-panel="properties">
+          <div id="no-selection-hint" style="color: var(--text-dim); font-size: 13px; text-align: center; margin-top: 40px; line-height: 1.6;">
+            💡 <i>Bấm chuột vào bất kỳ đối tượng nào trên màn hình preview để di chuyển và chỉnh sửa vị trí/kích thước.</i>
+          </div>
+
+          <div id="element-editor-form" style="display: none; flex-direction: column; gap: 16px;">
+            <div class="prop-group">
+              <label class="prop-label">Tên / Nhãn</label>
+              <div class="prop-input-wrap">
+                <input id="prop-name" type="text" class="prop-input" readonly />
+              </div>
+            </div>
+
+            <div class="prop-group">
+              <label class="prop-label">Tọa Độ Vị Trí (Kéo chuột hoặc nhập số)</label>
+              <div class="prop-row-dual">
+                <div class="prop-input-wrap">
+                  <span>X</span>
+                  <input id="prop-pos-x" type="number" class="prop-input" />
+                </div>
+                <div class="prop-input-wrap">
+                  <span>Y</span>
+                  <input id="prop-pos-y" type="number" class="prop-input" />
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-group">
+              <label class="prop-label">Kích Cỡ & Khung (px)</label>
+              <div class="prop-row-dual">
+                <div class="prop-input-wrap">
+                  <span>Font</span>
+                  <input id="prop-font-size" type="number" class="prop-input" placeholder="32" />
+                </div>
+                <div class="prop-input-wrap">
+                  <span>Rộng</span>
+                  <input id="prop-width" type="number" class="prop-input" placeholder="Tự động" />
+                </div>
+              </div>
+            </div>
+
+            <div class="prop-group">
+              <label class="prop-label">Nội Dung Văn Bản</label>
+              <textarea id="prop-text-content" class="prop-textarea"></textarea>
+            </div>
+
+            <!-- THƯ VIỆN HIỆU ỨNG CHUYỂN ĐỘNG GSAP (HYPERFRAMES) -->
+            <div id="animation-section" class="inspector-section animation-section">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-size: 11px; font-weight: 800; color: var(--teal-primary); text-transform: uppercase; letter-spacing: 0.05em;">
+                  ✨ Hiệu Ứng Chuyển Động (GSAP)
+                </span>
+                <span style="font-size: 10px; background: rgba(255,189,5,0.15); color: #ffbd05; padding: 2px 6px; border-radius: 4px; font-weight: 800;">
+                  HYPERFRAMES
+                </span>
+              </div>
+
+              <div class="prop-group" style="margin-bottom: 12px;">
+                <label class="prop-label">1. Hiệu Ứng Xuất Hiện (Entry)</label>
+                <select id="prop-anim-type" class="prop-input-wrap prop-input" style="background: var(--bg-input); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-subtle); color: #fff;">
+                  <option value="pop-punch" selected>💥 Bật nảy cực mạnh (Pop Punch - back.out)</option>
+                  <option value="drop-bounce">🏀 Rơi tưng tưng đàn hồi (Drop Bounce - bounce.out)</option>
+                  <option value="zoom-hero">🚀 Phóng to cực đại (Zoom Hero - back.out(3))</option>
+                  <option value="slide-up">⬆️ Trượt dứt khoát từ dưới lên (Slide Up)</option>
+                  <option value="slide-left">➡️ Trượt lướt từ trái sang (Slide Left)</option>
+                  <option value="slide-right">⬅️ Trượt lướt từ phải sang (Slide Right)</option>
+                  <option value="elastic-pop">🎯 Bung đàn hồi giật bật (Elastic Pop)</option>
+                  <option value="fade-in">✨ Mờ dần xuất hiện êm ái (Fade In)</option>
+                </select>
+              </div>
+
+              <div class="prop-group" style="margin-bottom: 12px;">
+                <label class="prop-label">2. Hiệu Ứng Duy Trì / Chú Ý (Loop)</label>
+                <select id="prop-anim-loop" class="prop-input-wrap prop-input" style="background: var(--bg-input); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-subtle); color: #fff;">
+                  <option value="none" selected>Không lặp (Tĩnh)</option>
+                  <option value="pulse">💓 Đập nhịp tim thu hút (Pulse Heartbeat)</option>
+                  <option value="float">🌊 Bồng bềnh lơ lửng (Float Bobbing)</option>
+                  <option value="wiggle">⚡ Lắc lư nhịp điệu (Wiggle Shake)</option>
+                  <option value="glow">🌟 Nhấp nháy hào quang (Glow Shimmer)</option>
+                </select>
+              </div>
+
+              <div class="prop-row-dual" style="margin-bottom: 14px;">
+                <div class="prop-input-wrap">
+                  <span>Thời lượng (s)</span>
+                  <input id="prop-anim-duration" type="number" step="0.05" class="prop-input" value="0.45" />
+                </div>
+                <div class="prop-input-wrap">
+                  <span>Độ trễ (s)</span>
+                  <input id="prop-anim-delay" type="number" step="0.05" class="prop-input" value="0.2" />
+                </div>
+              </div>
+
+              <button id="btn-preview-anim" class="btn-header" style="width: 100%; justify-content: center; background: rgba(18, 171, 160, 0.15); border-color: var(--teal-primary); color: #a5f3fc; font-weight: 800;">
+                <span>▶</span>
+                <span>Chạy Thử Hiệu Ứng Này</span>
+              </button>
+            </div>
+
+            <div class="prop-group" style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+              <button id="btn-play-scene-anim" class="btn-header" style="justify-content: center; background: rgba(255, 189, 5, 0.15); border-color: #ffbd05; color: #ffbd05; font-weight: 800;">
+                <span>🎬</span>
+                <span>Chạy Hoạt Ảnh Cả Phân Cảnh</span>
+              </button>
+              <button id="btn-align-center" class="btn-header" style="justify-content: center;">
+                <span>↔️</span>
+                <span>Căn Giữa Ngang Khung Hình</span>
+              </button>
+              <button id="btn-reset-pos" class="btn-header" style="justify-content: center; color: var(--coral-red);">
+                <span>↺</span>
+                <span>Khôi Phục Vị Trí Gốc</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="audio-inspector-panel" class="inspector-body inspector-panel" data-inspector-panel="audio">
+          <section class="audio-section">
+            <div class="section-title"><span>Nhạc nền (BGM)</span><span id="bgm-state-text">Đang tắt</span></div>
+            <div class="audio-source-card">
+              <div><strong id="bgm-name">Chưa chọn nhạc</strong><span id="bgm-meta">Chọn từ thư viện hoặc tải MP3/WAV/M4A</span></div>
+              <button id="btn-bgm-preview" class="mini-control" type="button" aria-label="Phát thử BGM"><svg class="ui-icon"><use href="#icon-play"/></svg></button>
+            </div>
+            <label class="switch-row"><span><strong>Bật nhạc nền</strong><small>Mặc định OFF cho project cũ</small></span><input id="bgm-toggle" type="checkbox" role="switch" /></label>
+            <label class="range-field"><span>Âm lượng <output id="bgm-volume-output">30%</output></span><input id="bgm-volume" type="range" min="0" max="100" value="30" /></label>
+            <div class="field-grid"><label>Bắt đầu (s)<input id="bgm-start" type="number" min="0" step="0.1" value="0" /></label><label>Kết thúc (s)<input id="bgm-end" type="number" min="0" step="0.1" value="29.5" /></label></div>
+            <div class="field-grid"><label>Fade in<input id="bgm-fade-in" type="number" min="0" step="0.1" value="0.8" /></label><label>Fade out<input id="bgm-fade-out" type="number" min="0" step="0.1" value="1.2" /></label></div>
+            <label class="switch-row"><span><strong>Lặp nhạc</strong><small>Khi file ngắn hơn video</small></span><input id="bgm-loop" type="checkbox" checked role="switch" /></label>
+            <label class="switch-row"><span><strong>Auto ducking</strong><small>Giảm BGM dưới Voiceover</small></span><input id="bgm-ducking" type="checkbox" checked role="switch" /></label>
+            <label class="range-field"><span>Mức ducking <output id="bgm-duck-output">-12 dB</output></span><input id="bgm-duck-db" type="range" min="-24" max="-3" value="-12" /></label>
+            <div class="button-grid"><button id="btn-upload-bgm" class="btn-header" type="button"><svg class="ui-icon"><use href="#icon-upload"/></svg>Tải BGM</button><button id="btn-open-audio-library" class="btn-header premium" type="button"><svg class="ui-icon"><use href="#icon-music"/></svg>Thư viện</button></div>
+          </section>
+          <section class="audio-section">
+            <div class="section-title"><span>Hiệu ứng âm thanh (SFX)</span><span id="sfx-master-output">50%</span></div>
+            <label class="range-field"><span>Master volume</span><input id="sfx-master-volume" type="range" min="0" max="100" value="50" /></label>
+            <div id="sfx-presets" class="sfx-preset-grid"></div>
+            <button id="btn-upload-sfx" class="btn-header full-width" type="button"><svg class="ui-icon"><use href="#icon-upload"/></svg>Tải SFX riêng</button>
+          </section>
+          <section class="audio-section selected-sfx-section">
+            <div class="section-title"><span>SFX đang chọn</span><span id="sfx-selected-name">Chưa chọn</span></div>
+            <label class="range-field"><span>Âm lượng clip <output id="sfx-clip-volume-output">42%</output></span><input id="sfx-clip-volume" type="range" min="0" max="100" value="42" disabled /></label>
+            <label class="range-field"><span>Pan L/R <output id="sfx-clip-pan-output">C</output></span><input id="sfx-clip-pan" type="range" min="-100" max="100" value="0" disabled /></label>
+            <div class="button-grid"><button id="btn-sfx-nudge-left" class="btn-header" type="button" disabled>-0.1s</button><button id="btn-sfx-nudge-right" class="btn-header" type="button" disabled>+0.1s</button></div>
+          </section>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Bottom Timeline Bar -->
+    <footer class="studio-timeline premium-timeline">
+      <div id="timeline-resizer" class="timeline-resizer" role="separator" aria-label="Kéo để thay đổi chiều cao Timeline" aria-orientation="horizontal" aria-valuemin="170" aria-valuenow="248" tabindex="0"><span></span></div>
+      <div class="timeline-toolbar">
+        <div class="timeline-title">TIMELINE <span id="timeline-duration-label">0.0s</span></div>
+        <button id="btn-play-pause" class="btn-play-toggle" aria-label="Phát timeline"><span id="play-icon">▶</span></button>
+        <div id="time-display" class="time-display">00:00.0 / 00:29.5</div>
+        <div id="studio-job-progress" class="studio-job-progress" data-state="ready" role="status" aria-live="polite">
+          <div class="studio-job-progress-head"><span id="studio-job-progress-label">Sẵn sàng xem thử</span><output id="studio-job-progress-percent">100%</output></div>
+          <div class="studio-job-progress-track"><div id="studio-job-progress-bar" class="studio-job-progress-bar" style="width:100%"></div></div>
+        </div>
+        <button id="btn-split-scene" class="timeline-action" type="button">Chia cảnh</button>
+        <button id="btn-duplicate-timeline" class="timeline-action" type="button"><svg class="ui-icon"><use href="#icon-copy"/></svg>Sao chép</button>
+        <button id="btn-delete-timeline" class="timeline-action danger" type="button"><svg class="ui-icon"><use href="#icon-trash"/></svg>Xóa</button>
+        <div class="timeline-spacer"></div>
+        <span id="audio-status" class="status-pill" data-state="ready">Âm thanh hiện tại</span>
+        <div id="voice-picker-strip" class="voice-picker-strip">
+          <select id="timeline-voice-select" class="timeline-voice-select" title="Chọn giọng đọc">
+            <optgroup label="Edge TTS" data-provider="edge">
+              <option value="vi-VN-HoaiMyNeural">Hoài My</option>
+              <option value="vi-VN-NamMinhNeural">Nam Minh</option>
+            </optgroup>
+            <optgroup label="VieNeu TTS" data-provider="vieneu" id="tl-voice-optgroup-vieneu"></optgroup>
+          </select>
+          <button id="btn-generate-voice" class="timeline-action tl-voice-generate" type="button" title="Tạo giọng đọc với giọng đã chọn">🎙 Tạo</button>
+          <div id="voice-variant-chips" class="voice-variant-chips" title="Giọng đã tạo — bấm để chuyển"></div>
+        </div>
+        <button id="btn-generate-audio" class="timeline-action" type="button" style="display:none;"><svg class="ui-icon"><use href="#icon-wave"/></svg>Tạo lại Voiceover</button>
+        <button id="btn-audio-toggle" class="timeline-action" type="button">Tắt tiếng</button>
+        <label class="timeline-zoom">Zoom <input id="timeline-zoom" type="range" min="80" max="180" value="100" /></label>
+      </div>
+      <div class="track-labels">
+        <div class="track-label scene-color"><svg class="ui-icon"><use href="#icon-script"/></svg><span>Phân cảnh</span></div>
+        <div class="track-label voice-color"><svg class="ui-icon"><use href="#icon-wave"/></svg><span>Voiceover</span></div>
+        <div class="track-label bgm-color"><svg class="ui-icon"><use href="#icon-music"/></svg><span>BGM</span></div>
+        <div class="track-label sfx-color"><svg class="ui-icon"><use href="#icon-wave"/></svg><span>SFX</span></div>
+        <div id="element-layer-labels" class="element-layer-labels"></div>
+      </div>
+      <div class="timeline-scroll">
+        <div id="timeline-track" class="timeline-track timeline-content">
+          <div id="timeline-ruler" class="timeline-ruler"></div>
+          <div id="scene-track" class="editor-track"></div>
+          <div id="voice-track" class="editor-track"></div>
+          <div id="bgm-track" class="editor-track"></div>
+          <div id="sfx-track" class="editor-track"></div>
+          <div id="elements-track" class="element-layer-tracks"></div>
+          <div id="timeline-fill" class="timeline-progress-fill"></div>
+          <div id="timeline-scrubber" class="timeline-scrubber" style="left: 0%;"></div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Hidden File Inputs -->
+    <input type="file" id="file-input-json" accept=".json" style="display: none;" />
+    <input type="file" id="input-upload-image" accept="image/*" style="display: none;" />
+    <input type="file" id="input-upload-logo" accept="image/*" style="display: none;" />
+    <input type="file" id="input-upload-bgm" accept="audio/mpeg,audio/wav,audio/mp4,.mp3,.wav,.m4a" hidden />
+    <input type="file" id="input-upload-sfx" accept="audio/*" hidden />
+    <input type="file" id="input-media-upload-image" accept="image/png,image/jpeg,image/webp,image/svg+xml,.png,.jpg,.jpeg,.webp,.svg" hidden />
+    <input type="file" id="input-upload-video" accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov" hidden />
+
+    <!-- Audio Element for Preview -->
+    <audio id="audio-preview-element" src="assets/audio.mp3" preload="auto"></audio>
+
+    <!-- Choose / Add Logo Modal -->
+    <div id="modal-choose-logo" class="modal-backdrop">
+      <div class="modal-dialog" style="width: 540px;">
+        <div class="modal-header">
+          <span class="modal-title">🏷️ Chọn Hoặc Tải Thêm Logo MathCA</span>
+          <button class="btn-close-modal btn-header" style="padding: 4px 8px;">✕</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            Chọn một biểu tượng thương hiệu MathCA hoặc tải file logo bất kỳ từ máy tính:
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+            <div id="opt-logo-main" class="preset-card" style="align-items: center; text-align: center; padding: 20px;">
+              <img src="assets/logo.png" style="height: 60px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="Logo MathCA" />
+              <span style="font-size: 13px; font-weight: 800; color: var(--text-main);">Logo MathCA Chuẩn</span>
+              <span style="font-size: 11px; color: var(--text-dim);">Bao gồm chữ và linh vật</span>
+            </div>
+            <div id="opt-logo-mascot" class="preset-card" style="align-items: center; text-align: center; padding: 20px;">
+              <img src="assets/mascot.png" style="height: 60px; max-width: 100%; object-fit: contain; margin-bottom: 8px;" alt="Mascot Cú con" />
+              <span style="font-size: 13px; font-weight: 800; color: var(--text-main);">Mascot Cú Con</span>
+              <span style="font-size: 11px; color: var(--text-dim);">Linh vật độc quyền MathCA</span>
+            </div>
+          </div>
+          <button id="btn-trigger-upload-logo" class="btn-header" style="width: 100%; justify-content: center; padding: 12px; background: rgba(18, 171, 160, 0.15); border-color: var(--teal-primary); color: #a5f3fc; font-weight: 800;">
+            <span>📁</span>
+            <span>Tải File Logo Khác Từ Máy Tính (PNG/JPG/SVG)</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-close-modal btn-header">Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template Presets Modal (4 Hướng Nội Dung Chuẩn MathCA) -->
+    <div id="modal-presets" class="modal-backdrop">
+      <div class="modal-dialog" style="width: 720px;">
+        <div class="modal-header">
+          <span class="modal-title">📚 Thư Viện Mẫu Kịch Bản Đa Dạng (Không Dập Khuôn)</span>
+          <button class="btn-close-modal btn-header" style="padding: 4px 8px;">✕</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            Chọn 1 trong 4 hướng kịch bản chuẩn của hệ thống MathCA để nạp ngay vào Studio:
+          </p>
+          <div class="preset-card-grid">
+            <div class="preset-card" data-preset="speed_trick">
+              <span class="preset-badge" style="background:#fff4d1; color:#8a6500;">HƯỚNG A • TÍNH NHANH</span>
+              <div class="preset-title">⚡ Mẹo Nhân 11 Trong 2 Giây</div>
+              <div class="preset-desc">Kịch bản 3 hồi bùng nổ, tách đôi 2 số rồi cộng nhét giữa, kết quả siêu tốc 148px.</div>
+            </div>
+            <div class="preset-card" data-preset="word_problem">
+              <span class="preset-badge" style="background:#e0f6f4; color:#006a63;">HƯỚNG B • TOÁN ĐỐ TRỰC QUAN</span>
+              <div class="preset-title">📊 Sơ Đồ Khối: Bài Toán Tổng - Hiệu</div>
+              <div class="preset-desc">Vẽ sơ đồ đoạn thẳng trực quan, bù trừ phần hơn kém, dễ hiểu cho học sinh lớp 4.</div>
+            </div>
+            <div class="preset-card" data-preset="speed_quiz">
+              <span class="preset-badge" style="background:#ffe6e2; color:#ff5239;">HƯỚNG C • ĐỐ VUI TƯƠNG TÁC</span>
+              <div class="preset-title">⏱️ Đố Vui 5 Giây: Tìm Quy Luật Số</div>
+              <div class="preset-desc">Minigame đếm ngược 5s tick-tock, tạo kịch tính, kêu gọi học sinh bình luận đua top.</div>
+            </div>
+            <div class="preset-card" data-preset="comparison">
+              <span class="preset-badge" style="background:#f3e8ff; color:#7e22ce;">HƯỚNG D • SO SÁNH PHƯƠNG PHÁP</span>
+              <div class="preset-title">⚖️ Cách Cũ (60s) vs MathCA (2s)</div>
+              <div class="preset-desc">Chia đôi khung hình làm nổi bật giá trị tư duy trực quan so với đặt tính dọc rối mắt.</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-close-modal btn-header">Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Paste JSON Modal -->
+    <div id="modal-paste-json" class="modal-backdrop">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <span class="modal-title">Dán Mã JSON Do ChatGPT Tạo Ra</span>
+          <button class="btn-close-modal btn-header" style="padding: 4px 8px;">✕</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+            Dán khối JSON kịch bản & cấu trúc mà ChatGPT vừa brainstorm vào khung bên dưới:
+          </p>
+          <textarea
+            id="paste-json-textarea"
+            class="prop-textarea"
+            style="height: 320px; font-family: monospace; font-size: 12px; color: #a5f3fc;"
+            placeholder='{\n  "metadata": {\n    "title": "Mẹo nhân nhẩm với 11",\n    ...\n}'
+          ></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-close-modal btn-header">Hủy</button>
+          <button id="btn-confirm-paste-json" class="btn-header" style="background: var(--teal-primary); color: #fff;">
+            Nạp Vào Studio
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-audio-library" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="audio-library-title">
+      <div class="modal-dialog audio-library-dialog">
+        <div class="modal-header"><span id="audio-library-title" class="modal-title">Thư viện âm thanh</span><button class="btn-close-modal btn-header icon-button" aria-label="Đóng">×</button></div>
+        <div class="modal-body">
+          <div class="library-tabs"><button class="library-tab active" data-library-kind="bgm">Nhạc nền</button><button class="library-tab" data-library-kind="sfx">Hiệu ứng</button></div>
+          <div class="library-search"><input id="audio-library-search" class="prop-input" placeholder="Tìm tên, mood hoặc loại âm thanh" /><button id="btn-library-upload" class="btn-header"><svg class="ui-icon"><use href="#icon-upload"/></svg>Tải lên</button></div>
+          <div id="audio-library-list" class="audio-library-list"></div>
+          <div id="audio-library-empty" class="library-empty">Không tìm thấy âm thanh phù hợp.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-media-library" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="media-library-title">
+      <div class="modal-dialog media-library-dialog">
+        <div class="modal-header"><span id="media-library-title" class="modal-title">Thư viện Media</span><button class="btn-close-modal btn-header icon-button" aria-label="Đóng">×</button></div>
+        <div class="modal-body">
+          <div class="library-tabs media-library-tabs">
+            <button class="media-library-tab active" data-media-kind="image" type="button">Ảnh</button>
+            <button class="media-library-tab" data-media-kind="audio" type="button">Audio</button>
+            <button class="media-library-tab" data-media-kind="video" type="button">Video</button>
+          </div>
+          <div class="library-search"><input id="media-library-search" class="prop-input" placeholder="Tìm media theo tên hoặc loại" /><button id="btn-media-upload" class="btn-header"><svg class="ui-icon"><use href="#icon-upload"/></svg>Tải lên</button></div>
+          <p class="media-library-help">Kéo asset vào Timeline hoặc bấm “Thêm vào dự án”. Dòng phía trên tương ứng layer hiển thị phía trên.</p>
+          <div id="media-library-list" class="media-library-list"></div>
+          <div id="media-library-empty" class="library-empty">Chưa có asset trong thư viện này.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Render Progress Modal -->
+    <div id="modal-render-progress" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="render-modal-title">
+      <div class="modal-dialog render-dialog">
+        <div class="modal-header"><span id="render-modal-title" class="modal-title">Xuất video MP4</span><button class="btn-close-modal btn-header icon-button" aria-label="Đóng">×</button></div>
+        <div class="modal-body render-modal-body">
+          <div class="render-settings">
+            <div class="section-title"><span>Cấu hình xuất bản</span><span>HyperFrames</span></div>
+            <div class="render-presets" role="radiogroup" aria-label="Tỷ lệ video">
+              <button class="render-preset active" data-resolution="portrait" type="button"><strong>1080 × 1920</strong><span>9:16 · Shorts</span></button>
+              <button class="render-preset" data-resolution="square" type="button"><strong>1080 × 1080</strong><span>1:1 · Square</span></button>
+              <button class="render-preset" data-resolution="landscape" type="button"><strong>1920 × 1080</strong><span>16:9 · YouTube</span></button>
+            </div>
+            <div class="field-grid"><label>FPS<select id="render-fps"><option value="25">25</option><option value="30" selected>30</option><option value="60">60</option></select></label><label>Chất lượng<select id="render-quality"><option value="draft">Nhanh</option><option value="looks" selected>Cao</option><option value="delivery">Xuất bản</option></select></label></div>
+            <label class="switch-row"><span><strong>Trộn Voiceover + BGM + SFX</strong><small>Stereo 48kHz</small></span><input id="render-include-audio" type="checkbox" checked role="switch" /></label>
+            <div id="render-audio-summary" class="render-summary">Voiceover sẵn sàng · BGM tắt · 0 SFX</div>
+            <button id="btn-start-render" class="btn-render-hero full-width" type="button"><svg class="ui-icon"><use href="#icon-spark"/></svg>Bắt đầu render</button>
+          </div>
+          <div class="render-progress-panel">
+            <div id="render-stage-text" class="render-stage-text">Sẵn sàng kiểm tra dự án.</div>
+            <div class="render-progress-track"><div id="render-progress-bar" class="render-progress-bar"></div></div>
+            <div id="render-percent-text" class="render-percent-text">0%</div>
+            <div class="render-steps"><span data-render-step="validate">Kiểm tra</span><span data-render-step="audio">Trộn audio</span><span data-render-step="encode">Mã hóa</span><span data-render-step="complete">Hoàn tất</span></div>
+            <div id="render-success-box" class="render-success-box" style="display:none">
+              <strong>Video đã xuất thành công</strong>
+              <div id="render-output-location" class="render-output-location">Bản dự phòng được lưu trong rendered_output.</div>
+              <a id="btn-download-video" href="#" class="btn-render-hero full-width" download>Tải Video MP4</a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" id="render-modal-footer"><button id="btn-cancel-render" class="btn-header danger">Hủy render</button></div>
+      </div>
+    </div>
+
+    <!-- Shared HyperFrames generator + Studio Core Script -->
+    <script src="js/composition-generator.js"></script>
+    <script src="js/project-model.js"></script>
+    <script src="js/studio-store.js"></script>
+    <script src="js/audio-plan.js"></script>
+    <script src="js/playback-engine.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/audio-preview.js"></script>
+    <script src="js/premium-ui.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
+
+
+
+

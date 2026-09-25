@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "checkedAt": "2026-09-25T02:52:43.369Z",
+  "fixturePath": "C:\\Users\\lexua\\Downloads\\MathCA_Lop3_5PhepTinhNangCao.json",
+  "audio": {
+    "voiceFile": "voice-7631463d00adbecc.mp3",
+    "masterFile": "audio-c7477554942fa127.mp3",
+    "sampleRate": 48000,
+    "channels": 2,
+    "bgmIncluded": true,
+    "sfxCount": 1
+  },
+  "render": {
+    "jobId": "job-1790304726790",
+    "outputFile": "5_phut_luyen_tap_toan_lop_3_voi_5_phep_tinh_nang_cao_1790304726790.mp4",
+    "outputPath": "E:\\10. Hyperframe\\mathca-studio\\rendered_output\\5_phut_luyen_tap_toan_lop_3_voi_5_phep_tinh_nang_cao_1790304726790.mp4",
+    "workspacePath": "E:\\10. Hyperframe\\mathca-studio\\render_workspace\\job-1790304726790",
+    "sizeBytes": 1156114,
+    "duration": 29.52,
+    "width": 1080,
+    "height": 1080,
+    "frameRate": "25/1",
+    "sampleRate": "48000",
+    "channels": 2,
+    "options": {
+      "fps": 25,
+      "captureFps": 30,
+      "quality": "draft",
+      "resolution": {
+        "name": "1:1",
+        "width": 1080,
+        "height": 1080
+      },
+      "includeAudio": true,
+      "fitMode": "contain",
+      "needsPostProcess": true
+    },
+    "logTail": [
+      "███████████████████░░░░░░  79%  Streaming frame 870/885 (3 workers)",
+      "████████████████████░░░░░  80%  Streaming frame 885/885 (3 workers)",
+      "[INFO] [Render:trace] {\"renderJobId\":\"e932d3e6-4054-42c3-8f1d-f07b5eef0cca\",\"phase\":\"capture_streaming\",\"status\":\"end\",\"elapsedMs\":30181,\"durationMs\":29037,\"stagePhase\":\"capturing\",\"workerCount\":3,\"forceScreenshot\":false,\"totalFrames\":885,\"framesCompleted\":885,\"captureMode\":\"drawelement\",\"captureOperation\":\"encode\"}",
+      "[INFO] [Render:trace] {\"renderJobId\":\"e932d3e6-4054-42c3-8f1d-f07b5eef0cca\",\"phase\":\"assemble\",\"status\":\"start\",\"elapsedMs\":30182,\"stagePhase\":\"capturing\",\"hasAudio\":true,\"workerCount\":3,\"forceScreenshot\":false,\"totalFrames\":885,\"framesCompleted\":885,\"captureMode\":\"drawelement\",\"captureOperation\":\"encode\"}",
+      "██████████████████████░░░  90%  Assembling final video",
+      "[INFO] [Render:trace] {\"renderJobId\":\"e932d3e6-4054-42c3-8f1d-f07b5eef0cca\",\"phase\":\"assemble\",\"status\":\"end\",\"elapsedMs\":31085,\"durationMs\":903,\"stagePhase\":\"capturing\",\"hasAudio\":true,\"workerCount\":3,\"forceScreenshot\":false,\"totalFrames\":885,\"framesCompleted\":885,\"captureMode\":\"drawelement\",\"captureOperation\":\"encode\"}",
+      "[INFO] [Render:trace] {\"renderJobId\":\"e932d3e6-4054-42c3-8f1d-f07b5eef0cca\",\"phase\":\"pipeline\",\"status\":\"checkpoint\",\"elapsedMs\":31118,\"message\":\"artifact validated\",\"totalElapsedMs\":31117}",
+      "█████████████████████████  100%  Render complete",
+      "◇  E:\\10. Hyperframe\\mathca-studio\\render_workspace\\job-1790304726790\\portrait-master.mp4",
+      "4.7 MB · 29.5s video · rendered in 31.1s",
+      "screenshot capture · hardware gpu · compile 0.1s · extract 0.0s · audio 0.7s · probe 0.0s · setup 0.3s · capture 29.0s · encode (during capture) 29.0s · assemble 0.9s",
+      "Thành công: 5_phut_luyen_tap_toan_lop_3_voi_5_phep_tinh_nang_cao_1790304726790.mp4"
+    ]
+  }
+}

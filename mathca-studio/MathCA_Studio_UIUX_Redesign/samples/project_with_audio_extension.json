@@ -1,0 +1,91 @@
+{
+  "$schema": "https://mathca.local/schemas/video-project-vNext.json",
+  "schemaVersion": "1.1",
+  "metadata": {
+    "title": "Mẹo nhân nhẩm với 11 trong 2 giây - Lớp 3",
+    "grade": 3,
+    "topic": "Nhân số có 2 chữ số với 11",
+    "duration": 29.5,
+    "voice": "vi-VN-HoaiMyNeural"
+  },
+  "brand": {
+    "colors": {
+      "tealPrimary": "#12ABA0",
+      "tealDark": "#006A63",
+      "coralRed": "#FF5239",
+      "yellowVibrant": "#FFBD05"
+    },
+    "fontFamily": "Inter"
+  },
+  "audio": {
+    "bgm": {
+      "enabled": false,
+      "src": "assets/bgm/happy-math.mp3",
+      "assetId": "bgm-happy-math-01",
+      "name": "Happy Math",
+      "volume": 0.3,
+      "startTime": 0,
+      "endTime": 29.5,
+      "loop": true,
+      "fadeIn": 0.8,
+      "fadeOut": 1.2,
+      "ducking": {
+        "enabled": true,
+        "underVoiceDb": -12,
+        "attack": 0.12,
+        "release": 0.35
+      }
+    },
+    "sfxMasterVolume": 0.5,
+    "sfx": [
+      {
+        "id": "sfx-whoosh-01",
+        "src": "preset:whoosh",
+        "name": "Whoosh",
+        "startTime": 0.8,
+        "duration": 1.1,
+        "volume": 0.42,
+        "pan": 0
+      },
+      {
+        "id": "sfx-pop-01",
+        "src": "preset:pop",
+        "name": "Pop",
+        "startTime": 6.1,
+        "duration": 0.8,
+        "volume": 0.42,
+        "pan": -0.08
+      },
+      {
+        "id": "sfx-boing-01",
+        "src": "preset:boing",
+        "name": "Boing",
+        "startTime": 14.3,
+        "duration": 1.4,
+        "volume": 0.45,
+        "pan": 0.05
+      },
+      {
+        "id": "sfx-chime-01",
+        "src": "preset:chime",
+        "name": "Chime",
+        "startTime": 19.1,
+        "duration": 1.7,
+        "volume": 0.46,
+        "pan": 0
+      },
+      {
+        "id": "sfx-click-01",
+        "src": "preset:click",
+        "name": "Click",
+        "startTime": 26.2,
+        "duration": 0.7,
+        "volume": 0.38,
+        "pan": 0.1
+      }
+    ]
+  },
+  "scenes": [],
+  "globalElements": [],
+  "html_template": ""
+}
